@@ -7,5 +7,7 @@
   <modules>
   	<module>icec-admin</module>
   	<module>icec-sys</module>
+  	<module>icec-parent</module>
+  	<module>icec-common</module>
   </modules>
 </project>

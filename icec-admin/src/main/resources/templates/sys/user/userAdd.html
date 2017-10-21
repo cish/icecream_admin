@@ -1,0 +1,110 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head th:replace="common/layout :: common_header(~{::title},~{::link})">
+<title>新建用户</title>
+</head>
+<body>
+	<div class="main-container">
+		<div class="main-content-inner">
+			<div class="page-content">
+				<div class="row">
+					<form class="form-horizontal" role="form" id="userAddForm" method="post" th:action="@{/sys/user/save}" >
+						<div class="form-group">
+                          <label class="col-sm-2 control-label" for="ds_id">用户名</label>
+                          <div class="col-sm-4">
+                             <input class="form-control" id="ds_id" name="loginName" type="text" placeholder="请输入登录系统账号" required/>
+                          </div>
+                          <label class="col-sm-2 control-label" for="ds_name">姓名</label>
+                          <div class="col-sm-4">
+                             <input class="form-control" id="ds_name" name="name" type="text" placeholder="请输入姓名" required/>
+                          </div>
+                       </div>
+                       <div class="form-group">
+                          <label class="col-sm-2 control-label" for="ds_password">密码</label>
+                          <div class="col-sm-4">
+                             <input class="form-control" id="ds_password" name="password" type="password" placeholder="请输入密码" required/>
+                          </div>
+                          <label class="col-sm-2 control-label" for="ds_repassword">确认密码</label>
+                          <div class="col-sm-4">
+                             <input class="form-control" id="ds_repassword" name="repassword" equalTo="#ds_password" type="password" placeholder="确认密码" required/>
+                          </div>
+                       </div>
+                       <div class="form-group">
+                          <label class="col-sm-2 control-label" for="ds_phone">手机号码</label>
+                          <div class="col-sm-4">
+                             <input class="form-control" id="ds_phone" name="phone" type="text" placeholder="请输入手机号码"/>
+                          </div>
+                          <label class="col-sm-2 control-label" for="ds_email">邮箱</label>
+                          <div class="col-sm-4">
+                             <input class="form-control" id="ds_email" name="email" type="email" placeholder="请输入邮箱"/>
+                          </div>
+                       </div>
+                       <div class="form-group">
+                          <label class="col-sm-2 control-label" for="ds_enable">状态</label>
+                          <div class="col-sm-4">
+                             <select class="form-control" id="ds_enable"  name="enabled" >
+                             	<option value="1">启用</option>
+                             	<option value="0">禁用</option>
+                             </select>
+                          </div>
+                          
+                       </div>
+                       <div class="clearfix ">
+										<div class="center">
+											<button class="btn btn-info" type="submit" id="submitBtn">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												保存
+											</button>
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="button" id="closeWin">
+												<i class="ace-icon fa fa-del bigger-110"></i>
+												关闭
+											</button>
+										</div>
+									</div>
+					</form>
+				</div>
+				<!-- /.col -->
+			</div>
+
+		</div>
+		<!-- end main container -->
+	</div>
+
+	<div th:replace="common/commonJS"></div>
+	<script type="text/javascript">
+	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+	//关闭iframe
+	$('#closeWin').click(function(){
+	    top.layer.close(index);
+	});
+	    
+	 $().ready(function() {
+		    $("#userAddForm").validate({
+		    	submitHandler: function(form) { 
+	        		//验证通过后 的js代码写在这里 
+	        		
+		    		 $(form).ajaxSubmit({
+		                 dataType:"json",
+		                 success:function( data ){
+		                      if(data==1){
+		                    	  top.layer.alert('保存成功') 
+		                    	  top.layer.close(index);
+		                    	  top.getActiveTab()[0].contentWindow.search();
+		                      }else{
+		                    	  top.layer.alert('保存失败')  
+		                      }
+		                        
+		                    
+		                   },
+		                   error:function(xhr, status, error){
+		                	   top.layer.alert('操作失败');
+		                   }
+		                 });
+	         
+	        		}
+		    });
+		});
+	</script>
+</body>
+</html>
