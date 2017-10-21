@@ -11,7 +11,7 @@
 	数据库脚本：doc/db/mysql/icec-all.sql
 	
 	
-##技术栈 
+## 技术栈 
     用到的主要技术
 
 
