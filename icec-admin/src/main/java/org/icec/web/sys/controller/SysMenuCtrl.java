@@ -1,13 +1,12 @@
 package org.icec.web.sys.controller;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.beetl.sql.core.engine.PageQuery;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.icec.web.shiro.annotation.CurrentUser;
 import org.icec.web.sys.model.SysMenu;
-import org.icec.web.sys.model.SysRole;
 import org.icec.web.sys.model.SysUser;
 import org.icec.web.sys.service.SysMenuService;
-import org.icec.web.sys.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,6 @@ public class SysMenuCtrl {
 	 * @return
 	 */
 	@RequestMapping("add")
-	//@RequiresPermissions({"role:edit"})
 	public String add() {
 		return "sys/menu/menuAdd";
 	}
@@ -35,7 +33,6 @@ public class SysMenuCtrl {
 	 */
 	@RequestMapping("save")
 	@ResponseBody
-	//@RequiresPermissions({"role:edit"})
 	public Integer save(SysMenu menu,@CurrentUser SysUser user) {
 		sysMenuService.save(menu,user);
 		return 1;
@@ -57,14 +54,10 @@ public class SysMenuCtrl {
 	 */
 	@RequestMapping("query")
 	@ResponseBody
-	public PageQuery<SysMenu> query( @RequestParam(defaultValue="1") Integer pageNumber, Integer pageSize, SysMenu menu) {
-		PageQuery<SysMenu> query=new PageQuery<SysMenu>();
-		query.setPageNumber(pageNumber);
-		if(pageSize!=null) {
-			query.setPageSize(pageSize);
-		}
-		query.setParas(menu);
-		  query=sysMenuService.query(query);
+	public List<SysMenu> query() {
+		List<SysMenu> query=new ArrayList<SysMenu>();
+		 
+		  query=sysMenuService.query();
 		   
 		return  query;
 	}

@@ -2,16 +2,7 @@ query
 ===
 * 角色查询
 	
-	select
- 	@pageTag(){
- 	* 
- 	@}
- 	from sys_menu 
- 	where del_flag=0 
- 	@if(!isEmpty(name)){
-	 and `name` like #'%'+name+'%'#
-	@}
- 	order by id 
+	select  *   from sys_menu  where del_flag=0  order by id 
 
 sample
 ===

@@ -19,16 +19,6 @@
 								data-placement="left" onclick="add()" title="添加">
 								<i class="fa fa-plus"></i> 新建菜单
 							</button>
-							<button class="btn btn-success btn-sm" data-toggle="tooltip"
-								data-placement="left" onclick="edit()" id="edit" title="修改">
-								<i class="glyphicon glyphicon-edit"></i> 修改
-							</button>
-							<button class="btn btn-danger btn-sm" onclick="del()" id="delete"
-								data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-trash-o"> 删除</i>
-							</button>
-							 
-
 						</div>
 						<div class="pull-right"></div>
 					</div>
@@ -36,24 +26,20 @@
 				 
 				<div class="row">
 					<div class="col-xs-12">
-						<table id="menutable"  data-toggle="table" data-side-pagination="server" 
-						data-striped="true"  data-query-params="queryParams" data-pagination-loop="false"
-               			data-page-number="1" data-data-field="list" data-total-field="totalRow"
-               			data-content-type="application/x-www-form-urlencoded" data-click-to-select="true"
-               			data-pagination="true" data-method="post"  th:data-url="@{/sys/menu/query}"  >
-               			<thead>
-										<tr>
-											<th class="center" data-checkbox="true"  > </th>
-											<th   data-field="id"   > ID</th>
-											<th class="center" data-field="name">名称</th>
-											<th data-field="href">链接</th>
-											<th data-field="sort">排序</th>
-											<th class="hidden-480" data-field="isShow" data-formatter="statusFormatter">显示/隐藏</th>
-											<th data-field="permission">权限标识</th>
-											<th data-field="id" data-formatter="optFormatter">操作</th>
-										</tr>
-									</thead>
-						</table>
+						<table id="treeTable" class="table table-hover">
+					<thead>
+						<tr>
+							<th>名称</th>
+							<th>链接</th>
+							<th>排序</th>
+							<th>显示/隐藏</th>
+							<th>权限标识</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+				    <tbody>  
+				    </tbody>  
+				</table> 
 					</div>
 				</div>
 				<!-- /.col -->
@@ -66,14 +52,7 @@
 <div th:replace="common/commonJS"></div>
 	 <script>
 
-	 function queryParams(params){
-		 var temp = $("#userForm").serializeJSON();
-		 temp.pageSize=params.limit;   //页面大小
-		 temp.pageNumber=(params.offset / params.limit) + 1;   //页码  
-		 temp.sort=params.sort;      //排序列名  
-		 temp.sortOrder=	 params.order; //排位命令（desc，asc）
-		 return temp; 
-	 }
+	 
     function statusFormatter(value,row,index){
     	if(value=="1"){
     		return "<span class='label label-sm label-success'>可用</span>"
@@ -147,13 +126,7 @@
     	}
     }
     
-	 $(function () {
-    	$('#menutable').on('check.bs.table uncheck.bs.table load-success.bs.table ' +
-                'check-all.bs.table uncheck-all.bs.table', function () {
-            $('#delete').prop('disabled', ! $('#menutable').bootstrapTable('getSelections').length);
-            $('#edit').prop('disabled', $('#menutable').bootstrapTable('getSelections').length!=1);
-        });
-    });
+	 
 </script>
 </body>
 </html>

@@ -1,5 +1,8 @@
 package org.icec.web.sys.service;
 
+import java.util.Date;
+import java.util.List;
+
 import org.beetl.sql.core.engine.PageQuery;
 import org.icec.web.sys.dao.SysMenuDao;
 import org.icec.web.sys.model.SysMenu;
@@ -21,6 +24,7 @@ public class SysMenuService {
 	@Transactional
 	public void save(SysMenu menu,SysUser optuser) {
 		menu.setCreateBy(optuser.getId());
+		menu.setCreateDate(new Date());
 		menu.setDelFlag(SysMenu.DEL_FLAG_NORMAL);
 		sysMenuDao.insert(menu);
 	}
@@ -29,7 +33,7 @@ public class SysMenuService {
 	 * @param query
 	 * @return
 	 */
-	public PageQuery<SysMenu> query(PageQuery<SysMenu> query) {
-		return sysMenuDao.query(query);
+	public List<SysMenu> query() {
+		return sysMenuDao.query();
 	}
 }

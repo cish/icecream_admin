@@ -1,6 +1,7 @@
 package org.icec.web.sys.dao;
 
-import org.beetl.sql.core.engine.PageQuery;
+import java.util.List;
+
 import org.beetl.sql.core.mapper.BaseMapper;
 import org.icec.web.sys.model.SysMenu;
 
@@ -10,5 +11,5 @@ public interface SysMenuDao extends BaseMapper<SysMenu>{
 	 * @param query
 	 * @return
 	 */
-	public PageQuery<SysMenu> query(PageQuery<SysMenu> query);
+	public List<SysMenu> query();
 }
