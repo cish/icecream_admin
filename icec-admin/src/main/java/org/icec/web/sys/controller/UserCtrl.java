@@ -3,7 +3,7 @@ package org.icec.web.sys.controller;
 import org.beetl.sql.core.engine.PageQuery;
 import org.icec.web.common.BaseController;
 import org.icec.web.sys.model.SysUser;
-import org.icec.web.sys.service.UserService;
+import org.icec.web.sys.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserCtrl extends BaseController{
 	
 	@Autowired
-	private UserService userService;
+	private SysUserService userService;
 	/**
 	 * 进入添加界面
 	 * @return

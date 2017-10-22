@@ -15,7 +15,7 @@ import org.icec.web.shiro.jwt.JwtUtil;
 import org.icec.web.shiro.jwt.TokenStatus;
 import org.icec.web.shiro.token.JWTAuthenticationToken;
 import org.icec.web.sys.model.SysUser;
-import org.icec.web.sys.service.UserService;
+import org.icec.web.sys.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 public class MyJWTRealm extends AuthorizingRealm {
 
     @Autowired
-    private UserService userRepository;
+    private SysUserService userRepository;
     @Autowired
     private JwtUtil jwtUtil;
     @Override

@@ -3,7 +3,7 @@ package org.icec.web.sys.service;
 
 import org.beetl.sql.core.engine.PageQuery;
 import org.icec.common.utils.CryptoUtils;
-import org.icec.web.sys.dao.UserDao;
+import org.icec.web.sys.dao.SysUserDao;
 import org.icec.web.sys.model.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import com.mysql.jdbc.StringUtils;
 
 @Service
-public class UserService {
+public class SysUserService {
 	@Autowired
-	private UserDao userDao;
+	private SysUserDao userDao;
 	/**
 	 * 新增用户
 	 * @param user

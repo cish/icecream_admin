@@ -13,7 +13,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.icec.web.sys.model.SysUser;
-import org.icec.web.sys.service.UserService;
+import org.icec.web.sys.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class MyFormRealm extends AuthorizingRealm {
 
     @Autowired
-    private UserService userRepository;
+    private SysUserService userRepository;
 
     @Override
     public boolean supports(AuthenticationToken token) {

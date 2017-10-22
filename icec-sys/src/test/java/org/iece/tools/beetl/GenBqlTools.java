@@ -41,8 +41,8 @@ public class GenBqlTools {
 		GenConfig config = new GenConfig();
 		 
 		try {
-			sqlManager.genPojoCode("sys_user", "org.icec.web.sys.model");
-			sqlManager.genSQLTemplateToConsole("sys_user");
+			sqlManager.genPojoCode("sys_role", "org.icec.web.sys.model");
+			sqlManager.genSQLTemplateToConsole("sys_role");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
