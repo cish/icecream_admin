@@ -1,5 +1,4 @@
 package org.icec.web.sys.model;
-import java.io.Serializable;
 import java.math.*;
 import java.util.Date;
 
@@ -7,6 +6,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.beetl.sql.core.annotatoin.AutoID;
 import org.beetl.sql.core.annotatoin.SeqID;
 import org.beetl.sql.core.annotatoin.Table;
+import org.icec.common.model.BaseModel;
 
 import java.sql.Timestamp;
 
@@ -15,15 +15,21 @@ import java.sql.Timestamp;
 * gen by beetlsql 2017-10-21
 */
 @Table(name="sys_user")
-public class SysUser    implements AuthenticationToken{
+public class SysUser  extends BaseModel   implements AuthenticationToken{
+	/**
+	 * 登录标记（0：正常；1：删除；）
+	 */
+	public static final String LOGIN_FLAG_NORMAL = "0";
+	public static final String LOGIN_FLAG_DELETE = "1";
+	
 	//编号
 	@AutoID
 	@SeqID(name="seq_sys_user")
-	private String id ;
+	private Integer id ;
 	//归属公司
 	private String companyId ;
 	//创建者
-	private String createBy ;
+	private Integer createBy ;
 	//删除标记
 	private String delFlag ;
 	//邮箱
@@ -51,7 +57,7 @@ public class SysUser    implements AuthenticationToken{
 	//备注信息
 	private String remarks ;
 	//更新者
-	private String updateBy ;
+	private Integer updateBy ;
 	//用户类型
 	private String userType ;
 	//创建时间
@@ -64,10 +70,10 @@ public class SysUser    implements AuthenticationToken{
 	public SysUser() {
 	}
 	
-	public String getId(){
+	public Integer getId(){
 		return  id;
 	}
-	public void setId(String id ){
+	public void setId(Integer id ){
 		this.id = id;
 	}
 	
@@ -78,10 +84,10 @@ public class SysUser    implements AuthenticationToken{
 		this.companyId = companyId;
 	}
 	
-	public String getCreateBy(){
+	public Integer getCreateBy(){
 		return  createBy;
 	}
-	public void setCreateBy(String createBy ){
+	public void setCreateBy(Integer createBy ){
 		this.createBy = createBy;
 	}
 	
@@ -176,10 +182,10 @@ public class SysUser    implements AuthenticationToken{
 		this.remarks = remarks;
 	}
 	
-	public String getUpdateBy(){
+	public Integer getUpdateBy(){
 		return  updateBy;
 	}
-	public void setUpdateBy(String updateBy ){
+	public void setUpdateBy(Integer updateBy ){
 		this.updateBy = updateBy;
 	}
 	

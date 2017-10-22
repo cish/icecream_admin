@@ -25,6 +25,7 @@ public class SysUserService {
 		 * 密码加密
 		 */
 		user.setPassword(CryptoUtils.bcrypt(user.getPassword()));
+		user.setDelFlag(SysUser.DEL_FLAG_NORMAL);
 		userDao.insert(user);
 	}
 	
@@ -62,8 +63,8 @@ public class SysUserService {
 		}
 		SysUser user=new SysUser();
 		user.setLoginName(loginName);
-		user.setLoginFlag("1");
-		user.setDelFlag("0");
+		user.setLoginFlag(SysUser.LOGIN_FLAG_NORMAL);
+		user.setDelFlag(SysUser.DEL_FLAG_NORMAL);
 		return userDao.templateOne(user);
 	}
 

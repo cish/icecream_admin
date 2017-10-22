@@ -7,43 +7,35 @@
 		<div class="main-content-inner">
 			<div class="page-content">
 				<div class="row">
-					<form class="form-horizontal" role="form" id="userAddForm" method="post" th:action="@{/sys/user/save}" >
+					<form class="form-horizontal" role="form" id="userAddForm" method="post" th:action="@{/sys/user/update}" >
+						<input type="hidden" name="id" th:value="${user.id}">
 						<div class="form-group">
                           <label class="col-sm-2 control-label" for="ds_id">用户名</label>
                           <div class="col-sm-4">
-                             <input class="form-control" id="ds_id" name="loginName" type="text" placeholder="请输入登录系统账号" required/>
+                             <input class="form-control" id="ds_id" name="loginName" type="text" th:value="${user.loginName}" disabled="disabled" placeholder="请输入登录系统账号" required/>
                           </div>
                           <label class="col-sm-2 control-label" for="ds_name">姓名</label>
                           <div class="col-sm-4">
-                             <input class="form-control" id="ds_name" name="name" type="text" placeholder="请输入姓名" required/>
+                             <input class="form-control" id="ds_name" name="name" type="text" th:value="${user.name}" placeholder="请输入姓名" required/>
                           </div>
                        </div>
-                       <div class="form-group">
-                          <label class="col-sm-2 control-label" for="ds_password">密码</label>
-                          <div class="col-sm-4">
-                             <input class="form-control" id="ds_password" name="password" type="password" placeholder="请输入密码" required/>
-                          </div>
-                          <label class="col-sm-2 control-label" for="ds_repassword">确认密码</label>
-                          <div class="col-sm-4">
-                             <input class="form-control" id="ds_repassword" name="repassword" equalTo="#ds_password" type="password" placeholder="确认密码" required/>
-                          </div>
-                       </div>
+                        
                        <div class="form-group">
                           <label class="col-sm-2 control-label" for="ds_phone">手机号码</label>
                           <div class="col-sm-4">
-                             <input class="form-control" id="ds_phone" name="phone" type="text" placeholder="请输入手机号码"/>
+                             <input class="form-control" id="ds_phone" name="phone" type="text" th:value="${user.phone}" placeholder="请输入手机号码"/>
                           </div>
                           <label class="col-sm-2 control-label" for="ds_email">邮箱</label>
                           <div class="col-sm-4">
-                             <input class="form-control" id="ds_email" name="email" type="email" placeholder="请输入邮箱"/>
+                             <input class="form-control" id="ds_email" name="email" type="email" th:value="${user.email}"  placeholder="请输入邮箱"/>
                           </div>
                        </div>
                        <div class="form-group">
-                          <label class="col-sm-2 control-label" for="ds_loginFlag">状态</label>
+                          <label class="col-sm-2 control-label" for="ds_enable">状态</label>
                           <div class="col-sm-4">
-                             <select class="form-control" id="ds_loginFlag"  name="loginFlag" >
-                             	<option value="0">启用</option>
-                             	<option value="1">禁用</option>
+                             <select class="form-control" id="ds_enable"  name="enabled" >
+                             	<option value="1" th:selected="${user.enabled==1}">启用</option>
+                             	<option value="0" th:selected="${user.enabled==0}">禁用</option>
                              </select>
                           </div>
                           

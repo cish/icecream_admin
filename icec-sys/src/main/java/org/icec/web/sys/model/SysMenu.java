@@ -14,40 +14,44 @@ import java.sql.Timestamp;
 * 
 * gen by beetlsql 2017-10-22
 */
-@Table(name="sys_role")
-public class SysRole  extends BaseModel {
+@Table(name="sys_menu")
+public class SysMenu   extends BaseModel {
 	//编号
 	@AutoID
-	@SeqID(name="seq_sys_role")
+	@SeqID(name="seq_sys_menu")
 	private Integer id ;
+	//排序
+	private Integer sort ;
 	//创建者
 	private Integer createBy ;
-	//数据范围
-	private String dataScope ;
 	//删除标记
 	private String delFlag ;
-	//英文名称
-	private String enname ;
-	//是否系统数据
-	private String isSys ;
-	//角色名称
+	//链接
+	private String href ;
+	//图标
+	private String icon ;
+	//是否在菜单中显示
+	private String isShow ;
+	//名称
 	private String name ;
-	//归属机构
-	private Integer officeId ;
+	//父级编号
+	private Integer parentId ;
+	//所有父级编号
+	private String parentIds ;
+	//权限标识
+	private String permission ;
 	//备注信息
 	private String remarks ;
-	//角色类型
-	private String roleType ;
+	//目标
+	private String target ;
 	//更新者
 	private Integer updateBy ;
-	//是否可用
-	private String useable ;
 	//创建时间
 	private Date createDate ;
 	//更新时间
 	private Date updateDate ;
 	
-	public SysRole() {
+	public SysMenu() {
 	}
 	
 	public Integer getId(){
@@ -57,18 +61,18 @@ public class SysRole  extends BaseModel {
 		this.id = id;
 	}
 	
+	public Integer getSort(){
+		return  sort;
+	}
+	public void setSort(Integer sort ){
+		this.sort = sort;
+	}
+	
 	public Integer getCreateBy(){
 		return  createBy;
 	}
 	public void setCreateBy(Integer createBy ){
 		this.createBy = createBy;
-	}
-	
-	public String getDataScope(){
-		return  dataScope;
-	}
-	public void setDataScope(String dataScope ){
-		this.dataScope = dataScope;
 	}
 	
 	public String getDelFlag(){
@@ -78,18 +82,25 @@ public class SysRole  extends BaseModel {
 		this.delFlag = delFlag;
 	}
 	
-	public String getEnname(){
-		return  enname;
+	public String getHref(){
+		return  href;
 	}
-	public void setEnname(String enname ){
-		this.enname = enname;
+	public void setHref(String href ){
+		this.href = href;
 	}
 	
-	public String getIsSys(){
-		return  isSys;
+	public String getIcon(){
+		return  icon;
 	}
-	public void setIsSys(String isSys ){
-		this.isSys = isSys;
+	public void setIcon(String icon ){
+		this.icon = icon;
+	}
+	
+	public String getIsShow(){
+		return  isShow;
+	}
+	public void setIsShow(String isShow ){
+		this.isShow = isShow;
 	}
 	
 	public String getName(){
@@ -99,11 +110,25 @@ public class SysRole  extends BaseModel {
 		this.name = name;
 	}
 	
-	public Integer getOfficeId(){
-		return  officeId;
+	public Integer getParentId(){
+		return  parentId;
 	}
-	public void setOfficeId(Integer officeId ){
-		this.officeId = officeId;
+	public void setParentId(Integer parentId ){
+		this.parentId = parentId;
+	}
+	
+	public String getParentIds(){
+		return  parentIds;
+	}
+	public void setParentIds(String parentIds ){
+		this.parentIds = parentIds;
+	}
+	
+	public String getPermission(){
+		return  permission;
+	}
+	public void setPermission(String permission ){
+		this.permission = permission;
 	}
 	
 	public String getRemarks(){
@@ -113,11 +138,11 @@ public class SysRole  extends BaseModel {
 		this.remarks = remarks;
 	}
 	
-	public String getRoleType(){
-		return  roleType;
+	public String getTarget(){
+		return  target;
 	}
-	public void setRoleType(String roleType ){
-		this.roleType = roleType;
+	public void setTarget(String target ){
+		this.target = target;
 	}
 	
 	public Integer getUpdateBy(){
@@ -125,13 +150,6 @@ public class SysRole  extends BaseModel {
 	}
 	public void setUpdateBy(Integer updateBy ){
 		this.updateBy = updateBy;
-	}
-	
-	public String getUseable(){
-		return  useable;
-	}
-	public void setUseable(String useable ){
-		this.useable = useable;
 	}
 	
 	public Date getCreateDate(){

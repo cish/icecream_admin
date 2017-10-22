@@ -13,9 +13,9 @@ create table  `sys_area`
        `sort`            INT not null comment '排序',
        `code`            VARCHAR(100) comment '区域编码',
        `type`            VARCHAR(1) comment '区域类型',
-       `create_by`       VARCHAR(64) not null comment '创建者',
+       `create_by`       INT not null comment '创建者',
        `create_date`     DATETIME not null comment '创建时间',
-       `update_by`       VARCHAR(64) not null comment '更新者',
+       `update_by`       INT not null comment '更新者',
        `update_date`     DATETIME not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
        `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
@@ -38,10 +38,10 @@ create table  `sys_dict`
        `type`            VARCHAR(100) not null comment '类型',
        `description`     VARCHAR(100) not null comment '描述',
        `sort`            INT not null comment '排序（升序）',
-       `parent_id`       VARCHAR(64) default 0 comment '父级编号',
-       `create_by`       VARCHAR(64) not null comment '创建者',
+       `parent_id`       INT default 0 comment '父级编号',
+       `create_by`       INT not null comment '创建者',
        `create_date`     DATETIME  not null comment '创建时间',
-       `update_by`       VARCHAR(64) not null comment '更新者',
+       `update_by`       INT not null comment '更新者',
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
        `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
@@ -88,9 +88,9 @@ create table  `sys_mdict`
        `name`            VARCHAR(100) not null comment '名称',
        `sort`            INT not null comment '排序',
        `description`     VARCHAR(100) comment '描述',
-       `create_by`       VARCHAR(64) not null comment '创建者',
+       `create_by`       INT not null comment '创建者',
        `create_date`     DATETIME  not null comment '创建时间',
-       `update_by`       VARCHAR(64) not null comment '更新者',
+       `update_by`       INT not null comment '更新者',
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
        `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
@@ -105,7 +105,7 @@ alter table `sys_mdict` comment= '多级字典表';
 create table  `sys_menu`
 (
        `id`              INT not null AUTO_INCREMENT comment '编号',
-       `parent_id`       VARCHAR(64) not null comment '父级编号',
+       `parent_id`       INT not null comment '父级编号',
        `parent_ids`      VARCHAR(2000) not null comment '所有父级编号',
        `name`            VARCHAR(100) not null comment '名称',
        `sort`            INT not null comment '排序',
@@ -114,9 +114,9 @@ create table  `sys_menu`
        `icon`            VARCHAR(100) comment '图标',
        `is_show`         VARCHAR(1) not null comment '是否在菜单中显示',
        `permission`      VARCHAR(200) comment '权限标识',
-       `create_by`       VARCHAR(64) not null comment '创建者',
+       `create_by`       INT not null comment '创建者',
        `create_date`     DATETIME  not null comment '创建时间',
-       `update_by`       VARCHAR(64) not null comment '更新者',
+       `update_by`       INT not null comment '更新者',
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
        `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
@@ -151,9 +151,9 @@ create table  `sys_office`
        `USEABLE`         VARCHAR(64) comment '是否启用',
        `PRIMARY_PERSON`  VARCHAR(64) comment '主负责人',
        `DEPUTY_PERSON`   VARCHAR(64) comment '副负责人',
-       `create_by`       VARCHAR(64) not null comment '创建者',
+       `create_by`       INT not null comment '创建者',
        `create_date`     DATETIME  not null comment '创建时间',
-       `update_by`       VARCHAR(64) not null comment '更新者',
+       `update_by`       INT not null comment '更新者',
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
        `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
@@ -176,9 +176,9 @@ create table  `sys_role`
        `data_scope`      VARCHAR(1) comment '数据范围',
        `is_sys`          VARCHAR(64) comment '是否系统数据',
        `useable`         VARCHAR(64) comment '是否可用',
-       `create_by`       VARCHAR(64) not null comment '创建者',
+       `create_by`       INT not null comment '创建者',
        `create_date`     DATETIME  not null comment '创建时间',
-       `update_by`       VARCHAR(64) not null comment '更新者',
+       `update_by`       INT not null comment '更新者',
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
        `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
@@ -202,8 +202,8 @@ alter table `sys_role_menu` comment= '角色-菜单';
 -- sys_role_office
 create table  `sys_role_office`
 (
-       `role_id`         VARCHAR(64) not null comment '角色编号',
-       `office_id`       VARCHAR(64) not null comment '机构编号'
+       `role_id`         INT not null comment '角色编号',
+       `office_id`       INT not null comment '机构编号'
 );
 alter  table `sys_role_office`
        add constraint `PK_sys_role_office_role_id` primary key (`role_id`,`office_id`);
@@ -217,8 +217,8 @@ alter table `sys_role_office` comment= '角色-机构';
 create table  `sys_user`
 (
        `id`              INT not null AUTO_INCREMENT comment '编号',
-       `company_id`      VARCHAR(64) not null comment '归属公司',
-       `office_id`       VARCHAR(64) not null comment '归属部门',
+       `company_id`      INT not null comment '归属公司',
+       `office_id`       INT not null comment '归属部门',
        `login_name`      VARCHAR(100) not null comment '登录名',
        `password`        VARCHAR(100) not null comment '密码',
        `no`              VARCHAR(100) comment '工号',
@@ -231,9 +231,9 @@ create table  `sys_user`
        `login_ip`        VARCHAR(100) comment '最后登陆IP',
        `login_date`      DATETIME  comment '最后登陆时间',
        `login_flag`      VARCHAR(64) comment '是否可登录',
-       `create_by`       VARCHAR(64) not null comment '创建者',
+       `create_by`       INT not null comment '创建者',
        `create_date`     DATETIME  not null comment '创建时间',
-       `update_by`       VARCHAR(64) not null comment '更新者',
+       `update_by`       INT not null comment '更新者',
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
        `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
@@ -259,4 +259,4 @@ alter table `sys_user_role` comment= '用户-角色';
 
 -- data
 
-INSERT INTO `sys_user` VALUES (1, '1', '1', 'admin', '$2a$10$iyy/9WyGecm9MqeSyGaxauYXcz79foBFA047EtQlrPJbau5OPBpMm', '1', '管理员', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '2017-10-21 17:12:38', '1', '2017-10-21 17:13:12', NULL, '0');
+INSERT INTO `sys_user` VALUES (1, '1', '1', 'admin', '$2a$10$iyy/9WyGecm9MqeSyGaxauYXcz79foBFA047EtQlrPJbau5OPBpMm', '1', '管理员', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1', '2017-10-21 17:12:38', '1', '2017-10-21 17:13:12', NULL, '0');

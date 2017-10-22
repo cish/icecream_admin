@@ -7,47 +7,41 @@
 		<div class="main-content-inner">
 			<div class="page-content">
 				<div class="row">
-					<form class="form-horizontal" role="form" id="userAddForm" method="post" th:action="@{/sys/user/save}" >
+					<form class="form-horizontal" role="form" id="userAddForm" method="post" th:action="@{/sys/menu/save}" >
 						<div class="form-group">
-                          <label class="col-sm-2 control-label" for="ds_id">用户名</label>
+                          <label class="col-sm-2 control-label" for="ds_name">名称</label>
                           <div class="col-sm-4">
-                             <input class="form-control" id="ds_id" name="loginName" type="text" placeholder="请输入登录系统账号" required/>
+                             <input class="form-control" id="ds_name" name="name" type="text" placeholder="请输入名称" required/>
                           </div>
-                          <label class="col-sm-2 control-label" for="ds_name">姓名</label>
+                          <label class="col-sm-2 control-label" for="ds_enname">链接</label>
                           <div class="col-sm-4">
-                             <input class="form-control" id="ds_name" name="name" type="text" placeholder="请输入姓名" required/>
-                          </div>
-                       </div>
-                       <div class="form-group">
-                          <label class="col-sm-2 control-label" for="ds_password">密码</label>
-                          <div class="col-sm-4">
-                             <input class="form-control" id="ds_password" name="password" type="password" placeholder="请输入密码" required/>
-                          </div>
-                          <label class="col-sm-2 control-label" for="ds_repassword">确认密码</label>
-                          <div class="col-sm-4">
-                             <input class="form-control" id="ds_repassword" name="repassword" equalTo="#ds_password" type="password" placeholder="确认密码" required/>
+                             <input class="form-control" id="ds_enname" name="enname" type="text" placeholder="请输入角色编码" required/>
                           </div>
                        </div>
                        <div class="form-group">
-                          <label class="col-sm-2 control-label" for="ds_phone">手机号码</label>
+                          <label class="col-sm-2 control-label" for="ds_roleType">目标</label>
                           <div class="col-sm-4">
-                             <input class="form-control" id="ds_phone" name="phone" type="text" placeholder="请输入手机号码"/>
+                             <input class="form-control" id="ds_roleType" name="roleType" type="text"  required/>
                           </div>
-                          <label class="col-sm-2 control-label" for="ds_email">邮箱</label>
+                          <label class="col-sm-2 control-label" for="ds_isSys">菜单类型</label>
                           <div class="col-sm-4">
-                             <input class="form-control" id="ds_email" name="email" type="email" placeholder="请输入邮箱"/>
+                             <input class="form-control" id="ds_isSys" name="isSys"   type="text" placeholder="确认密码" required/>
                           </div>
                        </div>
                        <div class="form-group">
-                          <label class="col-sm-2 control-label" for="ds_loginFlag">状态</label>
+                          <label class="col-sm-2 control-label" for="ds_useable">可见</label>
                           <div class="col-sm-4">
-                             <select class="form-control" id="ds_loginFlag"  name="loginFlag" >
-                             	<option value="0">启用</option>
-                             	<option value="1">禁用</option>
+                          <select class="form-control" id="ds_useable"  name="useable" >
+                             	<option value="1">可用</option>
+                             	<option value="0">禁用</option>
                              </select>
                           </div>
-                          
+                          <label class="col-sm-2 control-label" for="ds_remarks">备注</label>
+                          <div class="col-sm-4">
+                             <textarea class="form-control" id="ds_remarks" name="remarks" ></textarea>
+                          </div>
                        </div>
+                        
                        <div class="clearfix ">
 										<div class="center">
 											<button class="btn btn-info" type="submit" id="submitBtn">
@@ -90,7 +84,10 @@
 		                      if(data==1){
 		                    	  top.layer.alert('保存成功') 
 		                    	  top.layer.close(index);
-		                    	  top.getActiveTab()[0].contentWindow.search();
+		                    	  if(top.getActiveTab()[0]){
+		                    		  top.getActiveTab()[0].contentWindow.search();
+		                    	  }
+		                    	  
 		                      }else{
 		                    	  top.layer.alert('保存失败')  
 		                      }
