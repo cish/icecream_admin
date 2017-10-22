@@ -1,5 +1,6 @@
 package org.icec.web.sys.controller;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.beetl.sql.core.engine.PageQuery;
 import org.icec.web.common.BaseController;
 import org.icec.web.sys.model.SysUser;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +24,7 @@ public class UserCtrl extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("add")
+	//@RequiresPermissions({"user:edit"})
 	public String add() {
 		return "sys/user/userAdd";
 	}
@@ -32,6 +33,7 @@ public class UserCtrl extends BaseController{
 	 * @param user
 	 * @return
 	 */
+	//@RequiresPermissions({"user:edit"})
 	@RequestMapping("save")
 	@ResponseBody
 	public Integer save(SysUser user) {
@@ -44,6 +46,7 @@ public class UserCtrl extends BaseController{
 	 * @param model
 	 * @return
 	 */
+	//@RequiresPermissions({"user:edit"})
 	@RequestMapping("edit/{id}")
 	public String edit(@PathVariable Long id ,ModelMap model) {
 		SysUser user = userService.findById(id);
@@ -55,6 +58,7 @@ public class UserCtrl extends BaseController{
 	 * @param user
 	 * @return
 	 */
+	//@RequiresPermissions({"user:edit"})
 	@RequestMapping("update")
 	@ResponseBody
 	public Integer update(SysUser user) {

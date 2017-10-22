@@ -7,6 +7,7 @@ import org.icec.web.sys.dao.SysUserDao;
 import org.icec.web.sys.model.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mysql.jdbc.StringUtils;
 
@@ -18,6 +19,7 @@ public class SysUserService {
 	 * 新增用户
 	 * @param user
 	 */
+	@Transactional
 	public void save(SysUser user) {
 		/**
 		 * 密码加密
@@ -30,6 +32,7 @@ public class SysUserService {
 	 * 用户更新
 	 * @param user
 	 */
+	@Transactional
 	public void update(SysUser user) {
 		userDao.updateTemplateById(user);
 	}

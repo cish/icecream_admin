@@ -39,7 +39,6 @@ public class MyFormRealm extends AuthorizingRealm {
          // TODO 根据id查询用户的角色 user.getUserId  roleservice.queryRole(id);
             Set<String> roles = new HashSet<>();
             account.addRole(roles);  
-       
             return account;
         }
 

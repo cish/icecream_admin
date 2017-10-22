@@ -6,7 +6,7 @@
 */
 create table  `sys_area`
 (
-       `id`              VARCHAR(64) not null comment '编号',
+       `id`              INT not null AUTO_INCREMENT comment '编号',
        `parent_id`       VARCHAR(64) not null comment '父级编号',
        `parent_ids`      VARCHAR(2000) not null comment '所有父级编号',
        `name`            VARCHAR(100) not null comment '名称',
@@ -32,7 +32,7 @@ alter table `sys_area` comment= '区域表';
 */
 create table  `sys_dict`
 (
-       `id`              VARCHAR(64) not null comment '编号',
+       `id`              INT not null AUTO_INCREMENT comment '编号',
        `value`           VARCHAR(100) not null comment '数据值',
        `label`           VARCHAR(100) not null comment '标签名',
        `type`            VARCHAR(100) not null comment '类型',
@@ -59,7 +59,7 @@ alter table `sys_dict` comment= '字典表';
 */
 create table  `sys_log`
 (
-       `id`              VARCHAR(64) not null comment '编号',
+       `id`              INT not null AUTO_INCREMENT comment '编号',
        `type`            VARCHAR(1) default 1 comment '日志类型',
        `title`           VARCHAR(255) comment '日志标题',
        `create_by`       VARCHAR(64) comment '创建者',
@@ -82,7 +82,7 @@ alter table `sys_log` comment= '日志表';
 -- sys_mdict
 create table  `sys_mdict`
 (
-       `id`              VARCHAR(64) not null comment '编号',
+       `id`              INT not null AUTO_INCREMENT comment '编号',
        `parent_id`       VARCHAR(64) not null comment '父级编号',
        `parent_ids`      VARCHAR(2000) not null comment '所有父级编号',
        `name`            VARCHAR(100) not null comment '名称',
@@ -104,7 +104,7 @@ alter table `sys_mdict` comment= '多级字典表';
 -- sys_menu
 create table  `sys_menu`
 (
-       `id`              VARCHAR(64) not null comment '编号',
+       `id`              INT not null AUTO_INCREMENT comment '编号',
        `parent_id`       VARCHAR(64) not null comment '父级编号',
        `parent_ids`      VARCHAR(2000) not null comment '所有父级编号',
        `name`            VARCHAR(100) not null comment '名称',
@@ -133,7 +133,7 @@ alter table `sys_menu` comment= '菜单表';
 */
 create table  `sys_office`
 (
-       `id`              VARCHAR(64) not null comment '编号',
+       `id`              INT not null AUTO_INCREMENT comment '编号',
        `parent_id`       VARCHAR(64) not null comment '父级编号',
        `parent_ids`      VARCHAR(2000) not null comment '所有父级编号',
        `name`            VARCHAR(100) not null comment '名称',
@@ -168,7 +168,7 @@ alter table `sys_office` comment= '机构表';
 -- sys_role
 create table  `sys_role`
 (
-       `id`              VARCHAR(64) not null comment '编号',
+       `id`              INT not null AUTO_INCREMENT comment '编号',
        `office_id`       VARCHAR(64) comment '归属机构',
        `name`            VARCHAR(100) not null comment '角色名称',
        `enname`          VARCHAR(255) comment '英文名称',
@@ -216,7 +216,7 @@ alter table `sys_role_office` comment= '角色-机构';
 */
 create table  `sys_user`
 (
-       `id`              VARCHAR(64) not null comment '编号',
+       `id`              INT not null AUTO_INCREMENT comment '编号',
        `company_id`      VARCHAR(64) not null comment '归属公司',
        `office_id`       VARCHAR(64) not null comment '归属部门',
        `login_name`      VARCHAR(100) not null comment '登录名',
@@ -250,8 +250,8 @@ alter table `sys_user` comment= '用户表';
 -- sys_user_role
 create table  `sys_user_role`
 (
-       `user_id`         VARCHAR(64) not null comment '用户编号',
-       `role_id`         VARCHAR(64) not null comment '角色编号'
+       `user_id`         INT not null comment '用户编号',
+       `role_id`         INT not null comment '角色编号'
 );
 alter  table `sys_user_role`
        add constraint `PK_sys_user_role_user_id` primary key (`user_id`,`role_id`);
@@ -259,4 +259,4 @@ alter table `sys_user_role` comment= '用户-角色';
 
 -- data
 
-INSERT INTO `sys_user` VALUES ('1', '1', '1', 'admin', '$2a$10$iyy/9WyGecm9MqeSyGaxauYXcz79foBFA047EtQlrPJbau5OPBpMm', '1', '管理员', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '2017-10-21 17:12:38', '1', '2017-10-21 17:13:12', NULL, '0');
+INSERT INTO `sys_user` VALUES (1, '1', '1', 'admin', '$2a$10$iyy/9WyGecm9MqeSyGaxauYXcz79foBFA047EtQlrPJbau5OPBpMm', '1', '管理员', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '2017-10-21 17:12:38', '1', '2017-10-21 17:13:12', NULL, '0');

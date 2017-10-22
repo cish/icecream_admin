@@ -1,3 +1,18 @@
+queryRole
+===
+* 角色查询
+	
+	select
+ 	@pageTag(){
+ 	* 
+ 	@}
+ 	from sys_role 
+ 	where 1=1
+ 	@if(!isEmpty(name)){
+	 and `name` like #'%'+name+'%'#
+	@}
+ 	order by id 
+
 sample
 ===
 * 注释
