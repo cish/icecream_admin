@@ -28,6 +28,14 @@ public class SysRoleService {
 		role.setDelFlag("0");
 		sysRoleDao.insert(role);
 	}
+	/**
+	 * 根据主键id查询
+	 * @param id
+	 * @return
+	 */
+	public SysRole findById(Integer id) {
+		return sysRoleDao.single(id);
+	}
 	public PageQuery<SysRole> queryRole(PageQuery<SysRole> query) {
 		return sysRoleDao.queryRole(query);
 	}

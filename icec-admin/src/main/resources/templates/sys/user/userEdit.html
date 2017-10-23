@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
 <head th:replace="common/layout :: common_header(~{::title},~{::link})">
-<title>新建用户</title>
+<title>修改用户</title>
 </head>
 <body>
 	<div class="main-container">
@@ -34,8 +34,8 @@
                           <label class="col-sm-2 control-label" for="ds_enable">状态</label>
                           <div class="col-sm-4">
                              <select class="form-control" id="ds_enable"  name="enabled" >
-                             	<option value="1" th:selected="${user.enabled==1}">启用</option>
-                             	<option value="0" th:selected="${user.enabled==0}">禁用</option>
+                             	<option value="1" th:selected="${user.loginFlag==0}">启用</option>
+                             	<option value="0" th:selected="${user.loginFlag==1}">禁用</option>
                              </select>
                           </div>
                           

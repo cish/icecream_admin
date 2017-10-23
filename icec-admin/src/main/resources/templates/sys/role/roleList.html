@@ -14,7 +14,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<form action="" class="form-inline" id="userForm">
-							<label>用户名：</label><input type="text" name="loginName"> <label>姓名：</label><input
+							 <label>角色名称：</label><input
 								type="text" name="name">
 							<button class="btn btn-primary btn-rounded btn-outline btn-sm "
 							 type="button"	onclick="search()">
@@ -98,7 +98,8 @@
     function optFormatter(value,row,index){
     	return "<div class='hidden-sm hidden-xs btn-group'>"+
     	"<button class='btn btn-xs btn-info' onclick='edit("+value+")'>修改</button>"
-    	+"<button class='btn btn-xs btn-danger'>角色分配</button>"
+    	+"<button class='btn btn-xs btn-danger'>权限设置</button>"
+    	+"<button class='btn btn-xs btn-danger'>分配用户</button>"
     	+"</div>"
     	
     }
@@ -125,7 +126,7 @@
     	    	}
   			  id = getIdSelections();
   		  }
-    		jp.openWindow("修改"+'角色',ctx+"sys/role/edit/"+id,"800px", "325px");	
+    		jp.openWindow("修改"+'角色',ctx+"sys/role/edit/"+id,"800px", "360px");	
     	 
     	
     }

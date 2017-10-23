@@ -8,6 +8,8 @@ import org.icec.web.sys.model.SysUser;
 import org.icec.web.sys.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +38,34 @@ public class SysRoleCtrl {
 	//@RequiresPermissions({"role:edit"})
 	public Integer save(SysRole role,@CurrentUser SysUser user) {
 		sysRoleService.save(role,user);
+		return 1;
+	}
+	/**
+	 * 进入修改界面
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	//@RequiresPermissions({"user:edit"})
+	@RequestMapping("edit/{id}")
+	public String edit(@PathVariable Integer id ,ModelMap model) {
+		SysRole sysRole = sysRoleService.findById(id);
+		model.addAttribute("sysRole", sysRole);
+		return "sys/user/userEdit";
+	}
+	/**
+	 * 更新数据逻辑
+	 * @param user
+	 * @return
+	 */
+	//@RequiresPermissions({"user:edit"})
+	@RequestMapping("update")
+	@ResponseBody
+	public Integer update(SysRole sysRole) {
+		if(sysRole==null||sysRole.getId()==null) {
+			return 0;
+		}
+		//sysRoleService.update(sysRole);
 		return 1;
 	}
 	/**
