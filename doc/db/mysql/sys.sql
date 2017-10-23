@@ -18,10 +18,10 @@ create table  `sys_area`
        `update_by`       INT not null comment '更新者',
        `update_date`     DATETIME not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
-       `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
+       `del_flag`        VARCHAR(1) default 0 not null comment '删除标记',
+primary key (`id`)
 );
-alter  table `sys_area`
-       add constraint `PK_sys_area_id` primary key (`id`);
+ 
 create index `IDX_sys_area_parent_id` on `sys_area`(`parent_id`);
 create index `IDX_sys_area_del_flag` on `sys_area`(`del_flag`);
 alter table `sys_area` comment= '区域表';
@@ -44,10 +44,10 @@ create table  `sys_dict`
        `update_by`       INT not null comment '更新者',
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
-       `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
+       `del_flag`        VARCHAR(1) default 0 not null comment '删除标记',
+primary key (`id`)
 );
-alter  table `sys_dict`
-       add constraint `PK_sys_dict_id` primary key (`id`);
+ 
 create index `IDX_sys_dict_value` on `sys_dict`(`value`);
 create index `IDX_sys_dict_label` on `sys_dict`(`label`);
 create index `IDX_sys_dict_del_flag` on `sys_dict`(`del_flag`);
@@ -70,9 +70,9 @@ create table  `sys_log`
        `method`          VARCHAR(5) comment '操作方式',
        `params`          LONGBLOB comment '操作提交的数据',
        `exception`       LONGBLOB comment '异常信息'
+,primary key (`id`)
 );
-alter  table `sys_log`
-       add constraint `PK_sys_log_id` primary key (`id`);
+ 
 create index `IDX_sys_log_type` on `sys_log`(`type`);
 create index `IDX_sys_log_create_by` on `sys_log`(`create_by`);
 create index `IDX_sys_log_create_date` on `sys_log`(`create_date`);
@@ -94,9 +94,9 @@ create table  `sys_mdict`
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
        `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
+,primary key (`id`)
 );
-alter  table `sys_mdict`
-       add constraint `PK_sys_mdict_id` primary key (`id`);
+ 
 create index `IDX_sys_mdict_parent_id` on `sys_mdict`(`parent_id`);
 create index `IDX_sys_mdict_del_flag` on `sys_mdict`(`del_flag`);
 alter table `sys_mdict` comment= '多级字典表';
@@ -120,9 +120,9 @@ create table  `sys_menu`
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
        `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
+,primary key (`id`)
 );
-alter  table `sys_menu`
-       add constraint `PK_sys_menu_id` primary key (`id`);
+ 
 create index `IDX_sys_menu_parent_id` on `sys_menu`(`parent_id`);
 create index `IDX_sys_menu_del_flag` on `sys_menu`(`del_flag`);
 alter table `sys_menu` comment= '菜单表';
@@ -157,9 +157,9 @@ create table  `sys_office`
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
        `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
+,primary key (`id`)
 );
-alter  table `sys_office`
-       add constraint `PK_sys_office_id` primary key (`id`);
+ 
 create index `IDX_sys_office_parent_id` on `sys_office`(`parent_id`);
 create index `IDX_sys_office_type` on `sys_office`(`type`);
 create index `IDX_sys_office_del_flag` on `sys_office`(`del_flag`);
@@ -182,9 +182,9 @@ create table  `sys_role`
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
        `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
+,primary key (`id`)
 );
-alter  table `sys_role`
-       add constraint `PK_sys_role_id` primary key (`id`);
+ 
 create index `IDX_sys_role_enname` on `sys_role`(`enname`);
 create index `IDX_sys_role_del_flag` on `sys_role`(`del_flag`);
 alter table `sys_role` comment= '角色表';
@@ -237,9 +237,9 @@ create table  `sys_user`
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
        `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
+,primary key (`id`)
 );
-alter  table `sys_user`
-       add constraint `PK_sys_user_id` primary key (`id`);
+ 
 create index `IDX_sys_user_company_id` on `sys_user`(`company_id`);
 create index `IDX_sys_user_office_id` on `sys_user`(`office_id`);
 create index `IDX_sys_user_login_name` on `sys_user`(`login_name`);
