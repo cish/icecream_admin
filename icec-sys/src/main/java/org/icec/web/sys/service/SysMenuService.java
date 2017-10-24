@@ -3,10 +3,8 @@ package org.icec.web.sys.service;
 import java.util.Date;
 import java.util.List;
 
-import org.beetl.sql.core.engine.PageQuery;
 import org.icec.web.sys.dao.SysMenuDao;
 import org.icec.web.sys.model.SysMenu;
-import org.icec.web.sys.model.SysRole;
 import org.icec.web.sys.model.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -18,6 +18,8 @@ import org.beetl.sql.core.db.OracleStyle;
 import org.beetl.sql.core.db.PostgresStyle;
 import org.beetl.sql.ext.DebugInterceptor;
 import org.beetl.sql.ext.gen.GenConfig;
+import org.beetl.sql.ext.gen.MapperCodeGen;
+import org.icec.common.beetlsql.ext.gen.ServiceCodeGen;
 
 public class GenBqlTools {
 		
@@ -39,10 +41,13 @@ public class GenBqlTools {
 		NameConversion nc = new  UnderlinedNameConversion();
 		SQLManager sqlManager = new SQLManager(style,loader,source,nc,new Interceptor[]{new DebugInterceptor()});
 		GenConfig config = new GenConfig();
-		 
+		config.codeGens.add(new MapperCodeGen("org.icec.web.sys.dao"));
+		config.codeGens.add(new ServiceCodeGen("org.icec.web.sys.service"));
 		try {
-			sqlManager.genPojoCode("sys_menu", "org.icec.web.sys.model");
-			sqlManager.genSQLTemplateToConsole("sys_menu");
+			sqlManager.genPojoCode("sys_office", "org.icec.web.sys.model",config);
+			sqlManager.genSQLFile("sys_office");
+			//sqlManager.genSQLTemplateToConsole("sys_office");
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
