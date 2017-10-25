@@ -47,8 +47,6 @@ public class SysMenuCtrl {
 	}
 	/**
 	 * 查询逻辑
-	 * @param pageNumber
-	 * @param pageSize
 	 * @param user
 	 * @return
 	 */
