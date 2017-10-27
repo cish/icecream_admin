@@ -46,6 +46,10 @@ public class SysArea   extends BaseModel implements TreeModel{
 	//更新时间
 	private Date updateDate ;
 	
+	
+	//父机构名称
+	private String parentName;
+	
 	public SysArea() {
 	}
 	
@@ -144,6 +148,14 @@ public class SysArea   extends BaseModel implements TreeModel{
 	public Integer getPid() {
 		// TODO Auto-generated method stub
 		return this.getParentId();
+	}
+
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
 	}
 	
 	

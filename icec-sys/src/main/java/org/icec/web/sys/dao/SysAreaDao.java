@@ -12,6 +12,7 @@ import org.icec.web.sys.model.*;
 * gen by beetlsql mapper 2017-10-27
 */
 public interface SysAreaDao extends BaseMapper<SysArea> {
+	public SysArea findById(Integer id);
 	/**
 	 * 查询所有的区域
 	 * @return

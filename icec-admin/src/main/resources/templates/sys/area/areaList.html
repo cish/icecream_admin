@@ -51,7 +51,22 @@
 									<td th:text="${area.code}"></td>
 									<td th:text="${area.type}"></td>
 									<td th:text="${area.remarks}"></td>
-									<td  >操作</td>
+									<td>
+										 
+												 
+												 <a href="#"
+													th:onclick="'edit('+${area.id}+')'"><i
+														class="fa fa-edit"></i> 修改</a> 
+														&nbsp;&nbsp;&nbsp;
+												 <a
+													onclick="return del(this, '70bea8684c4142f79e93544ec104ae54')"><i
+														class="fa fa-trash"></i> 删除</a> 
+														&nbsp;&nbsp;&nbsp;
+												 <a href="#"
+													onclick="jp.openDialog('添加下级区域', '/jeeplus/a/sys/area/form?parent.id=70bea8684c4142f79e93544ec104ae54','800px', '500px', $treeTable)"><i
+														class="fa fa-plus"></i> 添加下级区域</a> 
+										 
+									</td>
 								</tr>
 
 							</tbody>
@@ -84,25 +99,7 @@
 		</tr>
 	</script>
 	<script>
-		/* $(document).ready(function() {
-			var tpl = $("#treeTableTpl").html().replace(/(\/\/\<!\-\-)|(\/\/\-\->)/g,"");
-			var data = ${fns:toJson(list)}, rootId = "${not empty office.id ? office.id : '0'}";
-			addRow("#treeTableList", tpl, data, rootId, true);
-			$("#treeTable").treeTable({expandLevel : 5});
-		});
-		function addRow(list, tpl, data, pid, root){
-			for (var i=0; i<data.length; i++){
-				var row = data[i];
-				if ((!row?'':!row.parentId?'':row.parentId) == pid){
-					$(list).append(Mustache.render(tpl, {
-						dict: {
-							type: getDictLabel([], row.type)
-						}, pid: (root?0:pid), row: row
-					}));
-					addRow(list, tpl, data, row.id);
-				}
-			}
-		} */
+		 
 		function refresh() {
 			window.location.reload()
 		}
@@ -110,25 +107,11 @@
 			jp.openWindow("新增" + '区域', "sys/area/add", "800px", "360px");
 		}
 
-		function getIdSelections() {
-			return $.map($("#menutable").bootstrapTable('getSelections'),
-					function(row) {
-						return row.id
-					});
-		}
+	 
 
 		function edit(id) {
-			if (!id) {
-				var selectRows = $('#menutable')
-						.bootstrapTable('getSelections');
-				if (selectRows.length == 0) {
-					jp.alert("未选择任何行");
-				} else if (selectRows.length > 1) {
-					jp.alert("只能修改一行");
-				}
-				id = getIdSelections();
-			}
-			jp.openWindow("修改" + '角色', ctx + "sys/role/edit/" + id, "800px",
+			 
+			jp.openWindow("修改" + '区域', ctx + "sys/area/edit/" + id, "800px",
 					"325px");
 
 		}

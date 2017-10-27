@@ -55,7 +55,7 @@ public class SysAreaCtrl {
 	public String edit(@PathVariable Integer id ,ModelMap model) {
 		SysArea sysArea = sysAreaService.findById(id);
 		model.addAttribute("sysArea", sysArea);
-		return "sys/user/userEdit";
+		return "sys/area/areaEdit";
 	}
 	/**
 	 * 更新数据逻辑

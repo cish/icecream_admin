@@ -48,7 +48,7 @@ public class SysAreaService   {
 	 * @return
 	 */
 	public SysArea findById(Integer id) {
-		return sysAreaDao.single(id);
+		return sysAreaDao.findById(id);
 	}
 	
 	public List<SysArea> query(){
