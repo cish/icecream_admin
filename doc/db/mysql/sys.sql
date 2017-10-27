@@ -83,7 +83,7 @@ alter table `sys_log` comment= '日志表';
 create table  `sys_mdict`
 (
        `id`              INT not null AUTO_INCREMENT comment '编号',
-       `parent_id`       VARCHAR(64) not null comment '父级编号',
+       `parent_id`       INT not null comment '父级编号',
        `parent_ids`      VARCHAR(2000) not null comment '所有父级编号',
        `name`            VARCHAR(100) not null comment '名称',
        `sort`            INT not null comment '排序',
@@ -134,7 +134,7 @@ alter table `sys_menu` comment= '菜单表';
 create table  `sys_office`
 (
        `id`              INT not null AUTO_INCREMENT comment '编号',
-       `parent_id`       VARCHAR(64) not null comment '父级编号',
+       `parent_id`       INT not null comment '父级编号',
        `parent_ids`      VARCHAR(2000) not null comment '所有父级编号',
        `name`            VARCHAR(100) not null comment '名称',
        `sort`            INT not null comment '排序',
