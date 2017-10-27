@@ -42,7 +42,7 @@ public class SysOffice   implements Serializable{
 	//名称
 	private String name ;
 	//父级编号
-	private String parentId ;
+	private Integer parentId ;
 	//所有父级编号
 	private String parentIds ;
 	//电话
@@ -173,10 +173,10 @@ public class SysOffice   implements Serializable{
 		this.name = name;
 	}
 	
-	public String getParentId(){
+	public Integer getParentId(){
 		return  parentId;
 	}
-	public void setParentId(String parentId ){
+	public void setParentId(Integer parentId ){
 		this.parentId = parentId;
 	}
 	
