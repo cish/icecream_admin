@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/layout :: common_header(~{::title},~{::link})">
-<title>机构管理</title>
+<title>区域管理</title>
 <!-- 
   additional css  -->
-<link th:href="@{/ace/plugins/treeTable/themes/vsStyle/treeTable.min.css" rel="stylesheet" type="text/css" />
+<link
+	th:href="@{/ace/plugins/treeTable/themes/vsStyle/treeTable.min.css}"
+	rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -18,7 +20,11 @@
 						<div class="pull-left">
 							<button class="btn btn-primary btn-sm" data-toggle="tooltip"
 								data-placement="left" onclick="add()" title="添加">
-								<i class="fa fa-plus"></i> 新建机构
+								<i class="fa fa-plus"></i> 新建
+							</button>
+							<button class="btn btn-warning btn-sm" data-toggle="tooltip"
+								data-placement="left" onclick="refresh()" title="添加">
+								<i class="glyphicon glyphicon-repeat"></i>刷新
 							</button>
 						</div>
 						<div class="pull-right"></div>
@@ -31,17 +37,23 @@
 							class="table table-striped table-bordered table-condensed">
 							<thead>
 								<tr>
-									<th>机构名称</th>
-									<th>归属区域</th>
-									<th>机构编码</th>
-									<th>机构类型</th>
+									<th>区域名称</th>
+									<th>区域编码</th>
+									<th>区域类型</th>
 									<th>备注</th>
 									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody id="treeTableList">
-							
-							
+								<tr th:each="area:${areaList}" th:id="${area.id}"
+									th:pid="${area.parentId}">
+									<td th:text="${area.name}"></td>
+									<td th:text="${area.code}"></td>
+									<td th:text="${area.type}"></td>
+									<td th:text="${area.remarks}"></td>
+									<td  >操作</td>
+								</tr>
+
 							</tbody>
 						</table>
 					</div>
@@ -56,7 +68,7 @@
 	<div th:replace="common/commonJS"></div>
 	<script th:src="@{/ace/plugins/treeTable/jquery.treeTable.min.js}"></script>
 	<script th:src="@{/ace/plugins/mustache/mustache.min.js}"></script>
-		
+
 	<script type="text/template" id="treeTableTpl">
 		<tr id="{{row.id}}" pId="{{pid}}">
 			<td><a href="${ctx}/sys/office/form?id={{row.id}}">{{row.name}}</a></td>
@@ -72,30 +84,30 @@
 		</tr>
 	</script>
 	<script>
-	/* $(document).ready(function() {
-		var tpl = $("#treeTableTpl").html().replace(/(\/\/\<!\-\-)|(\/\/\-\->)/g,"");
-		var data = ${fns:toJson(list)}, rootId = "${not empty office.id ? office.id : '0'}";
-		addRow("#treeTableList", tpl, data, rootId, true);
-		$("#treeTable").treeTable({expandLevel : 5});
-	});
-	function addRow(list, tpl, data, pid, root){
-		for (var i=0; i<data.length; i++){
-			var row = data[i];
-			if ((!row?'':!row.parentId?'':row.parentId) == pid){
-				$(list).append(Mustache.render(tpl, {
-					dict: {
-						type: getDictLabel([], row.type)
-					}, pid: (root?0:pid), row: row
-				}));
-				addRow(list, tpl, data, row.id);
+		/* $(document).ready(function() {
+			var tpl = $("#treeTableTpl").html().replace(/(\/\/\<!\-\-)|(\/\/\-\->)/g,"");
+			var data = ${fns:toJson(list)}, rootId = "${not empty office.id ? office.id : '0'}";
+			addRow("#treeTableList", tpl, data, rootId, true);
+			$("#treeTable").treeTable({expandLevel : 5});
+		});
+		function addRow(list, tpl, data, pid, root){
+			for (var i=0; i<data.length; i++){
+				var row = data[i];
+				if ((!row?'':!row.parentId?'':row.parentId) == pid){
+					$(list).append(Mustache.render(tpl, {
+						dict: {
+							type: getDictLabel([], row.type)
+						}, pid: (root?0:pid), row: row
+					}));
+					addRow(list, tpl, data, row.id);
+				}
 			}
-		}
-	} */
-		function search() {
-			$('#menutable').bootstrapTable('refresh');
+		} */
+		function refresh() {
+			window.location.reload()
 		}
 		function add() {
-			jp.openWindow("新增" + '菜单', "sys/menu/add", "800px", "360px");
+			jp.openWindow("新增" + '区域', "sys/area/add", "800px", "360px");
 		}
 
 		function getIdSelections() {
@@ -152,6 +164,12 @@
 				);
 			}
 		}
+		$(function() {
+
+			$("#treeTable").treeTable({
+				expandLevel : 5
+			});
+		});
 	</script>
 </body>
 </html>

@@ -7,7 +7,7 @@
 create table  `sys_area`
 (
        `id`              INT not null AUTO_INCREMENT comment '编号',
-       `parent_id`       VARCHAR(64) not null comment '父级编号',
+       `parent_id`       INT not null comment '父级编号',
        `parent_ids`      VARCHAR(2000) not null comment '所有父级编号',
        `name`            VARCHAR(100) not null comment '名称',
        `sort`            INT not null comment '排序',

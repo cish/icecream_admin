@@ -7,35 +7,29 @@
 		<div class="main-content-inner">
 			<div class="page-content">
 				<div class="row">
-					<form class="form-horizontal" role="form" id="userAddForm" method="post" th:action="@{/sys/menu/save}" >
+					<form class="form-horizontal" role="form" id="areaAddForm" method="post" th:action="@{/sys/area/save}" >
 						<div class="form-group">
-                          <label class="col-sm-2 control-label" for="ds_name">名称</label>
+                          <label class="col-sm-2 control-label" for="ds_parentId">上级区域</label>
                           <div class="col-sm-4">
-                             <input class="form-control" id="ds_name" name="name" type="text" placeholder="请输入名称" required/>
+                             <input class="form-control" id="ds_parentId" name="parentId" type="text"  />
                           </div>
-                          <label class="col-sm-2 control-label" for="ds_enname">链接</label>
+                          <label class="col-sm-2 control-label" for="ds_name">区域名称</label>
                           <div class="col-sm-4">
-                             <input class="form-control" id="ds_enname" name="enname" type="text" placeholder="请输入角色编码" required/>
-                          </div>
-                       </div>
-                       <div class="form-group">
-                          <label class="col-sm-2 control-label" for="ds_roleType">目标</label>
-                          <div class="col-sm-4">
-                             <input class="form-control" id="ds_roleType" name="roleType" type="text"  required/>
-                          </div>
-                          <label class="col-sm-2 control-label" for="ds_isSys">菜单类型</label>
-                          <div class="col-sm-4">
-                             <input class="form-control" id="ds_isSys" name="isSys"   type="text" placeholder="确认密码" required/>
+                             <input class="form-control" id="ds_name" name="name" type="text"   required/>
                           </div>
                        </div>
                        <div class="form-group">
-                          <label class="col-sm-2 control-label" for="ds_useable">可见</label>
+                          <label class="col-sm-2 control-label" for="ds_code">*区域编码:</label>
                           <div class="col-sm-4">
-                          <select class="form-control" id="ds_useable"  name="useable" >
-                             	<option value="1">可用</option>
-                             	<option value="0">禁用</option>
-                             </select>
+                             <input class="form-control" id="ds_code" name="code" type="text"  required/>
                           </div>
+                          <label class="col-sm-2 control-label" for="ds_type">区域类型</label>
+                          <div class="col-sm-4">
+                             <input class="form-control" id="ds_type" name="type"   type="text"  />
+                          </div>
+                       </div>
+                       <div class="form-group">
+                          
                           <label class="col-sm-2 control-label" for="ds_remarks">备注</label>
                           <div class="col-sm-4">
                              <textarea class="form-control" id="ds_remarks" name="remarks" ></textarea>
@@ -74,7 +68,7 @@
 	});
 	    
 	 $().ready(function() {
-		    $("#userAddForm").validate({
+		    $("#areaAddForm").validate({
 		    	submitHandler: function(form) { 
 	        		//验证通过后 的js代码写在这里 
 	        		

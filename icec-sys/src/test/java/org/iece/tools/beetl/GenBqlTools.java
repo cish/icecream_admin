@@ -44,8 +44,8 @@ public class GenBqlTools {
 		config.codeGens.add(new MapperCodeGen("org.icec.web.sys.dao"));
 		config.codeGens.add(new ServiceCodeGen("org.icec.web.sys.service"));
 		try {
-			sqlManager.genPojoCode("sys_office", "org.icec.web.sys.model",config);
-			sqlManager.genSQLFile("sys_office");
+			sqlManager.genPojoCode("sys_area", "org.icec.web.sys.model",config);
+			sqlManager.genSQLFile("sys_area");
 			//sqlManager.genSQLTemplateToConsole("sys_office");
 			
 		} catch (Exception e) {
