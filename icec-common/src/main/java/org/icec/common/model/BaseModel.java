@@ -1,8 +1,7 @@
 package org.icec.common.model;
 
-import java.io.Serializable;
 
-public abstract  class BaseModel implements Serializable{
+public interface BaseModel {
 	/**
 	 * 删除标记（0：正常；1：删除；2：审核；）
 	 */

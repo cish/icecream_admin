@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 * gen by beetlsql 2017-10-21
 */
 @Table(name="sys_user")
-public class SysUser  extends BaseModel   implements AuthenticationToken{
+public class SysUser  implements BaseModel ,AuthenticationToken{
 	/**
 	 * 登录标记（0：正常；1：删除；）
 	 */

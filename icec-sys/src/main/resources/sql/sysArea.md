@@ -1,3 +1,9 @@
+findByParentIdsLike
+===
+
+	select #use("cols")# from sys_area  where del_flag=0 
+	and parent_ids like 	#parentIds+'%'#
+
 findById
 ===
 

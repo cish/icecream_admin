@@ -2,6 +2,7 @@ package org.icec.web.sys.model;
 import java.io.Serializable;
 import java.math.*;
 import java.util.Date;
+import java.util.List;
 
 import org.beetl.sql.core.annotatoin.AutoID;
 import org.beetl.sql.core.annotatoin.SeqID;
@@ -16,7 +17,7 @@ import java.sql.Timestamp;
 * gen by beetlsql 2017-10-27
 */
 @Table(name="sys_area")
-public class SysArea   extends BaseModel implements TreeModel{
+public class SysArea   extends TreeModel implements BaseModel{
 	//编号
 	@AutoID
 	@SeqID(name="seq_sys_area")
@@ -49,6 +50,7 @@ public class SysArea   extends BaseModel implements TreeModel{
 	
 	//父机构名称
 	private String parentName;
+	
 	
 	public SysArea() {
 	}
@@ -157,8 +159,9 @@ public class SysArea   extends BaseModel implements TreeModel{
 	public void setParentName(String parentName) {
 		this.parentName = parentName;
 	}
-	
-	
-	
+
+	 
+
+	 
 
 }

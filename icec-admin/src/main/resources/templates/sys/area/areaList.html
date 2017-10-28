@@ -37,17 +37,17 @@
 							class="table table-striped table-bordered table-condensed">
 							<thead>
 								<tr>
-									<th>区域名称</th>
-									<th>区域编码</th>
-									<th>区域类型</th>
-									<th>备注</th>
-									<th>操作</th>
+									<th class="width-15 " width="20%">区域名称</th>
+									<th class="width-15 " width="20%">区域编码</th>
+									<th class="width-15 " width="10%">区域类型</th>
+									<th class="width-15 " width="30%">备注</th>
+									<th class="width-15 " width="20%">操作</th>
 								</tr>
 							</thead>
 							<tbody id="treeTableList">
 								<tr th:each="area:${areaList}" th:id="${area.id}"
 									th:pid="${area.parentId}">
-									<td th:text="${area.name}"></td>
+									<td   th:text="${area.name}"></td>
 									<td th:text="${area.code}"></td>
 									<td th:text="${area.type}"></td>
 									<td th:text="${area.remarks}"></td>
@@ -58,12 +58,12 @@
 													th:onclick="'edit('+${area.id}+')'"><i
 														class="fa fa-edit"></i> 修改</a> 
 														&nbsp;&nbsp;&nbsp;
-												 <a
-													onclick="return del(this, '70bea8684c4142f79e93544ec104ae54')"><i
+												 <a href="#"
+													th:onclick="'del('+${area.id}+')'"><i
 														class="fa fa-trash"></i> 删除</a> 
 														&nbsp;&nbsp;&nbsp;
 												 <a href="#"
-													onclick="jp.openDialog('添加下级区域', '/jeeplus/a/sys/area/form?parent.id=70bea8684c4142f79e93544ec104ae54','800px', '500px', $treeTable)"><i
+													th:onclick="'addsubarea('+${area.id}+')'"><i
 														class="fa fa-plus"></i> 添加下级区域</a> 
 										 
 									</td>
@@ -82,22 +82,6 @@
 
 	<div th:replace="common/commonJS"></div>
 	<script th:src="@{/ace/plugins/treeTable/jquery.treeTable.min.js}"></script>
-	<script th:src="@{/ace/plugins/mustache/mustache.min.js}"></script>
-
-	<script type="text/template" id="treeTableTpl">
-		<tr id="{{row.id}}" pId="{{pid}}">
-			<td><a href="${ctx}/sys/office/form?id={{row.id}}">{{row.name}}</a></td>
-			<td>{{row.area.name}}</td>
-			<td>{{row.code}}</td>
-			<td>{{dict.type}}</td>
-			<td>{{row.remarks}}</td>
-			 <td>
-				<a href="${ctx}/sys/office/form?id={{row.id}}">修改</a>
-				<a href="${ctx}/sys/office/delete?id={{row.id}}" onclick="return confirmx('要删除该机构及所有子机构项吗？', this.href)">删除</a>
-				<a href="${ctx}/sys/office/form?parent.id={{row.id}}">添加下级机构</a> 
-			</td> 
-		</tr>
-	</script>
 	<script>
 		 
 		function refresh() {
@@ -107,7 +91,9 @@
 			jp.openWindow("新增" + '区域', "sys/area/add", "800px", "360px");
 		}
 
-	 
+		function addsubarea(parent) {
+			jp.openWindow("新增" + '区域', "sys/area/add?parentId="+parent, "800px", "360px");
+		}
 
 		function edit(id) {
 			 
@@ -116,36 +102,19 @@
 
 		}
 
-		function del(ids) {
-			//layer.confirm("确定要删除吗"){}
-			var selectRows = $('#menutable').bootstrapTable('getSelections');
-			if (selectRows.length == 0) {
-				jp.alert("未选择任何行");
-
-			} else {
-				if (!ids) {
-					ids = getIdSelections();
-				}
-
-				jp.confirm('确定要删除选择的用户吗？', function() {
-
-					layer.alert(1);
+		function del(id) {
+				jp.confirm('确定要删除该区域和所有子区域吗？', function() {
 					jp.loading();
-
-					$.get(ctx + "sys/role/deleteAll?ids=" + ids,
+					$.get(ctx + "sys/area/delete?id=" + id,
 							function(data) {
-								if (data.success) {
-									$('#menutable').bootstrapTable('refresh');
-									jp.success(data.msg);
+								if (data==1) {
+									jp.alert("删除成功！")
+									refresh();
 								} else {
-									jp.error(data.msg);
+									jp.error("删除失败");
 								}
 							})
-
-				}
-
-				);
-			}
+				});
 		}
 		$(function() {
 

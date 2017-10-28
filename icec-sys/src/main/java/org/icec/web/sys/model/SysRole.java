@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 * gen by beetlsql 2017-10-22
 */
 @Table(name="sys_role")
-public class SysRole  extends BaseModel {
+public class SysRole  implements BaseModel {
 	//编号
 	@AutoID
 	@SeqID(name="seq_sys_role")

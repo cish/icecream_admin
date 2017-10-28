@@ -1,9 +1,12 @@
 package org.icec.web.sys.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.beetl.sql.core.engine.PageQuery;
+import org.icec.common.model.JsTreeData;
+import org.icec.common.utils.TreeBuild;
 import org.icec.web.shiro.annotation.CurrentUser;
 import org.icec.web.sys.model.SysArea;
 import org.icec.web.sys.model.SysRole;
@@ -13,6 +16,7 @@ import org.icec.web.sys.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +33,14 @@ public class SysAreaCtrl {
 	 */
 	@RequestMapping("add")
 	//@RequiresPermissions({"role:edit"})
-	public String add() {
+	public String add(Integer parentId,ModelMap model) {
+		if(parentId!=null) {
+			SysArea parea=sysAreaService.findById(parentId);
+			model.addAttribute("parea", parea);
+			
+		} else {
+			model.addAttribute("parea", new SysArea());
+		}
 		return "sys/area/areaAdd";
 	}
 	/**
@@ -65,11 +76,11 @@ public class SysAreaCtrl {
 	//@RequiresPermissions({"user:edit"})
 	@RequestMapping("update")
 	@ResponseBody
-	public Integer update(SysArea sysArea) {
+	public Integer update(SysArea sysArea,@CurrentUser SysUser user) {
 		if(sysArea==null||sysArea.getId()==null) {
 			return 0;
 		}
-		//sysRoleService.update(sysRole);
+		sysAreaService.update(sysArea, user);
 		return 1;
 	}
 	/**
@@ -88,12 +99,21 @@ public class SysAreaCtrl {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping("query")
+	@RequestMapping("delete")
 	@ResponseBody
-	public List<SysArea> query( SysArea sysArea) {
+	public Integer delete( Integer id,@CurrentUser SysUser user) {
 		 
-		
+		sysAreaService.delete(  id, user);
 		   
-		return  null;
+		return  1;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<JsTreeData> treeData(@RequestParam(required=false) String extId) {
+		List<SysArea> list = sysAreaService.findAll();
+		 
+		return TreeBuild.buildJsTree(list);
+	}
+
 }

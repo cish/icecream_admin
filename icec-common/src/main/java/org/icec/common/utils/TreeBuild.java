@@ -3,6 +3,7 @@ package org.icec.common.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.icec.common.model.JsTreeData;
 import org.icec.common.model.TreeModel;
 
 public class TreeBuild {
@@ -11,12 +12,12 @@ public class TreeBuild {
      * @param TreeModels 
      * @return 
      */  
-    public static List<?> buildByRecursive(List<?> treeModels) {
-    	List<TreeModel> treeModels2=(List<TreeModel>) treeModels;
+    public static List<? extends TreeModel> buildByRecursive(List<? extends TreeModel> treeModels) {
+    	 
         List<TreeModel> trees = new ArrayList<TreeModel>();  
-        for (TreeModel treeModel : treeModels2) {  
+        for (TreeModel treeModel : treeModels) {  
             if ((treeModel.getPid()==0)) {  
-                findChildren(treeModel,treeModels2,trees);  
+                findChildren(treeModel,treeModels,trees);  
             }  
         }  
         return trees;  
@@ -27,7 +28,7 @@ public class TreeBuild {
      * @param TreeModels 
      * @return 
      */  
-    private static void findChildren(TreeModel treeModel,List<TreeModel> treeModels,List<TreeModel> trees) {  
+    private static void findChildren(TreeModel treeModel,List<? extends TreeModel> treeModels,List<TreeModel> trees) {  
     	trees.add(treeModel);
     	//treeModels.remove(treeModel);
     	boolean flag=false;
@@ -44,4 +45,29 @@ public class TreeBuild {
         }  
        
     }  
+    
+    public static List<JsTreeData> buildJsTree(List<? extends TreeModel> treeModels) {
+    	 List<JsTreeData> trees = new ArrayList<JsTreeData>();  
+         for (TreeModel treeModel : treeModels) {  
+             if ((treeModel.getPid()==0)) { 
+            	 JsTreeData data=new JsTreeData(treeModel.getId()+"","#",treeModel.getName(), true);
+            	 trees.add(data);
+                 findChildren2jstree(treeModel,treeModels,trees);  
+             }  
+         }  
+    	return trees;
+    }
+    private static void  findChildren2jstree (TreeModel treeModel,List<? extends TreeModel> treeModels,List<JsTreeData> trees) {  
+    	for (TreeModel it : treeModels) { 
+    		 if(treeModel.getId().equals(it.getPid())) {  
+    			 JsTreeData data=new JsTreeData(it.getId()+"",it.getPid()+"",it.getName());
+            	 trees.add(data);
+    			 findChildren2jstree(it,treeModels,trees); 
+    		 } 
+        }  
+       
+    }  
+    
+    
+    
 }

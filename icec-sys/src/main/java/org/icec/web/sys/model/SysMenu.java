@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 * gen by beetlsql 2017-10-22
 */
 @Table(name="sys_menu")
-public class SysMenu   extends BaseModel {
+public class SysMenu   implements BaseModel {
 	//编号
 	@AutoID
 	@SeqID(name="seq_sys_menu")

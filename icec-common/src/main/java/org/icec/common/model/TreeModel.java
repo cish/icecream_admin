@@ -1,6 +1,8 @@
 package org.icec.common.model;
-
-public interface TreeModel {
-	public Integer getId();
-	 public Integer getPid();
+ 
+public abstract class TreeModel {
+	public abstract Integer getId() ;
+	 public abstract Integer getPid() ;
+	 public abstract String getName() ;
+	 
 }
