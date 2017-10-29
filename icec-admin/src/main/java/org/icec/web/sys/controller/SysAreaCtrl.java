@@ -1,22 +1,16 @@
 package org.icec.web.sys.controller;
 
 import java.util.List;
-import java.util.Map;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.beetl.sql.core.engine.PageQuery;
 import org.icec.common.model.JsTreeData;
 import org.icec.common.utils.TreeBuild;
 import org.icec.web.shiro.annotation.CurrentUser;
 import org.icec.web.sys.model.SysArea;
-import org.icec.web.sys.model.SysRole;
 import org.icec.web.sys.model.SysUser;
 import org.icec.web.sys.service.SysAreaService;
-import org.icec.web.sys.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -92,13 +86,12 @@ public class SysAreaCtrl {
 		model.addAttribute("areaList", sysAreaService.query());
 		return "sys/area/areaList";
 	}
-	/**
-	 * 查询逻辑
-	 * @param pageNumber
-	 * @param pageSize
-	 * @param user
-	 * @return
-	 */
+	 /**
+	  * 删除
+	  * @param id
+	  * @param user
+	  * @return
+	  */
 	@RequestMapping("delete")
 	@ResponseBody
 	public Integer delete( Integer id,@CurrentUser SysUser user) {

@@ -115,7 +115,7 @@ public class SysAreaService {
 	}
 
 	public List<SysArea> findAll() {
-		return sysAreaDao.all();
+		return sysAreaDao.query();
 	}
 
 	public List<SysArea> query() {

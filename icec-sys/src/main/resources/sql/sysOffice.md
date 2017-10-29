@@ -1,3 +1,25 @@
+findByParentIdsLike
+===
+
+	select #use("cols")# from sys_office  where del_flag=0 
+	and parent_ids like 	#parentIds+'%'#
+
+findById
+===
+
+SELECT a.*,b.name parentName,c.name areaName
+FROM sys_office a
+    LEFT JOIN sys_office b 
+        ON a.parent_id=b.id
+        LEFT JOIN sys_area c 
+        ON a.area_id=c.id where a.id=#id#
+        
+query
+===
+* 查询所有的区域
+	
+	select a.*,b.name as areaName from sys_office a LEFT JOIN sys_area b 
+        ON a.area_id=b.id    where a.del_flag=0 order by  a.parent_ids
 sample
 ===
 * 注释

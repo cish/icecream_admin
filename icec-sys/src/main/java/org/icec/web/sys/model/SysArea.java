@@ -146,11 +146,6 @@ public class SysArea   extends TreeModel implements BaseModel{
 		this.updateDate = updateDate;
 	}
 
-	@Override
-	public Integer getPid() {
-		// TODO Auto-generated method stub
-		return this.getParentId();
-	}
 
 	public String getParentName() {
 		return parentName;

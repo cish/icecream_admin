@@ -2,19 +2,23 @@ package org.icec.web.sys.model;
 import java.io.Serializable;
 import java.math.*;
 import java.util.Date;
+
+import org.icec.common.model.BaseModel;
+import org.icec.common.model.TreeModel;
+
 import java.sql.Timestamp;
 
 /*
 * 
 * gen by beetlsql 2017-10-24
 */
-public class SysOffice   implements Serializable{
+public class SysOffice   extends TreeModel implements BaseModel{
 	//编号
 	private Integer id ;
 	//创建者
 	private Integer createBy ;
 	//排序
-	private Integer sort ;
+	private Integer sort =30;
 	//更新者
 	private Integer updateBy ;
 	//副负责人
@@ -57,6 +61,12 @@ public class SysOffice   implements Serializable{
 	private Date createDate ;
 	//更新时间
 	private Date updateDate ;
+	
+	
+	//父机构名称
+	private String parentName;
+	//区域名称
+	private String areaName ;
 	
 	public SysOffice() {
 	}
@@ -228,6 +238,24 @@ public class SysOffice   implements Serializable{
 	public void setUpdateDate(Date updateDate ){
 		this.updateDate = updateDate;
 	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
+
+	 
 	
 	
 	

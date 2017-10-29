@@ -16,7 +16,7 @@ public class TreeBuild {
     	 
         List<TreeModel> trees = new ArrayList<TreeModel>();  
         for (TreeModel treeModel : treeModels) {  
-            if ((treeModel.getPid()==0)) {  
+            if ((treeModel.getParentId()==0)) {  
                 findChildren(treeModel,treeModels,trees);  
             }  
         }  
@@ -34,7 +34,7 @@ public class TreeBuild {
     	boolean flag=false;
     	for (TreeModel it : treeModels) { 
     		
-    		 if(treeModel.getId().equals(it.getPid())) {  
+    		 if(treeModel.getId().equals(it.getParentId())) {  
     			 findChildren(it,treeModels,trees); 
     			 flag=true; 
     		 }else {
@@ -49,7 +49,7 @@ public class TreeBuild {
     public static List<JsTreeData> buildJsTree(List<? extends TreeModel> treeModels) {
     	 List<JsTreeData> trees = new ArrayList<JsTreeData>();  
          for (TreeModel treeModel : treeModels) {  
-             if ((treeModel.getPid()==0)) { 
+             if ((treeModel.getParentId()==0)) { 
             	 JsTreeData data=new JsTreeData(treeModel.getId()+"","#",treeModel.getName(), true);
             	 trees.add(data);
                  findChildren2jstree(treeModel,treeModels,trees);  
@@ -59,8 +59,8 @@ public class TreeBuild {
     }
     private static void  findChildren2jstree (TreeModel treeModel,List<? extends TreeModel> treeModels,List<JsTreeData> trees) {  
     	for (TreeModel it : treeModels) { 
-    		 if(treeModel.getId().equals(it.getPid())) {  
-    			 JsTreeData data=new JsTreeData(it.getId()+"",it.getPid()+"",it.getName());
+    		 if(treeModel.getId().equals(it.getParentId())) {  
+    			 JsTreeData data=new JsTreeData(it.getId()+"",it.getParentId()+"",it.getName());
             	 trees.add(data);
     			 findChildren2jstree(it,treeModels,trees); 
     		 } 
