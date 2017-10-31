@@ -25,6 +25,10 @@ public class SysOfficeService   {
 	public SysOffice findById(Integer id) {
 		return sysOfficeDao.findById(id);
 	}
+	public List<SysOffice> findAll() {
+		return sysOfficeDao.query();
+	}
+
 	/**
 	*
 	*保存

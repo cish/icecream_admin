@@ -117,9 +117,9 @@
 		top.layer.open({
 		    type: 2, 
 		    area: ['300px', '420px'],
-		    title:"选择区域",
+		    title:"选择机构",
 		    ajaxData:{selectIds: $("#p_Id").val()},
-		    content: ctx+"sys/treeselect?url="+encodeURIComponent("sys/area/treeData")+"&module=&checked=&extId=&isAll=&allowSearch=" ,
+		    content: ctx+"sys/treeselect?url="+encodeURIComponent("sys/office/treeData")+"&module=&checked=&extId=&isAll=&allowSearch=" ,
 		    btn: ['确定', '关闭']
     	       ,yes: function(index, layero){ //或者使用btn1
 						var tree = layero.find("iframe")[0].contentWindow.tree;//h.find("iframe").contents();

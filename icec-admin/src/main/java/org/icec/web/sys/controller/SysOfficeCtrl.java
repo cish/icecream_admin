@@ -1,7 +1,12 @@
 package org.icec.web.sys.controller;
 
 
+import java.util.List;
+
+import org.icec.common.model.JsTreeData;
+import org.icec.common.utils.TreeBuild;
 import org.icec.web.shiro.annotation.CurrentUser;
+import org.icec.web.sys.model.SysArea;
 import org.icec.web.sys.model.SysOffice;
 import org.icec.web.sys.model.SysUser;
 import org.icec.web.sys.service.SysOfficeService;
@@ -10,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -90,4 +96,11 @@ public class SysOfficeCtrl {
 		return "sys/office/officeList";
 	}
 	 
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<JsTreeData> treeData(@RequestParam(required=false) String extId) {
+		List<SysOffice> list = sysOfficeService.findAll();
+		 
+		return TreeBuild.buildJsTree(list);
+	}
 }
