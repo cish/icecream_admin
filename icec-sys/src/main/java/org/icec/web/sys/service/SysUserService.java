@@ -1,6 +1,8 @@
 package org.icec.web.sys.service;
 
 
+import java.util.Date;
+
 import org.beetl.sql.core.engine.PageQuery;
 import org.icec.common.utils.CryptoUtils;
 import org.icec.web.sys.dao.SysUserDao;
@@ -20,7 +22,11 @@ public class SysUserService {
 	 * @param user
 	 */
 	@Transactional
-	public void save(SysUser user) {
+	public void save(SysUser user,SysUser optuser) {
+		user.setCreateBy(optuser.getId());
+		user.setCreateDate(new Date());
+		user.setUpdateBy(optuser.getId());
+		user.setUpdateDate(new Date());
 		/**
 		 * 密码加密
 		 */

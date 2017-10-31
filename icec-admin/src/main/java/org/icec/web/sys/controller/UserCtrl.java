@@ -3,6 +3,7 @@ package org.icec.web.sys.controller;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.beetl.sql.core.engine.PageQuery;
 import org.icec.web.common.BaseController;
+import org.icec.web.shiro.annotation.CurrentUser;
 import org.icec.web.sys.model.SysUser;
 import org.icec.web.sys.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class UserCtrl extends BaseController{
 	//@RequiresPermissions({"user:edit"})
 	@RequestMapping("save")
 	@ResponseBody
-	public Integer save(SysUser user) {
-		userService.save(user);
+	public Integer save(SysUser user,@CurrentUser SysUser optuser) {
+		userService.save(user,optuser);
 		return 1;
 	}
 	/**
