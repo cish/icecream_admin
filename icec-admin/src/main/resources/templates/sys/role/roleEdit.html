@@ -7,39 +7,45 @@
 		<div class="main-content-inner">
 			<div class="page-content">
 				<div class="row">
-					<form class="form-horizontal" role="form" id="userAddForm" method="post" th:action="@{/sys/user/update}" >
-						<input type="hidden" name="id" th:value="${user.id}">
+					<form class="form-horizontal" role="form" id="userAddForm" method="post" th:action="@{/sys/role/update}" >
+						<input type="hidden" id="id" name="id" th:value="${role.id}">
 						<div class="form-group">
-                          <label class="col-sm-2 control-label" for="ds_id">用户名</label>
+                          <label class="col-sm-2 control-label" for="ds_name">角色名称</label>
                           <div class="col-sm-4">
-                             <input class="form-control" id="ds_id" name="loginName" type="text" th:value="${user.loginName}" disabled="disabled" placeholder="请输入登录系统账号" required/>
+                             <input class="form-control" id="ds_name" name="name" type="text" placeholder="请输入角色名称" required th:value="${role.name}"/>
                           </div>
-                          <label class="col-sm-2 control-label" for="ds_name">姓名</label>
+                          <label class="col-sm-2 control-label" for="ds_enname">角色编码</label>
                           <div class="col-sm-4">
-                             <input class="form-control" id="ds_name" name="name" type="text" th:value="${user.name}" placeholder="请输入姓名" required/>
+                             <input class="form-control" id="ds_enname" name="enname" type="text" placeholder="请输入角色编码" required th:value="${role.enname}"/>
+                          </div>
+                       </div>
+                       <div class="form-group">
+                          <label class="col-sm-2 control-label" for="ds_roleType">角色类型</label>
+                          <div class="col-sm-4">
+                             <input class="form-control" id="ds_roleType" name="roleType" type="text"  required th:value="${role.roleType}"/>
+                          </div>
+                          <label class="col-sm-2 control-label" for="ds_isSys">是否系统数据</label>
+                          <div class="col-sm-4">
+                          	<select class="form-control" id="ds_isSys" name="isSys">
+							<option value="1" th:selected="${role.isSys=='1'}">是</option>
+							<option value="0" th:selected="${role.isSys=='0'}">否</option>
+							</select>
+                          </div>
+                       </div>
+                       <div class="form-group">
+                          <label class="col-sm-2 control-label" for="ds_useable">是否可用</label>
+                          <div class="col-sm-4">
+                          <select class="form-control" id="ds_useable"  name="useable" >
+                             	<option value="1" th:selected="${role.useable=='1'}">可用</option>
+                             	<option value="0" th:selected="${role.useable=='0'}">禁用</option>
+                             </select>
+                          </div>
+                          <label class="col-sm-2 control-label" for="ds_remarks">备注</label>
+                          <div class="col-sm-4">
+                             <textarea class="form-control" id="ds_remarks" name="remarks" >[[${role.remarks}]]</textarea>
                           </div>
                        </div>
                         
-                       <div class="form-group">
-                          <label class="col-sm-2 control-label" for="ds_phone">手机号码</label>
-                          <div class="col-sm-4">
-                             <input class="form-control" id="ds_phone" name="phone" type="text" th:value="${user.phone}" placeholder="请输入手机号码"/>
-                          </div>
-                          <label class="col-sm-2 control-label" for="ds_email">邮箱</label>
-                          <div class="col-sm-4">
-                             <input class="form-control" id="ds_email" name="email" type="email" th:value="${user.email}"  placeholder="请输入邮箱"/>
-                          </div>
-                       </div>
-                       <div class="form-group">
-                          <label class="col-sm-2 control-label" for="ds_enable">状态</label>
-                          <div class="col-sm-4">
-                             <select class="form-control" id="ds_enable"  name="enabled" >
-                             	<option value="1" th:selected="${user.enabled==1}">启用</option>
-                             	<option value="0" th:selected="${user.enabled==0}">禁用</option>
-                             </select>
-                          </div>
-                          
-                       </div>
                        <div class="clearfix ">
 										<div class="center">
 											<button class="btn btn-info" type="submit" id="submitBtn">

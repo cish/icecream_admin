@@ -47,6 +47,10 @@ public class SysRole  implements BaseModel {
 	//更新时间
 	private Date updateDate ;
 	
+	
+	
+	private String officeName ;//机构名称
+	
 	public SysRole() {
 	}
 	
@@ -146,6 +150,14 @@ public class SysRole  implements BaseModel {
 	}
 	public void setUpdateDate(Date updateDate ){
 		this.updateDate = updateDate;
+	}
+
+	public String getOfficeName() {
+		return officeName;
+	}
+
+	public void setOfficeName(String officeName) {
+		this.officeName = officeName;
 	}
 	
 	

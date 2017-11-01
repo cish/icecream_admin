@@ -28,6 +28,27 @@ public class SysRoleService {
 		role.setDelFlag("0");
 		sysRoleDao.insert(role);
 	}
+	
+	@Transactional
+	public void update(SysRole role ,SysUser optuser){
+		role.setUpdateBy(optuser.getId());
+		role.setUpdateDate(new Date());
+		sysRoleDao.updateTemplateById(role);
+	}
+	
+	@Transactional
+	public void deleteAll(String ids,SysUser optuser) {
+		String [] idarr=ids.split(",");
+		for(String id:idarr) {
+			SysRole role=new SysRole();
+			role.setId(Integer.parseInt(id));
+			role.setUpdateBy(optuser.getId());
+			role.setUpdateDate(new Date());
+			role.setDelFlag(SysUser.DEL_FLAG_DELETE);
+			sysRoleDao.updateTemplateById(role);
+		}
+		 
+	}
 	/**
 	 * 根据主键id查询
 	 * @param id

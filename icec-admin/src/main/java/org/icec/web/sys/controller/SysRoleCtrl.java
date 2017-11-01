@@ -50,8 +50,8 @@ public class SysRoleCtrl {
 	@RequestMapping("edit/{id}")
 	public String edit(@PathVariable Integer id ,ModelMap model) {
 		SysRole sysRole = sysRoleService.findById(id);
-		model.addAttribute("sysRole", sysRole);
-		return "sys/user/userEdit";
+		model.addAttribute("role", sysRole);
+		return "sys/role/roleEdit";
 	}
 	/**
 	 * 更新数据逻辑
@@ -61,11 +61,20 @@ public class SysRoleCtrl {
 	//@RequiresPermissions({"user:edit"})
 	@RequestMapping("update")
 	@ResponseBody
-	public Integer update(SysRole sysRole) {
+	public Integer update(SysRole sysRole,@CurrentUser SysUser optuser) {
 		if(sysRole==null||sysRole.getId()==null) {
 			return 0;
 		}
-		//sysRoleService.update(sysRole);
+		sysRoleService.update(sysRole,optuser);
+		return 1;
+	}
+	@RequestMapping("deleteAll")
+	@ResponseBody
+	public Integer deleteAll(String ids,@CurrentUser SysUser optuser) {
+		if(ids==null) {
+			return 0;
+		}
+		sysRoleService.deleteAll(ids,optuser);
 		return 1;
 	}
 	/**

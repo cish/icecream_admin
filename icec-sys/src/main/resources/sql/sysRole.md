@@ -1,3 +1,10 @@
+findById
+===
+
+	select a.*,b.name officeName 	from sys_role a
+	LEFT JOIN sys_office b 
+        ON a.officeId=b.id 	where del_flag=0  and id=#id#
+
 queryRole
 ===
 * 角色查询
@@ -7,7 +14,7 @@ queryRole
  	* 
  	@}
  	from sys_role 
- 	where 1=1
+ 	where del_flag=0
  	@if(!isEmpty(name)){
 	 and `name` like #'%'+name+'%'#
 	@}
