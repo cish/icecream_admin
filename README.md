@@ -42,7 +42,8 @@
 	jquery,bootstrap,bootstrap-table,jquery-treetable,layer,jquery-validation
   
   
-##参与开发
+## 参与开发
+
 	如果你希望参与开发，欢迎通过Gitee上fork本项目，并Pull Request您的commit    
 
 
