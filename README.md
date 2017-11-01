@@ -1,8 +1,10 @@
 # icec 1.0
+
 	本项目目前还在研发阶段，第一阶段是完成基础框架部分
 	未来在办公自动化，内容管理，微信公众号，电商等多领域进行研发扩展
 	
-	交流群：
+	交流群1：15643354
+	
 ## icec开发团队
 	xxjin 
 ## 系统说明(研发中)
@@ -17,8 +19,8 @@
 	数据字典管
 	日志管理
 ## 开发环境说明：
-	1、eclipse / st
-	2、jdk 1.
+	1、eclipse / sts
+	2、jdk 1.8
 	3、数据库 ：mysql  
 	本机安装mysql 5.7  db:icec   user:icec passwd:icec
 	4、数据库设计工具:EZDML,安装包下载：http://www.ezdml.com
