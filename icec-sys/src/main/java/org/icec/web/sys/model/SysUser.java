@@ -67,6 +67,9 @@ public class SysUser  implements BaseModel ,AuthenticationToken{
 	//更新时间
 	private Date updateDate ;
 	
+	private String companyName;//公司名称
+	private String officeName;//部门名称
+	
 	public SysUser() {
 	}
 	
@@ -258,6 +261,22 @@ public class SysUser  implements BaseModel ,AuthenticationToken{
 		} else if (!loginName.equals(other.loginName))
 			return false;
 		return true;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getOfficeName() {
+		return officeName;
+	}
+
+	public void setOfficeName(String officeName) {
+		this.officeName = officeName;
 	}
 
 }

@@ -1,3 +1,13 @@
+findById
+===
+ 
+	SELECT a.*,b.name companyName,c.name officeName
+	FROM sys_user a
+       LEFT JOIN sys_area b 
+        ON a.company_id=b.id
+        LEFT JOIN sys_area c 
+        ON a.office_id=c.id where a.id=#id#
+
 queryUser
 ===
  
@@ -6,7 +16,7 @@ queryUser
  	* 
  	@}
  	from sys_user 
- 	where 1=1
+ 	where del_flag=0
  	@if(!isEmpty(loginName)){
 	 and `login_name` like #'%'+loginName+'%'#
 	@}

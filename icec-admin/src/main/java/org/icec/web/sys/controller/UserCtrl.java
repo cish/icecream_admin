@@ -49,7 +49,7 @@ public class UserCtrl extends BaseController{
 	 */
 	//@RequiresPermissions({"user:edit"})
 	@RequestMapping("edit/{id}")
-	public String edit(@PathVariable Long id ,ModelMap model) {
+	public String edit(@PathVariable Integer id ,ModelMap model) {
 		SysUser user = userService.findById(id);
 		model.addAttribute("user", user);
 		return "sys/user/userEdit";
@@ -62,13 +62,25 @@ public class UserCtrl extends BaseController{
 	//@RequiresPermissions({"user:edit"})
 	@RequestMapping("update")
 	@ResponseBody
-	public Integer update(SysUser user) {
+	public Integer update(SysUser user,@CurrentUser SysUser optuser) {
 		if(user==null||user.getId()==null) {
 			return 0;
 		}
-		userService.update(user);
+		userService.update(user,optuser);
 		return 1;
 	}
+	
+	@RequestMapping("deleteAll")
+	@ResponseBody
+	public Integer deleteAll(String ids,@CurrentUser SysUser optuser) {
+		if(ids==null) {
+			return 0;
+		}
+		userService.deleteAll(ids,optuser);
+		return 1;
+	}
+	
+	
 	/**
 	 * 进入查询界面
 	 * @return

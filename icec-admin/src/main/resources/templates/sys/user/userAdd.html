@@ -181,9 +181,9 @@
 			return true;
 		}
 		// 清除	
-		$("#p_Id").val("");
-		$("#parentName").val("");
-		$("#parentName").focus();
+		$("#officeId").val("");
+		$("#officeName").val("");
+		$("#officeName").focus();
 	
 	});
 	
@@ -227,7 +227,7 @@
 
 	$("#companyDelButton").click(function(){
 		// 是否限制选择，如果限制，设置为disabled
-		if ($("#areaButton").hasClass("disabled")){
+		if ($("#companyButton").hasClass("disabled")){
 			return true;
 		}
 		// 清除	

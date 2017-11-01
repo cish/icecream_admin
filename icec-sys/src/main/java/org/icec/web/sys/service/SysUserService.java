@@ -10,8 +10,8 @@ import org.icec.web.sys.model.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
-import com.mysql.jdbc.StringUtils;
 
 @Service
 public class SysUserService {
@@ -40,17 +40,43 @@ public class SysUserService {
 	 * @param user
 	 */
 	@Transactional
-	public void update(SysUser user) {
+	public void update(SysUser user,SysUser optuser) {
+		user.setUpdateBy(optuser.getId());
+		user.setUpdateDate(new Date());
+		if(StringUtils.hasLength(user.getPassword())) {
+			user.setPassword(CryptoUtils.bcrypt(user.getPassword()));	
+		}else {
+			user.setPassword(null);
+		}
 		userDao.updateTemplateById(user);
 	}
+	/**
+	 * 删除操作，更新del_flag字段
+	 * @param ids
+	 * @param optuser
+	 */
+	@Transactional
+	public void deleteAll(String ids,SysUser optuser) {
+		String [] idarr=ids.split(",");
+		for(String id:idarr) {
+			SysUser user=new SysUser();
+			user.setId(Integer.parseInt(id));
+			user.setUpdateBy(optuser.getId());
+			user.setUpdateDate(new Date());
+			user.setDelFlag(SysUser.DEL_FLAG_DELETE);
+			userDao.updateTemplateById(user);
+		}
+		 
+	}
+	
 	/**
 	 * 根据主键id查询
 	 * @param id
 	 * @return
 	 */
-	public SysUser findById(Long id) {
+	public SysUser findById(Integer id) {
 
-		return userDao.single(id);
+		return userDao.findById(id);
 	}
 
 	public PageQuery<SysUser> queryUser(PageQuery<SysUser> query) {
@@ -63,7 +89,7 @@ public class SysUserService {
 	 * @return
 	 */
 	public SysUser findByUserId(String loginName) {
-		if(StringUtils.isNullOrEmpty(loginName)) {
+		if(StringUtils.isEmpty(loginName)) {
 			//不允许为空
 			return null;
 		}
