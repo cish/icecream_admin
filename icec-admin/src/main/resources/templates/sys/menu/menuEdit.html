@@ -54,14 +54,28 @@
 								id="ds_icon" name="icon" type="text" th:value="${menu.icon}"  /></td>
 							<td class="width-15 active"><label
 								class="pull-right  control-label" for="ds_type">菜单类型</label></td>
-							<td class="width-35"><input class="form-control"
-								id="ds_type" name="type" type="text" th:value="${menu.type}"/></td>
+							<td class="width-35"> <label
+								class="radio-inline"> <input th:field="*{menu.type}" type="radio"
+									name="type" id="type1" value="1"
+									checked> 菜单
+							</label> <label class="radio-inline"> <input type="radio" th:field="*{menu.type}"
+									name="type" id="type2" value="2">
+									按钮
+							</label></td>
 						</tr>
 						<tr>
 							<td class="width-15 active"><label
-								class="pull-right  control-label" for="ds_isShow">可见</label></td>
-							<td class="width-35"><input class="form-control"
-								id="ds_isShow" name="isShow" type="text"  th:value="${menu.isShow}" /></td>
+								class="pull-right  control-label"  >可见</label></td>
+							<td class="width-35"> 
+								 <label
+								class="radio-inline"> <input type="radio"
+									name="isShow" id="isShow1" value="1" th:field="*{menu.isShow}"
+									checked> 显示
+							</label> <label class="radio-inline"> <input type="radio" th:field="*{menu.isShow}"
+									name="isShow" id="isShow2" value="0">
+									隐藏
+							</label>
+								</td>
 							<td class="width-15 active"><label
 								class="pull-right  control-label" for="ds_permission">权限标识</label></td>
 							<td class="width-35"><input class="form-control"
