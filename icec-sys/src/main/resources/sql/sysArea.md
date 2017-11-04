@@ -7,8 +7,8 @@ findByParentIdsLike
 findById
 ===
 
-SELECT a.*,b.name parentName
-FROM sys_area a
+	SELECT a.*,b.name parentName
+	FROM sys_area a
     LEFT JOIN sys_area b 
         ON a.parent_id=b.id where a.id=#id#
 

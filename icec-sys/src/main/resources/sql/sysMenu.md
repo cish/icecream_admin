@@ -1,8 +1,22 @@
+findById
+===
+
+	SELECT a.*,b.name parentName
+	FROM sys_menu a
+    LEFT JOIN sys_menu b 
+        ON a.parent_id=b.id where a.id=#id#
+
+findByParentIdsLike
+===
+
+	select #use("cols")# from sys_menu  where del_flag=0 
+	and parent_ids like 	#parentIds+'%'#
+	
 query
 ===
 * 角色查询
 	
-	select  *   from sys_menu  where del_flag=0  order by id 
+	select  *   from sys_menu  where del_flag=0   order by parent_ids
 
 sample
 ===

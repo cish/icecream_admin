@@ -3,12 +3,17 @@ package org.icec.web.sys.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.icec.common.model.JsTreeData;
+import org.icec.common.utils.TreeBuild;
 import org.icec.web.shiro.annotation.CurrentUser;
+import org.icec.web.sys.model.SysArea;
 import org.icec.web.sys.model.SysMenu;
 import org.icec.web.sys.model.SysUser;
 import org.icec.web.sys.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +28,14 @@ public class SysMenuCtrl {
 	 * @return
 	 */
 	@RequestMapping("add")
-	public String add() {
+	public String add(Integer parentId,ModelMap model) {
+		if(parentId!=null) {
+			SysMenu parea=sysMenuService.findById(parentId);
+			model.addAttribute("pmenu", parea);
+			
+		} else {
+			model.addAttribute("pmenu", new SysMenu());
+		}
 		return "sys/menu/menuAdd";
 	}
 	/**
@@ -38,11 +50,54 @@ public class SysMenuCtrl {
 		return 1;
 	}
 	/**
+	 * 进入修改界面
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	//@RequiresPermissions({"user:edit"})
+	@RequestMapping("edit/{id}")
+	public String edit(@PathVariable Integer id ,ModelMap model) {
+		SysMenu sysMenu = sysMenuService.findById(id);
+		model.addAttribute("menu", sysMenu);
+		return "sys/menu/menuEdit";
+	}
+	/**
+	 * 更新数据逻辑
+	 * @param user
+	 * @return
+	 */
+	//@RequiresPermissions({"user:edit"})
+	@RequestMapping("update")
+	@ResponseBody
+	public Integer update(SysMenu sysMenu ,@CurrentUser SysUser user) {
+		if(sysMenu==null||sysMenu.getId()==null) {
+			return 0;
+		}
+		sysMenuService.update(sysMenu, user);
+		return 1;
+	}
+	 /**
+	  * 删除
+	  * @param id
+	  * @param user
+	  * @return
+	  */
+	@RequestMapping("delete")
+	@ResponseBody
+	public Integer delete( Integer id,@CurrentUser SysUser user) {
+		 
+		sysMenuService.delete(  id, user);
+		   
+		return  1;
+	}
+	/**
 	 * 进入查询界面
 	 * @return
 	 */
 	@RequestMapping("list")
-	public String list() {
+	public String list(ModelMap model) {
+		model.addAttribute("menuList", sysMenuService.query());
 		return "sys/menu/menuList";
 	}
 	/**
@@ -58,5 +113,13 @@ public class SysMenuCtrl {
 		  query=sysMenuService.query();
 		   
 		return  query;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<JsTreeData> treeData(@RequestParam(required=false) String extId) {
+		List<SysMenu> list = sysMenuService.query();
+		 
+		return TreeBuild.buildJsTree(list);
 	}
 }
