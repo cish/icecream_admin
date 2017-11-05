@@ -57,8 +57,8 @@
 
 							<li class="divider"></li>
 
-							<li><a href="#"> <i class="ace-icon fa fa-power-off"></i>
-									Logout
+							<li><a th:href="@{/sys/logout}"> <i class="ace-icon fa fa-power-off"></i>
+									登出
 							</a></li>
 						</ul></li>
 
@@ -119,6 +119,9 @@
 						</a> <b class="arrow"></b></li>
 						<li class=""><a class="J_menuItem" th:href="@{/sys/area/list}"> <i
 								class="menu-icon fa fa-caret-right"></i> 区域管理
+						</a> <b class="arrow"></b></li>
+						<li class=""><a class="J_menuItem" th:href="@{/sys/dict/list}"> <i
+								class="menu-icon fa fa-caret-right"></i> 字典管理
 						</a> <b class="arrow"></b></li>
 						<li class=""><a href="error-500.html"> <i
 								class="menu-icon fa fa-caret-right"></i> 日志管理
