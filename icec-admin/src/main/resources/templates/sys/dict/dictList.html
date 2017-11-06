@@ -95,7 +95,7 @@
 								<div class="panel-body">
 									<div id="dictValueToolbar">
 										<button id="dictValueButton"
-											class="btn btn-outline btn-primary" title="添加键值">
+											class="btn btn-outline btn-sm btn-primary" title="添加键值">
 											<i class="fa fa-plus-circle"></i> 添加键值
 										</button>
 									</div>
@@ -193,7 +193,7 @@
     			 jp.loading();
           	  	$.get(ctx+"sys/dict/deleteAll?ids=" +ids, function(data){
           	  		if(data){
-          	  			$('#usertable').bootstrapTable('refresh');
+          	  			search();
          	  			jp.success("删除成功");
          	  		}else{
          	  			jp.error("删除失败");
@@ -205,7 +205,9 @@
  		);
     	}
     }
-    
+    function dictValueRefresh(){
+    	$('#dictValueTable').bootstrapTable('refresh');
+    }
 	 $(function () {
     	$('#usertable').on('check.bs.table uncheck.bs.table load-success.bs.table ' +
                 'check-all.bs.table uncheck-all.bs.table', function () {
@@ -215,7 +217,7 @@
     	
      	$('#dictValueTable').bootstrapTable({
 			  //请求方法
-          method: 'post',
+          method: 'get',
           dataType: "json",
            //是否显示行间隔色
           striped: true,
@@ -249,21 +251,20 @@
               align: 'center',
               events: {
               	 'click .edit': function (e, value, row, index) {
-      		        	
-              		 jp.openDialog('编辑键值', '/jeeplus/a/sys/dict/dictValueForm?dictTypeId=' + $("#dictTypeId").val()+"&dictValueId="+row.id,'800px', '500px', $dictValueTable);
+              		jp.openWindow("修改"+'键值',ctx+"sys/dict/dictValueEdit/"+row.id,"800px", "420px");	
       		        },
   		        'click .del': function (e, value, row, index) {
   		        	
   		        	jp.confirm('确认要删除键值吗？',function(){
   		        		jp.loading();
-  		        		$.get('/jeeplus/a/sys/dict/deleteDictValue?dictValueId='+row.id+'&dictTypeId=' + $("#dictTypeId").val(), function(data){
-	                    	  		if(data.success){
-	                    	  			$('#dictValueTable').bootstrapTable("refresh");
-	                    	  			jp.success(data.msg);
-	                    	  		}else{
-	                    	  			jp.error(data.msg);
-	                    	  		}
-	                    	  	})
+  		        		$.get(ctx+"sys/dict/deleteAll?ids=" +row.id, function(data){
+  		          	  		if(data){
+  		          	  			dictValueRefresh();
+  		         	  			jp.success("删除成功");
+  		         	  		}else{
+  		         	  			jp.error("删除失败");
+  		         	  		}
+  		          	  	})
   		        	});
   		        }
   		    },
@@ -286,7 +287,7 @@
 		  
 		  $("#dictValueButton").click(function(){
 				
-				jp.openDialog('添加键值', '/jeeplus/a/sys/dict/dictValueForm?dictTypeId=' + $("#dictTypeId").val(),'800px', '500px', $dictValueTable);
+				jp.openWindow('添加键值', ctx+'sys/dict/dictValueAdd?dictTypeId=' + $("#dictTypeId").val(),'800px', '420px');
 			});
 		  
 		 

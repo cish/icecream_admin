@@ -1,19 +1,24 @@
+getDictItems
+===
+
+	select * from sys_dict  where del_flag=0 and parent_id=#parentId# order by sort 
+
 queryDict
 ===
 
-select
- 	@pageTag(){
- 	* 
- 	@}
- 	from sys_dict 
- 	where del_flag=0 and parent_id=0
- 	@if(!isEmpty(type)){
+	select
+	@pageTag(){
+	* 
+	@}
+	from sys_dict 
+	where del_flag=0 and parent_id=0
+	@if(!isEmpty(type)){
 	 and `type` like #'%'+type+'%'#
 	@}
- 	@if(!isEmpty(description)){
+	@if(!isEmpty(description)){
 	 and `description` like #'%'+description+'%'#
 	@}
- 	order by sort 
+	order by sort 
 
 sample
 ===

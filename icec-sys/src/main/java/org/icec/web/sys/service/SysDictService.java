@@ -2,6 +2,7 @@ package org.icec.web.sys.service;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.icec.web.sys.model.SysDict;
 import org.icec.web.sys.model.SysUser;
 
@@ -9,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.beetl.sql.core.engine.PageQuery;
+import org.icec.common.utils.CryptoUtils;
 import org.icec.web.sys.dao.SysDictDao;
 
 /*
@@ -20,6 +22,9 @@ public class SysDictService   {
 	@Autowired
 	private SysDictDao  sysDictDao ;
 	
+	public SysDict findById(Integer id){
+		return sysDictDao.single(id);
+	}
 	/**
 	*
 	*保存
@@ -32,19 +37,50 @@ public class SysDictService   {
 		sysDict.setUpdateDate(new Date());
 		sysDictDao.insertTemplate(sysDict);
 	}
+	/**
+	 * 字典更新
+	 * @param sysDict
+	 * @param optuser
+	 */
+	@Transactional
+	public void update(SysDict sysDict,SysUser optuser) {
+		sysDict.setUpdateBy(optuser.getId());
+		sysDict.setUpdateDate(new Date());
+		 
+		sysDictDao.updateTemplateById(sysDict);
+	}
+	
+	/**
+	 * 字典删除
+	 * @param ids
+	 * @param optuser
+	 */
+	@Transactional
+	public void deleteAll(String ids,SysUser optuser) {
+		String [] idarr=ids.split(",");
+		for(String id:idarr) {
+			SysDict sysDict=new SysDict();
+			sysDict.setId(Integer.parseInt(id));
+			sysDict.setUpdateBy(optuser.getId());
+			sysDict.setUpdateDate(new Date());
+			sysDict.setDelFlag(SysUser.DEL_FLAG_DELETE);
+			sysDictDao.updateTemplateById(sysDict);
+		}
+		 
+	}
 	
 	public PageQuery<SysDict> queryDict(PageQuery<SysDict> query) {
 		return sysDictDao.queryDict(query);
 	}
+	
+	
 	/**
 	 * 查询字典项
 	 * @param typeId
 	 * @return
 	 */
 	public List<SysDict> getDictValue(Integer typeId){
-		SysDict dict=new SysDict();
-		dict.setDelFlag(SysDict.DEL_FLAG_NORMAL);
-		dict.setParentId(typeId);
-		return sysDictDao.template(dict);
+		if(typeId==null)return null;
+		return sysDictDao.getDictItems(typeId);
 	}
 }
