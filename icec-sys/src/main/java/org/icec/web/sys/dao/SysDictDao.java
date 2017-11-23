@@ -12,5 +12,8 @@ import org.icec.web.sys.model.*;
 */
 public interface SysDictDao extends BaseMapper<SysDict> {
 	public List<SysDict> getDictItems(@Param("parentId") Integer parentId);
+	public List<SysDict> getDictItemsByType(@Param("type") String type);
+	public List<SysDict> getDictItemsByTypeValue(@Param("type") String type,@Param("value") String value);
+	
 	public PageQuery<SysDict> queryDict(PageQuery<SysDict> query);
 }

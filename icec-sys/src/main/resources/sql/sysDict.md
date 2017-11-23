@@ -1,3 +1,14 @@
+getDictItemsByTypeValue
+===
+
+	select a.* from sys_dict a , sys_dict b where a.del_flag=0 and a.parent_id=b.id and b.type=#type# and a.value=#value# order by sort
+
+getDictItemsByType
+===
+	
+	select a.* from sys_dict a , sys_dict b where a.del_flag=0 and a.parent_id=b.id and b.type=#type# order by sort 
+
+
 getDictItems
 ===
 
