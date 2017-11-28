@@ -5,9 +5,11 @@ import org.beetl.sql.core.engine.PageQuery;
 import org.icec.web.common.BaseController;
 import org.icec.web.shiro.annotation.CurrentUser;
 import org.icec.web.sys.model.SysUser;
+import org.icec.web.sys.service.SysRoleService;
 import org.icec.web.sys.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +22,17 @@ public class UserCtrl extends BaseController{
 	
 	@Autowired
 	private SysUserService userService;
+	
+	@Autowired
+	private SysRoleService sysRoleService;
 	/**
 	 * 进入添加界面
 	 * @return
 	 */
 	@RequestMapping("add")
 	//@RequiresPermissions({"user:edit"})
-	public String add() {
+	public String add(Model model) {
+		model.addAttribute("roleList", sysRoleService.findAll());
 		return "sys/user/userAdd";
 	}
 	/**

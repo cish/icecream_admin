@@ -1,6 +1,7 @@
 package org.icec.web.sys.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.beetl.sql.core.engine.PageQuery;
 import org.icec.web.sys.dao.SysRoleDao;
@@ -59,5 +60,14 @@ public class SysRoleService {
 	}
 	public PageQuery<SysRole> queryRole(PageQuery<SysRole> query) {
 		return sysRoleDao.queryRole(query);
+	}
+	/**
+	 * 查询全部角色
+	 * @return
+	 */
+	public List<SysRole> findAll(){
+		SysRole role=new SysRole();
+		role.setDelFlag(SysRole.DEL_FLAG_NORMAL);
+		return sysRoleDao.template(role);
 	}
 }
