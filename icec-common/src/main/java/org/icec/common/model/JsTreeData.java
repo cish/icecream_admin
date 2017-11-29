@@ -11,6 +11,7 @@ public class JsTreeData {
 		this.id = id;
 		this.parent = parent;
 		this.text = text;
+		this.state = new TreeState(false);
 	}
 	public JsTreeData(String id, String parent, String text, boolean opened) {
 		super();
@@ -62,6 +63,8 @@ public class JsTreeData {
 
 	public class TreeState{
 		private boolean opened=false ;
+		private boolean disabled=false;
+		private boolean selected=false;
 		public TreeState(){}
 		public TreeState(boolean opened){
 			this.opened=opened;
@@ -72,6 +75,18 @@ public class JsTreeData {
 
 		public void setOpened(boolean opened) {
 			this.opened = opened;
+		}
+		public boolean isDisabled() {
+			return disabled;
+		}
+		public void setDisabled(boolean disabled) {
+			this.disabled = disabled;
+		}
+		public boolean isSelected() {
+			return selected;
+		}
+		public void setSelected(boolean selected) {
+			this.selected = selected;
 		}
 		
 	}

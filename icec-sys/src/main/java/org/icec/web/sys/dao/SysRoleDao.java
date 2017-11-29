@@ -35,4 +35,18 @@ public interface SysRoleDao extends BaseMapper<SysRole>{
 	 * @return
 	 */
 	public List<SysRole> findRoleByUserId(@Param("userId")Integer userId);
+	
+	
+	/**
+	 * 添加角色菜单关系表
+	 * @param userId
+	 * @param roleId
+	 */
+	public void insertRoleMenu(@Param("roleId")Integer roleId,@Param("menuId")Integer menuId);
+	/**
+	 * 根据角色删除角色菜单关系
+	 * @param userId
+	 */
+	public void deleteRoleMenuByRoleId(@Param("roleId")Integer roleId);
+	
 }

@@ -108,4 +108,8 @@ public class SysMenuService {
 	public List<SysMenu> query() {
 		return (List<SysMenu> )TreeBuild.buildByRecursive(sysMenuDao.query());
 	}
+	
+	public List<SysMenu> findByRoleId(Integer roleId){
+		return sysMenuDao.findByRoleId(roleId);
+	}
 }

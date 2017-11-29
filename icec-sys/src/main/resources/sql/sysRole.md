@@ -1,3 +1,13 @@
+deleteRoleMenuByRoleId
+===
+
+	delete from 	sys_role_menu where role_id=#roleId#
+
+insertRoleMenu
+===
+
+	insert into sys_role_menu values(#roleId#,#menuId#)
+
 findRoleByUserId
 ===
 

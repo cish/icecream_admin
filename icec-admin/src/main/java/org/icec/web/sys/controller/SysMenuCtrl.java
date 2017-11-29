@@ -1,7 +1,9 @@
 package org.icec.web.sys.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.icec.common.model.JsTreeData;
 import org.icec.common.utils.TreeBuild;
@@ -13,6 +15,7 @@ import org.icec.web.sys.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -117,9 +120,23 @@ public class SysMenuCtrl {
 	
 	@ResponseBody
 	@RequestMapping(value = "treeData")
-	public List<JsTreeData> treeData(@RequestParam(required=false) String extId) {
+	public List<JsTreeData> treeData(@RequestParam(required=false) String extId,Integer roleId) {
 		List<SysMenu> list = sysMenuService.query();
-		 
-		return TreeBuild.buildJsTree(list);
+		List<JsTreeData> tree=TreeBuild.buildJsTree(list);
+		 if(roleId!=null) {//角色不为空，查询出觉得对应的菜单，并设置为选中
+			 List<SysMenu> selected= sysMenuService.findByRoleId(roleId);
+			 Map<String,SysMenu> tmp=new HashMap<String,SysMenu>();
+			 for(SysMenu menu:selected) {
+				 if(!StringUtils.isEmpty(menu.getHref().trim()))
+				 {tmp.put(menu.getId()+"",menu);}
+			 }
+			 for(JsTreeData data:tree) {
+				 SysMenu menu= tmp.get(data.getId());
+				 if(menu!=null) {
+					 data.getState().setSelected(true);
+				 }
+			 }
+		 }
+		return tree;
 	}
 }

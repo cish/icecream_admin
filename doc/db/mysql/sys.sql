@@ -193,8 +193,8 @@ alter table `sys_role` comment= '角色表';
 -- sys_role_menu
 create table  `sys_role_menu`
 (
-       `role_id`         VARCHAR(64) not null comment '角色编号',
-       `menu_id`         VARCHAR(64) not null comment '菜单编号'
+       `role_id`         INT not null comment '角色编号',
+       `menu_id`         INT not null comment '菜单编号'
 );
 alter  table `sys_role_menu`
        add constraint `PK_sys_role_menu_role_id` primary key (`role_id`,`menu_id`);

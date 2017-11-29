@@ -6,6 +6,8 @@ import org.icec.web.shiro.annotation.CurrentUser;
 import org.icec.web.sys.model.SysRole;
 import org.icec.web.sys.model.SysUser;
 import org.icec.web.sys.service.SysRoleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/sys/role")
 public class SysRoleCtrl {
+	Logger logger=LoggerFactory.getLogger(getClass());
 	@Autowired
 	private SysRoleService sysRoleService;
 	/**
@@ -104,5 +107,21 @@ public class SysRoleCtrl {
 		  query=sysRoleService.queryRole(query);
 		   
 		return  query;
+	}
+	
+	/**
+	 * 对角色进行授权
+	 * @return
+	 */
+	@RequestMapping("auth")
+	public String auth(Integer roleId,ModelMap model) {
+		model.addAttribute("roleId", roleId);
+		return "sys/role/roleAuth";
+	}
+	@RequestMapping("authSave")
+	@ResponseBody
+	public String authSave(Integer roleId,String menuIds) {
+		sysRoleService.saveRoleMenu(roleId, menuIds);
+		return "1";
 	}
 }

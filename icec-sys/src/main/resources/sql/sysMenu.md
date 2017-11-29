@@ -1,3 +1,10 @@
+findByRoleId
+===
+* 根据角色id查菜单
+
+	select #use("cols")# from sys_menu a,sys_role_menu b 
+	where a.id=b.menu_id and b.role_id=#roleId# and a.del_flag=0
+
 findById
 ===
 

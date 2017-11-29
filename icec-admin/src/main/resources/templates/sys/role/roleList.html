@@ -98,7 +98,7 @@
     function optFormatter(value,row,index){
     	return "<div class='hidden-sm hidden-xs btn-group'>"+
     	"<button class='btn btn-xs btn-info' onclick='edit("+value+")'>修改</button>"
-    	+"<button class='btn btn-xs btn-danger'>权限设置</button>"
+    	+"<button class='btn btn-xs btn-danger' onclick='auth("+value+")'>权限设置</button>"
     	+"<button class='btn btn-xs btn-danger'>分配用户</button>"
     	+"</div>"
     	
@@ -130,7 +130,9 @@
     	 
     	
     }
-    
+    function auth(id){
+		jp.openDialog('菜单权限', ctx+'sys/role/auth?roleId=' + id,'350px', '700px');
+	}
     function del(ids){
     	//layer.confirm("确定要删除吗"){}
     	var selectRows=$('#roletable').bootstrapTable('getSelections');

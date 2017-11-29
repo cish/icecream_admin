@@ -10,6 +10,7 @@ import org.icec.web.sys.model.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 /**
  * 角色管理
@@ -73,5 +74,18 @@ public class SysRoleService {
 	
 	public List<SysRole> findRoleByUserId(Integer userId){
 		return sysRoleDao.findRoleByUserId(userId);
+	}
+	
+	@Transactional
+	public void saveRoleMenu(Integer roleId,String menuIds) {
+		String [] menus=menuIds.split(",");
+		if(menus.length>0) {
+			sysRoleDao.deleteRoleMenuByRoleId(roleId);//删除老数据
+			for(String mid:menus) {					  //保存新数据
+				if(!StringUtils.isEmpty(mid.trim())){
+					sysRoleDao.insertRoleMenu(roleId,Integer.valueOf(mid));
+				}
+			}
+		}
 	}
 }
