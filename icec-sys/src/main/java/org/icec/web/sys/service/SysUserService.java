@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.beetl.sql.core.engine.PageQuery;
 import org.icec.common.utils.CryptoUtils;
+import org.icec.web.sys.dao.SysRoleDao;
 import org.icec.web.sys.dao.SysUserDao;
 import org.icec.web.sys.model.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,14 @@ import org.springframework.util.StringUtils;
 public class SysUserService {
 	@Autowired
 	private SysUserDao userDao;
+	@Autowired
+	private SysRoleDao sysRoleDao;
 	/**
 	 * 新增用户
 	 * @param user
 	 */
 	@Transactional
-	public void save(SysUser user,SysUser optuser) {
+	public void save(SysUser user,SysUser optuser,Integer[] roleList) {
 		user.setCreateBy(optuser.getId());
 		user.setCreateDate(new Date());
 		user.setUpdateBy(optuser.getId());
@@ -32,7 +35,12 @@ public class SysUserService {
 		 */
 		user.setPassword(CryptoUtils.bcrypt(user.getPassword()));
 		user.setDelFlag(SysUser.DEL_FLAG_NORMAL);
-		userDao.insert(user);
+		userDao.insert(user,true);
+		
+		for(Integer roleId:roleList) {//添加用户角色关系表
+			sysRoleDao.insertUserRole(user.getId(), roleId);
+		}
+		
 	}
 	
 	/**
@@ -40,7 +48,7 @@ public class SysUserService {
 	 * @param user
 	 */
 	@Transactional
-	public void update(SysUser user,SysUser optuser) {
+	public void update(SysUser user,SysUser optuser,Integer[] roleList) {
 		user.setUpdateBy(optuser.getId());
 		user.setUpdateDate(new Date());
 		if(StringUtils.hasLength(user.getPassword())) {
@@ -49,6 +57,10 @@ public class SysUserService {
 			user.setPassword(null);
 		}
 		userDao.updateTemplateById(user);
+		sysRoleDao.deleteUserRoleByUserId(user.getId());//先删除角色
+		for(Integer roleId:roleList) {//添加用户角色关系表
+			sysRoleDao.insertUserRole(user.getId(), roleId);
+		}
 	}
 	/**
 	 * 删除操作，更新del_flag字段

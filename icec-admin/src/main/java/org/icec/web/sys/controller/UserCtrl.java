@@ -7,6 +7,8 @@ import org.icec.web.shiro.annotation.CurrentUser;
 import org.icec.web.sys.model.SysUser;
 import org.icec.web.sys.service.SysRoleService;
 import org.icec.web.sys.service.SysUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Controller
 @RequestMapping("sys/user")
 public class UserCtrl extends BaseController{
-	
+	Logger logger=LoggerFactory.getLogger(getClass());
 	@Autowired
 	private SysUserService userService;
 	
@@ -43,8 +48,14 @@ public class UserCtrl extends BaseController{
 	//@RequiresPermissions({"user:edit"})
 	@RequestMapping("save")
 	@ResponseBody
-	public Integer save(SysUser user,@CurrentUser SysUser optuser) {
-		userService.save(user,optuser);
+	public Integer save(SysUser user,Integer[] roleList,@CurrentUser SysUser optuser) {
+		logger.debug(roleList.toString());
+		SysUser temp=userService.findByUserId(user.getLoginName());
+		if(temp!=null) {
+			logger.debug("用户名已存在，不能新增");
+			return 0;
+		}
+		userService.save(user,optuser,roleList);
 		return 1;
 	}
 	/**
@@ -58,6 +69,16 @@ public class UserCtrl extends BaseController{
 	public String edit(@PathVariable Integer id ,ModelMap model) {
 		SysUser user = userService.findById(id);
 		model.addAttribute("user", user);
+		model.addAttribute("roleList", sysRoleService.findAll());
+		ObjectMapper mapper = new ObjectMapper(); 
+		String myrole="";
+		try {
+			myrole = mapper.writeValueAsString(sysRoleService.findRoleByUserId(id));
+		} catch (JsonProcessingException e) {
+			 
+			logger.error("json转换错误",e);
+		}
+		model.addAttribute("myRole", myrole);
 		return "sys/user/userEdit";
 	}
 	/**
@@ -68,11 +89,11 @@ public class UserCtrl extends BaseController{
 	//@RequiresPermissions({"user:edit"})
 	@RequestMapping("update")
 	@ResponseBody
-	public Integer update(SysUser user,@CurrentUser SysUser optuser) {
+	public Integer update(SysUser user,Integer[] roleList,@CurrentUser SysUser optuser) {
 		if(user==null||user.getId()==null) {
 			return 0;
 		}
-		userService.update(user,optuser);
+		userService.update(user,optuser,roleList);
 		return 1;
 	}
 	

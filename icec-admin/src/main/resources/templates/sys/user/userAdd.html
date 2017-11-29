@@ -104,8 +104,8 @@
 							<td class="width-15 active"><label
 								class="pull-right control-label" for="ds_loginFlag">角色</label></td>
 							<td class="width-35">
-								<select multiple="" name="roleList" class="chosen-select form-control" id="form-field-select-4" data-placeholder="请分配角色...">
-									<option th:each="role:${roleList}" th:value="${role.enname}" th:text="${role.name}">Alabama</option>
+								<select multiple="" name="roleList" class="chosen-select form-control" id="roleValue" data-placeholder="请分配角色...">
+									<option th:each="role:${roleList}" th:value="${role.id}" th:text="${role.name}">Alabama</option>
 									</select>
 							</td>
 						</tr>
@@ -256,7 +256,6 @@
 			$("#userAddForm").validate({
 				submitHandler : function(form) {
 					//验证通过后 的js代码写在这里 
-
 					$(form).ajaxSubmit({
 						dataType : "json",
 						success : function(data) {

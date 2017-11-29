@@ -70,4 +70,8 @@ public class SysRoleService {
 		role.setDelFlag(SysRole.DEL_FLAG_NORMAL);
 		return sysRoleDao.template(role);
 	}
+	
+	public List<SysRole> findRoleByUserId(Integer userId){
+		return sysRoleDao.findRoleByUserId(userId);
+	}
 }

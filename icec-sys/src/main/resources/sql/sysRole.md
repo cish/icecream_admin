@@ -1,3 +1,25 @@
+findRoleByUserId
+===
+
+	select #use("cols")# from sys_role a,sys_user_role b 
+	where a.id=b.role_id and b.user_id=#userId#
+	
+insertUserRole
+===
+	
+	insert into sys_user_role values(#userId#,#roleId#)
+	
+deleteUserRoleByUserId
+===
+
+	delete from 	sys_user_role where user_id=#userId#
+	
+deleteUserRoleByUserIdAndRoleId
+===
+	
+	delete from 	sys_user_role where user_id=#userId# and role_id=#roleId#	
+		
+
 findById
 ===
 
