@@ -7,6 +7,9 @@ import org.beetl.sql.core.annotatoin.AutoID;
 import org.beetl.sql.core.annotatoin.SeqID;
 import org.beetl.sql.core.annotatoin.Table;
 import org.icec.common.model.BaseModel;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
 
@@ -61,10 +64,13 @@ public class SysUser  implements BaseModel ,AuthenticationToken{
 	//用户类型
 	private String userType ;
 	//创建时间
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createDate ;
 	//最后登陆时间
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date loginDate ;
 	//更新时间
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date updateDate ;
 	
 	private String companyName;//公司名称

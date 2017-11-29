@@ -3,9 +3,9 @@ findById
  
 	SELECT a.*,b.name companyName,c.name officeName
 	FROM sys_user a
-       LEFT JOIN sys_area b 
+       LEFT JOIN sys_office b 
         ON a.company_id=b.id
-        LEFT JOIN sys_area c 
+        LEFT JOIN sys_office c 
         ON a.office_id=c.id where a.id=#id#
 
 queryUser
@@ -23,7 +23,9 @@ queryUser
  	@if(!isEmpty(name)){
 	 and `name` like #'%'+name+'%'#
 	@}
- 	
+ 	@if(!isEmpty(companyId)){
+	 and `company_id` =#companyId#
+	@}
  	order by id 
  
 

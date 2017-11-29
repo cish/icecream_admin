@@ -4,16 +4,31 @@
 <title>用户管理</title>
  <!-- 
   additional css  -->
-
+	<link th:href="@{/ace/plugins/jstree/themes/default/style.min.css}" rel="stylesheet" type="text/css"/>
+	
 </head>
  
 <body>
 	<div class="main-container">
 		<div class="main-content-inner">
 			<div class="page-content">
+			<div class="row">
+				<div class="col-sm-3 col-md-2" >
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">机构列表</h3>
+					</div>
+					<div class="panel-body">
+					<div id="jstree"></div> 
+					</div>
+					</div>
+				</div>
+				<div  class="col-sm-9 col-md-10 animated fadeInRight">
 				<div class="row">
 					<div class="col-xs-12">
 						<form action="" class="form-inline" id="userForm">
+							<input type="hidden" id="companyId" name="companyId">
+							<input type="hidden" id="officeId" name="officeId">
 							<label>用户名：</label><input type="text" name="loginName"> <label>姓名：</label><input
 								type="text" name="name">
 							<button class="btn btn-primary btn-rounded btn-outline btn-sm "
@@ -65,16 +80,18 @@
 											<th data-field="phone">手机</th>
 											<th class="hidden-480" data-field="email">邮箱</th>
 
-											<th ><i
+											<th data-field="updateDate"><i
 												class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
 												修改时间</th>
 											<th class="hidden-480" data-field="loginFlag" data-formatter="statusFormatter">状态</th>
 
-											<th data-field="id" data-formatter="optFormatter">操作</th>
+											<!-- <th data-field="id" data-formatter="optFormatter">操作</th> -->
 										</tr>
 									</thead>
 						</table>
 					</div>
+				</div>
+				</div>
 				</div>
 				<!-- /.col -->
 			</div>
@@ -84,7 +101,10 @@
 	</div>
 
 <div th:replace="common/commonJS"></div>
-	 <script>
+ <script th:src="@{/ace/plugins/jstree/jstree.min.js}" type="text/javascript"></script>
+ 
+ 
+ 	 <script>
 
 	 function queryParams(params){
 		 var temp = $("#userForm").serializeJSON();
@@ -165,6 +185,59 @@
     }
     
 	 $(function () {
+		 
+		 $('#jstree').jstree({
+				'core' : {
+					"multiple" : true,
+					"animation" : 0,
+					"themes" : { "icons":true ,"stripes":false},
+					'data' : {
+						"url" : ctx+"sys/office/treeData",
+						"dataType" : "json" // needed only if you do not supply JSON headers
+					}
+				} ,
+				'plugins' : ['types' ,"search",  'wholerow'],
+				"types":{ 
+					'default' : { 'icon' : 'fa fa-file-text-o' }, 
+			        '1' : {'icon' : 'fa fa-home'},
+					'2' : {'icon' : 'fa fa-umbrella' },
+				    '3' : { 'icon' : 'fa fa-group'},
+					'4' : { 'icon' : 'fa fa-eur' },
+					'btn':{'icon' : 'fa fa-square'}
+				}  
+
+			});
+		 $('#jstree').on("changed.jstree", function (e, data) {
+			  console.log(data.selected);
+			  $("#companyId").val(data.selected[0]);
+			  $('#usertable').bootstrapTable('refresh');
+			});
+		 /* $.getJSON(ctx+"sys/office/treeData",function(data){
+				$('#jstree').treeview({
+					data: data,
+					levels: 5,
+		            onNodeSelected: function(event, treeNode) {
+		            	var id = treeNode.id == '0' ? '' :treeNode.id;
+						if(treeNode.level == 1){//level=0 代表公司
+							$("#companyId").val(id);
+							//$("#companyName").val(treeNode.text);
+							$("#officeId").val("");
+							//$("#officeName").val("");
+						}else{
+							$("#companyId").val("");
+							//$("#companyName").val("");
+							$("#officeId").val(id);
+							//$("#officeName").val(treeNode.text);
+						}
+						
+						$('#usertable').bootstrapTable('refresh');
+		            },
+		         });
+			}); */
+			
+
+		 
+		 
     	$('#usertable').on('check.bs.table uncheck.bs.table load-success.bs.table ' +
                 'check-all.bs.table uncheck-all.bs.table', function () {
             $('#delete').prop('disabled', ! $('#usertable').bootstrapTable('getSelections').length);

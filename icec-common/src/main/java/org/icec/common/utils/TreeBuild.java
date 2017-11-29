@@ -50,7 +50,7 @@ public class TreeBuild {
     	 List<JsTreeData> trees = new ArrayList<JsTreeData>();  
          for (TreeModel treeModel : treeModels) {  
              if ((treeModel.getParentId()==0)) { 
-            	 JsTreeData data=new JsTreeData(treeModel.getId()+"","#",treeModel.getName(), true);
+            	 JsTreeData data=new JsTreeData(treeModel.getId()+"","#",treeModel.getName(), true,treeModel);
             	 trees.add(data);
                  findChildren2jstree(treeModel,treeModels,trees);  
              }  
@@ -60,7 +60,7 @@ public class TreeBuild {
     private static void  findChildren2jstree (TreeModel treeModel,List<? extends TreeModel> treeModels,List<JsTreeData> trees) {  
     	for (TreeModel it : treeModels) { 
     		 if(treeModel.getId().equals(it.getParentId())) {  
-    			 JsTreeData data=new JsTreeData(it.getId()+"",it.getParentId()+"",it.getName());
+    			 JsTreeData data=new JsTreeData(it.getId()+"",it.getParentId()+"",it.getName(),it);
             	 trees.add(data);
     			 findChildren2jstree(it,treeModels,trees); 
     		 } 

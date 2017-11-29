@@ -5,20 +5,23 @@ public class JsTreeData {
 	private String parent;
 	private String text;
 	private TreeState state;
+	private Object ext;
 	public JsTreeData() {}
-	public JsTreeData(String id, String parent, String text) {
+	public JsTreeData(String id, String parent, String text,Object ext) {
 		super();
 		this.id = id;
 		this.parent = parent;
 		this.text = text;
 		this.state = new TreeState(false);
+		this.ext=ext;
 	}
-	public JsTreeData(String id, String parent, String text, boolean opened) {
+	public JsTreeData(String id, String parent, String text, boolean opened,Object ext) {
 		super();
 		this.id = id;
 		this.parent = parent;
 		this.text = text;
 		this.state = new TreeState(opened);
+		this.ext=ext;
 	}
 
 
@@ -89,6 +92,13 @@ public class JsTreeData {
 			this.selected = selected;
 		}
 		
+	}
+
+	public Object getExt() {
+		return ext;
+	}
+	public void setExt(Object ext) {
+		this.ext = ext;
 	}
 	
 
