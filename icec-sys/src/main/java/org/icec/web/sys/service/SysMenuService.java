@@ -112,4 +112,9 @@ public class SysMenuService {
 	public List<SysMenu> findByRoleId(Integer roleId){
 		return sysMenuDao.findByRoleId(roleId);
 	}
+	
+	
+	public List<SysMenu> findByUserId(Integer userId){
+		return sysMenuDao.findByUserId(userId);
+	}
 }

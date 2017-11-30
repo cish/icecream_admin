@@ -3,6 +3,7 @@ package org.icec.web.sys.model;
 import java.io.Serializable;
 import java.math.*;
 import java.util.Date;
+import java.util.List;
 
 import org.beetl.sql.core.annotatoin.AutoID;
 import org.beetl.sql.core.annotatoin.SeqID;
@@ -58,6 +59,9 @@ public class SysMenu extends TreeModel implements BaseModel {
 	private Date updateDate;
 	// 父菜单名称
 	private String parentName;
+	
+	
+    
 	public SysMenu() {
 	}
 

@@ -22,4 +22,6 @@ public interface SysMenuDao extends BaseMapper<SysMenu>{
 	public List<SysMenu> findByParentIdsLike(@Param("parentIds") String parentIds);
 
 	public List<SysMenu> findByRoleId(@Param("roleId") Integer roleId);
+
+	public List<SysMenu> findByUserId(@Param("userId") Integer userId);
 }

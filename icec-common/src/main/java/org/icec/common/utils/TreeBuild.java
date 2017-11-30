@@ -68,6 +68,29 @@ public class TreeBuild {
        
     }  
     
+    /**
+     * 构建树状结构
+     * @param treeModels
+     * @return
+     */
+    public static List<TreeModel> buildTree(List<? extends TreeModel> treeModels){
+    	List<TreeModel> trees = new ArrayList<TreeModel>();  
+        for (TreeModel treeModel : treeModels) {  
+            if ((treeModel.getParentId()==0)) {  
+            	trees.add(treeModel);
+            	addChildren(treeModel,treeModels);  
+            }  
+        }  
+        return trees; 
+    }
     
+    private static void addChildren(TreeModel treeModel,List<? extends TreeModel> treeModels) {
+    	for (TreeModel it : treeModels) { 
+   		 if(treeModel.getId().equals(it.getParentId())) {  
+   			treeModel.getChildren().add(it);
+   			addChildren(it,treeModels); 
+   		 } 
+       } 
+    }
     
 }

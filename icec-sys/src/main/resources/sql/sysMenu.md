@@ -1,9 +1,17 @@
+findByUserId
+===
+* 根据用户id查菜单
+	
+	select DISTINCT #use("cols")# from sys_menu a,sys_role_menu b ,sys_user_role c 
+	where a.id=b.menu_id and b.role_id=c.role_id and c.user_id=#userId# 
+	and a.del_flag=0  and type=1
+
 findByRoleId
 ===
 * 根据角色id查菜单
 
 	select #use("cols")# from sys_menu a,sys_role_menu b 
-	where a.id=b.menu_id and b.role_id=#roleId# and a.del_flag=0
+	where a.id=b.menu_id and b.role_id=#roleId# and a.del_flag=0  and type=1
 
 findById
 ===
@@ -34,12 +42,12 @@ sample
 cols
 ===
 
-	id,parent_id,parent_ids,name,sort,href,target,icon,is_show,permission,create_by,create_date,update_by,update_date,remarks,del_flag
+	id,parent_id,parent_ids,name,sort,href,target,icon,is_show,type,permission,create_by,create_date,update_by,update_date,remarks,del_flag
 
 updateSample
 ===
 
-	`id`=#id#,`parent_id`=#parentId#,`parent_ids`=#parentIds#,`name`=#name#,`sort`=#sort#,`href`=#href#,`target`=#target#,`icon`=#icon#,`is_show`=#isShow#,`permission`=#permission#,`create_by`=#createBy#,`create_date`=#createDate#,`update_by`=#updateBy#,`update_date`=#updateDate#,`remarks`=#remarks#,`del_flag`=#delFlag#
+	`id`=#id#,`parent_id`=#parentId#,`parent_ids`=#parentIds#,`name`=#name#,`sort`=#sort#,`href`=#href#,`target`=#target#,`icon`=#icon#,`is_show`=#isShow#,`type`=#type#,`permission`=#permission#,`create_by`=#createBy#,`create_date`=#createDate#,`update_by`=#updateBy#,`update_date`=#updateDate#,`remarks`=#remarks#,`del_flag`=#delFlag#
 
 condition
 ===
@@ -68,6 +76,9 @@ condition
 	@}
 	@if(!isEmpty(isShow)){
 	 and `is_show`=#isShow#
+	@}
+	@if(!isEmpty(type)){
+	 and `type`=#type#
 	@}
 	@if(!isEmpty(permission)){
 	 and `permission`=#permission#
