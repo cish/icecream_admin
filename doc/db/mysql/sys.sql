@@ -258,6 +258,56 @@ alter  table `sys_user_role`
        add constraint `PK_sys_user_role_user_id` primary key (`user_id`,`role_id`);
 alter table `sys_user_role` comment= '用户-角色';
 
+
+
+
 -- data
 
 INSERT INTO `sys_user` VALUES (1, '1', '1', 'admin', '$2a$10$iyy/9WyGecm9MqeSyGaxauYXcz79foBFA047EtQlrPJbau5OPBpMm', '1', '管理员', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1', '2017-10-21 17:12:38', '1', '2017-10-21 17:13:12', NULL, '0');
+
+
+
+
+
+-- ----------------------------
+-- Records of sys_menu
+-- ----------------------------
+INSERT INTO `sys_menu` VALUES ('1', '0', '0,', '系统管理', '30', '', '', '', '1', '', '1', '2017-11-29 11:02:04', '1', '2017-11-29 11:02:04', '', '0', '1');
+INSERT INTO `sys_menu` VALUES ('2', '1', '0,1,', '用户管理', '30', '/sys/user/list', '', '', '1', '', '1', '2017-11-29 11:03:21', '1', '2017-11-29 11:03:21', '', '0', '1');
+INSERT INTO `sys_menu` VALUES ('3', '1', '0,1,', '角色管理', '30', '/sys/role/list', '', '', '1', '', '1', '2017-11-29 11:03:37', '1', '2017-11-29 11:03:37', '', '0', '1');
+INSERT INTO `sys_menu` VALUES ('4', '1', '0,1,', '菜单管理', '30', '/sys/menu/list', '', '', '1', '', '1', '2017-11-29 11:03:49', '1', '2017-11-29 11:03:49', '', '0', '1');
+INSERT INTO `sys_menu` VALUES ('5', '1', '0,1,', '机构管理', '30', '/sys/office/list', '', '', '1', '', '1', '2017-11-29 11:04:03', '1', '2017-11-29 11:04:03', '', '0', '1');
+INSERT INTO `sys_menu` VALUES ('6', '1', '0,1,', '区域管理', '30', '/sys/area/list', '', '', '1', '', '1', '2017-11-29 11:04:16', '1', '2017-11-29 11:04:16', '', '0', '1');
+INSERT INTO `sys_menu` VALUES ('7', '1', '0,1,', '字典管理', '30', '/sys/dict/list', '', '', '1', '', '1', '2017-11-29 11:04:29', '1', '2017-11-29 11:04:29', '', '0', '1');
+
+
+
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+INSERT INTO `sys_role` VALUES ('1', null, '管理员', 'admin', '1', null, '1', '1', '1', '2017-10-23 15:54:40', '1', '2017-11-28 16:52:57', '', '0');
+INSERT INTO `sys_role` VALUES ('2', null, '普通用户', 'normal', '1', null, '1', '1', '1', '2017-11-28 16:52:44', '1', '2017-11-28 16:52:44', '', '0');
+
+
+-- ----------------------------
+-- Records of sys_role_menu
+-- ----------------------------
+INSERT INTO `sys_role_menu` VALUES ('1', '1');
+INSERT INTO `sys_role_menu` VALUES ('1', '2');
+INSERT INTO `sys_role_menu` VALUES ('1', '3');
+INSERT INTO `sys_role_menu` VALUES ('1', '4');
+INSERT INTO `sys_role_menu` VALUES ('1', '5');
+INSERT INTO `sys_role_menu` VALUES ('1', '6');
+INSERT INTO `sys_role_menu` VALUES ('1', '7');
+INSERT INTO `sys_role_menu` VALUES ('1', '8');
+
+
+-- ----------------------------
+-- Records of sys_user_role
+-- ----------------------------
+INSERT INTO `sys_user_role` VALUES ('1', '1');
+INSERT INTO `sys_user_role` VALUES ('1', '2');
+
+
+
