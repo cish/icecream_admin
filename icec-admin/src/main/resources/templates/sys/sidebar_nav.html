@@ -37,7 +37,7 @@
 
 						<ul class="submenu">
 							<li th:each="menu3 :${menu2.children}">
-								<div th:if="${#lists.isEmpty(menu2.children)}" th:remove="tag">
+								<div th:if="${#lists.isEmpty(menu3.children)}" th:remove="tag">
 									<a th:href="@{${menu3.href}}" class="J_menuItem"
 										th:data-index="${menu3.id}"> <i
 										class="menu-icon fa fa-caret-right"></i> <span
