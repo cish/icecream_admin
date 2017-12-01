@@ -68,6 +68,7 @@ create table  `sys_log`
        `user_agent`      VARCHAR(255) comment '用户代理',
        `request_uri`     VARCHAR(255) comment '请求URI',
        `method`          VARCHAR(5) comment '操作方式',
+       `lose_time`       INT comment '用时',
        `params`          LONGBLOB comment '操作提交的数据',
        `exception`       LONGBLOB comment '异常信息'
 ,primary key (`id`)
