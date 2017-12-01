@@ -9,5 +9,6 @@
   	<module>icec-sys</module>
   	<module>icec-parent</module>
   	<module>icec-common</module>
+  	<module>icec-workflow</module>
   </modules>
 </project>
