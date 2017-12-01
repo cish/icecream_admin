@@ -87,14 +87,14 @@ public class WebLogAspect {
 		
 		sysLog.setLoseTime(end-start);
 		
-		if(ShiroKit.isUser()) {//只记录已登陆用户的日志
+		if(ShiroKit.isUser()) {
 			sysLog.setCreateBy(ShiroKit.getUser().getLoginName());
-			if(logger.isDebugEnabled()) {
-				logger.debug("请求日志："+sysLog.toString());
-			}
-			LogManager.me().executeLog(LogTaskFactory.requestLog(sysLog));
+		}else {
+			sysLog.setCreateBy("");
 		}
-		
-		
+		if(logger.isDebugEnabled()) {
+			logger.debug("请求日志："+sysLog.toString());
+		}
+		LogManager.me().executeLog(LogTaskFactory.requestLog(sysLog));
 	}
 }
