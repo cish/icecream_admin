@@ -2,7 +2,7 @@ package org.icec.web.sys.controller;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.beetl.sql.core.engine.PageQuery;
-import org.icec.web.common.BaseController;
+import org.icec.common.web.BaseController;
 import org.icec.web.shiro.annotation.CurrentUser;
 import org.icec.web.sys.model.SysUser;
 import org.icec.web.sys.service.SysRoleService;
@@ -28,7 +28,6 @@ public class UserCtrl extends BaseController{
 	Logger logger=LoggerFactory.getLogger(getClass());
 	@Autowired
 	private SysUserService userService;
-	
 	@Autowired
 	private SysRoleService sysRoleService;
 	/**

@@ -48,13 +48,13 @@ public class LogTaskFactory {
 	 * @param exception
 	 * @return
 	 */
-	public static TimerTask exceptionLog(final Integer userId, final Exception exception) {
+	public static TimerTask exceptionLog( SysLog operationLog, final Exception exception) {
 		return new TimerTask() {
 			@Override
 			public void run() {
-				SysLog operationLog = new SysLog();
+				 
+				operationLog.setType(SysLog.LOGTYPE_EXCEPTION);
 				String msg = getExceptionMsg(exception);
-				operationLog.setCreateBy(userId + "");
 				operationLog.setException(msg);
 				operationLog.setCreateDate(new Date());
 				try {

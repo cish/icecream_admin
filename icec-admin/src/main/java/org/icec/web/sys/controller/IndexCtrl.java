@@ -3,6 +3,7 @@ package org.icec.web.sys.controller;
 
 import java.util.List;
 
+import org.icec.common.exception.IcecException;
 import org.icec.common.model.TreeModel;
 import org.icec.common.utils.TreeBuild;
 import org.icec.web.shiro.annotation.CurrentUser;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexCtrl {
@@ -29,5 +31,10 @@ public class IndexCtrl {
 		 List<TreeModel> tree=TreeBuild.buildTree(menuList);
 		 model.addAttribute("menuList", tree);
 		return "sys/index";
+	}
+	
+	@RequestMapping({"/error2"})
+	public String error() {
+		throw new IcecException(500, "Sam 错误");
 	}
 }
