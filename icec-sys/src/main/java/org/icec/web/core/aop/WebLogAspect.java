@@ -38,11 +38,15 @@ public class WebLogAspect {
 	@Around("cutService()")
 	public Object recordSysLog(ProceedingJoinPoint point) throws Throwable {
 		// 接收到请求，记录请求内容
-		// 先执行业务
+		
+		String userName="";//提前记录用户名，防止登出操作，取不到用户名
+		if(ShiroKit.isUser()) {
+			userName=ShiroKit.getUser().getLoginName();
+		} 
 		Long start = System.currentTimeMillis();
-		Object result = point.proceed();
+		Object result = point.proceed();// 先执行业务
 		try {
-			handle(point, start);
+			handle(point, start,userName);
 		} catch (Exception e) {
 			logger.error("日志记录出错!", e);
 		}
@@ -50,7 +54,7 @@ public class WebLogAspect {
 		return result;
 	}
 
-	private void handle(ProceedingJoinPoint point, Long start) throws Exception {
+	private void handle(ProceedingJoinPoint point, Long start,String userName) throws Exception {
 		logger.info("WebLogAspect.handle()");
 		Long end = System.currentTimeMillis();
 		SysLog sysLog = new SysLog();
@@ -81,11 +85,7 @@ public class WebLogAspect {
 		
 		sysLog.setLoseTime(end-start);
 		
-		if(ShiroKit.isUser()) {
-			sysLog.setCreateBy(ShiroKit.getUser().getLoginName());
-		}else {
-			sysLog.setCreateBy("");
-		}
+		sysLog.setCreateBy(userName);
 		if(logger.isDebugEnabled()) {
 			logger.debug("请求日志："+sysLog.toString());
 		}

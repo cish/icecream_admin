@@ -64,13 +64,13 @@ public class SysUser  implements BaseModel ,AuthenticationToken{
 	//用户类型
 	private String userType ;
 	//创建时间
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	private Date createDate ;
 	//最后登陆时间
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	private Date loginDate ;
 	//更新时间
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	private Date updateDate ;
 	
 	private String companyName;//公司名称

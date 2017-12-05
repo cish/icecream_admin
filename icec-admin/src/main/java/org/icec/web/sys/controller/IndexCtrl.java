@@ -32,6 +32,12 @@ public class IndexCtrl {
 		 model.addAttribute("menuList", tree);
 		return "sys/index";
 	}
+	@GetMapping({"/home"})
+	public String home(@CurrentUser SysUser user,ModelMap model) {
+		model.addAttribute("user", user);
+		 
+		return "sys/home";
+	}
 	
 	@RequestMapping({"/error2"})
 	public String error() {
