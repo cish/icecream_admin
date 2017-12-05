@@ -23,5 +23,11 @@ public interface SysMenuDao extends BaseMapper<SysMenu>{
 
 	public List<SysMenu> findByRoleId(@Param("roleId") Integer roleId);
 
-	public List<SysMenu> findByUserId(@Param("userId") Integer userId);
+	public List<SysMenu> findMenuByUserId(@Param("userId") Integer userId);
+	/**
+	 * 根据用户id查权限标识
+	 * @param userId
+	 * @return
+	 */
+	public List<SysMenu> findPermissionsByUserId(@Param("userId") Integer userId);
 }

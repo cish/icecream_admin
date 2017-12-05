@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.icec.common.model.JsTreeData;
 import org.icec.common.utils.TreeBuild;
 import org.icec.web.shiro.annotation.CurrentUser;
@@ -30,6 +32,7 @@ public class SysMenuCtrl {
 	 * 进入添加界面
 	 * @return
 	 */
+	@RequiresPermissions({"menu:edit"})
 	@RequestMapping("add")
 	public String add(Integer parentId,ModelMap model) {
 		if(parentId!=null) {
@@ -46,6 +49,7 @@ public class SysMenuCtrl {
 	 * @param role
 	 * @return
 	 */
+	@RequiresPermissions({"menu:edit"})
 	@RequestMapping("save")
 	@ResponseBody
 	public Integer save(SysMenu menu,@CurrentUser SysUser user) {
@@ -58,7 +62,7 @@ public class SysMenuCtrl {
 	 * @param model
 	 * @return
 	 */
-	//@RequiresPermissions({"user:edit"})
+	@RequiresPermissions({"menu:edit"})
 	@RequestMapping("edit/{id}")
 	public String edit(@PathVariable Integer id ,ModelMap model) {
 		SysMenu sysMenu = sysMenuService.findById(id);
@@ -70,7 +74,8 @@ public class SysMenuCtrl {
 	 * @param user
 	 * @return
 	 */
-	//@RequiresPermissions({"user:edit"})
+	@RequiresPermissions({"menu:edit"})
+	@RequiresRoles({"admin"})
 	@RequestMapping("update")
 	@ResponseBody
 	public Integer update(SysMenu sysMenu ,@CurrentUser SysUser user) {
@@ -86,6 +91,7 @@ public class SysMenuCtrl {
 	  * @param user
 	  * @return
 	  */
+	@RequiresPermissions({"user:edit"})
 	@RequestMapping("delete")
 	@ResponseBody
 	public Integer delete( Integer id,@CurrentUser SysUser user) {
@@ -127,12 +133,11 @@ public class SysMenuCtrl {
 			 List<SysMenu> selected= sysMenuService.findByRoleId(roleId);
 			 Map<String,SysMenu> tmp=new HashMap<String,SysMenu>();
 			 for(SysMenu menu:selected) {
-				 if(!StringUtils.isEmpty(menu.getHref().trim()))
-				 {tmp.put(menu.getId()+"",menu);}
+			tmp.put(menu.getId()+"",menu);
 			 }
 			 for(JsTreeData data:tree) {
 				 SysMenu menu= tmp.get(data.getId());
-				 if(menu!=null) {
+				 if(menu!=null&&data.isLeaf()==true) {
 					 data.getState().setSelected(true);
 				 }
 			 }

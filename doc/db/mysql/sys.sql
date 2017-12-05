@@ -263,9 +263,22 @@ alter table `sys_user_role` comment= '用户-角色';
 
 
 -- data
-
+-- ----------------------------
+-- Records of sys_user
+-- ----------------------------
 INSERT INTO `sys_user` VALUES (1, '1', '1', 'admin', '$2a$10$iyy/9WyGecm9MqeSyGaxauYXcz79foBFA047EtQlrPJbau5OPBpMm', '1', '管理员', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1', '2017-10-21 17:12:38', '1', '2017-10-21 17:13:12', NULL, '0');
 
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+INSERT INTO `sys_role` VALUES ('1', null, '管理员', 'admin', '1', null, '1', '1', '1', '2017-10-23 15:54:40', '1', '2017-11-28 16:52:57', '', '0');
+INSERT INTO `sys_role` VALUES ('2', null, '普通用户', 'normal', '1', null, '1', '1', '1', '2017-11-28 16:52:44', '1', '2017-11-28 16:52:44', '', '0');
+
+
+-- ----------------------------
+-- Records of sys_user_role
+-- ----------------------------
+INSERT INTO `sys_user_role` VALUES ('1', '1');
 
 
 
@@ -280,15 +293,18 @@ INSERT INTO `sys_menu` VALUES ('4', '1', '0,1,', '菜单管理', '30', '/sys/men
 INSERT INTO `sys_menu` VALUES ('5', '1', '0,1,', '机构管理', '30', '/sys/office/list', '', '', '1', '', '1', '2017-11-29 11:04:03', '1', '2017-11-29 11:04:03', '', '0', '1');
 INSERT INTO `sys_menu` VALUES ('6', '1', '0,1,', '区域管理', '30', '/sys/area/list', '', '', '1', '', '1', '2017-11-29 11:04:16', '1', '2017-11-29 11:04:16', '', '0', '1');
 INSERT INTO `sys_menu` VALUES ('7', '1', '0,1,', '字典管理', '30', '/sys/dict/list', '', '', '1', '', '1', '2017-11-29 11:04:29', '1', '2017-11-29 11:04:29', '', '0', '1');
+INSERT INTO `sys_menu` VALUES ('8', '7', '0,1,7,', 'aaa', '30', 'aaaa', 'aaaa', '', '1', '', '1', '2017-11-30 16:59:21', '1', '2017-11-30 16:59:21', 'aaaa', '0', '1');
+INSERT INTO `sys_menu` VALUES ('9', '1', '0,1,', '日志管理', '30', '/sys/log/list', '', '', '1', '', '1', '2017-12-01 13:53:02', '1', '2017-12-01 13:53:02', '', '0', '1');
+INSERT INTO `sys_menu` VALUES ('10', '4', '0,1,4', '编辑权限', '30', '', '', '', '1', 'menu:edit', '1', '0000-00-00 00:00:00', '1', '2017-12-05 14:52:34', '', '0', '2');
+INSERT INTO `sys_menu` VALUES ('11', '3', '0,1,3,', '编辑', '30', '', '', '', '1', 'role:edit', '1', '2017-12-05 14:54:57', '1', '2017-12-05 16:45:00', '', '0', '2');
+INSERT INTO `sys_menu` VALUES ('12', '2', '0,1,2,', '用户编辑', '30', '', '', '', '1', 'user:edit', '1', '2017-12-05 14:55:22', '1', '2017-12-05 14:55:22', '', '0', '2');
+INSERT INTO `sys_menu` VALUES ('13', '3', '0,1,3,', '查看', '30', '', '', '', '1', 'role:view', '1', '2017-12-05 15:03:15', '1', '2017-12-05 15:03:15', '', '0', '2');
+INSERT INTO `sys_menu` VALUES ('14', '4', '0,1,4,', '查看', '30', '', '', '', '1', 'menu:view', '1', '2017-12-05 15:03:35', '1', '2017-12-05 15:03:35', '', '0', '2');
+INSERT INTO `sys_menu` VALUES ('15', '3', '0,1,3,', '角色授权', '30', null, null, null, '1', 'role:auth', '1', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00', null, '0', '2');
 
 
 
 
--- ----------------------------
--- Records of sys_role
--- ----------------------------
-INSERT INTO `sys_role` VALUES ('1', null, '管理员', 'admin', '1', null, '1', '1', '1', '2017-10-23 15:54:40', '1', '2017-11-28 16:52:57', '', '0');
-INSERT INTO `sys_role` VALUES ('2', null, '普通用户', 'normal', '1', null, '1', '1', '1', '2017-11-28 16:52:44', '1', '2017-11-28 16:52:44', '', '0');
 
 
 -- ----------------------------
@@ -302,13 +318,17 @@ INSERT INTO `sys_role_menu` VALUES ('1', '5');
 INSERT INTO `sys_role_menu` VALUES ('1', '6');
 INSERT INTO `sys_role_menu` VALUES ('1', '7');
 INSERT INTO `sys_role_menu` VALUES ('1', '8');
+INSERT INTO `sys_role_menu` VALUES ('1', '9');
+INSERT INTO `sys_role_menu` VALUES ('1', '10');
+INSERT INTO `sys_role_menu` VALUES ('1', '11');
+INSERT INTO `sys_role_menu` VALUES ('1', '12');
+INSERT INTO `sys_role_menu` VALUES ('1', '13');
+INSERT INTO `sys_role_menu` VALUES ('1', '14');
+INSERT INTO `sys_role_menu` VALUES ('1', '15');
 
 
--- ----------------------------
--- Records of sys_user_role
--- ----------------------------
-INSERT INTO `sys_user_role` VALUES ('1', '1');
-INSERT INTO `sys_user_role` VALUES ('1', '2');
+
+
 
 
 

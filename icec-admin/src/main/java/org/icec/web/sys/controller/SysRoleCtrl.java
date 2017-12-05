@@ -27,7 +27,7 @@ public class SysRoleCtrl {
 	 * @return
 	 */
 	@RequestMapping("add")
-	//@RequiresPermissions({"role:edit"})
+	@RequiresPermissions({"role:edit"})
 	public String add() {
 		return "sys/role/roleAdd";
 	}
@@ -38,7 +38,7 @@ public class SysRoleCtrl {
 	 */
 	@RequestMapping("save")
 	@ResponseBody
-	//@RequiresPermissions({"role:edit"})
+	@RequiresPermissions({"role:edit"})
 	public Integer save(SysRole role,@CurrentUser SysUser user) {
 		sysRoleService.save(role,user);
 		return 1;
@@ -49,7 +49,7 @@ public class SysRoleCtrl {
 	 * @param model
 	 * @return
 	 */
-	//@RequiresPermissions({"user:edit"})
+	@RequiresPermissions({"role:edit"})
 	@RequestMapping("edit/{id}")
 	public String edit(@PathVariable Integer id ,ModelMap model) {
 		SysRole sysRole = sysRoleService.findById(id);
@@ -61,7 +61,7 @@ public class SysRoleCtrl {
 	 * @param user
 	 * @return
 	 */
-	//@RequiresPermissions({"user:edit"})
+	@RequiresPermissions({"role:edit"})
 	@RequestMapping("update")
 	@ResponseBody
 	public Integer update(SysRole sysRole,@CurrentUser SysUser optuser) {
@@ -71,6 +71,7 @@ public class SysRoleCtrl {
 		sysRoleService.update(sysRole,optuser);
 		return 1;
 	}
+	@RequiresPermissions({"role:edit"})
 	@RequestMapping("deleteAll")
 	@ResponseBody
 	public Integer deleteAll(String ids,@CurrentUser SysUser optuser) {
@@ -113,11 +114,13 @@ public class SysRoleCtrl {
 	 * 对角色进行授权
 	 * @return
 	 */
+	@RequiresPermissions({"role:auth"})
 	@RequestMapping("auth")
 	public String auth(Integer roleId,ModelMap model) {
 		model.addAttribute("roleId", roleId);
 		return "sys/role/roleAuth";
 	}
+	@RequiresPermissions({"role:auth"})
 	@RequestMapping("authSave")
 	@ResponseBody
 	public String authSave(Integer roleId,String menuIds) {

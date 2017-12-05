@@ -27,7 +27,7 @@ public class IndexCtrl {
 	@GetMapping({"/","/index"})
 	public String index(@CurrentUser SysUser user,ModelMap model) {
 		model.addAttribute("user", user);
-		List<SysMenu> menuList= sysMenuService.findByUserId(user.getId());
+		List<SysMenu> menuList= sysMenuService.findMenuByUserId(user.getId());
 		 List<TreeModel> tree=TreeBuild.buildTree(menuList);
 		 model.addAttribute("menuList", tree);
 		return "sys/index";

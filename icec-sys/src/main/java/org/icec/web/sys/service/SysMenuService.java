@@ -3,6 +3,7 @@ package org.icec.web.sys.service;
 import java.util.Date;
 import java.util.List;
 
+import org.beetl.sql.core.annotatoin.Param;
 import org.icec.common.utils.TreeBuild;
 import org.icec.web.sys.dao.SysMenuDao;
 import org.icec.web.sys.model.SysArea;
@@ -114,7 +115,11 @@ public class SysMenuService {
 	}
 	
 	
-	public List<SysMenu> findByUserId(Integer userId){
-		return sysMenuDao.findByUserId(userId);
+	public List<SysMenu> findMenuByUserId(Integer userId){
+		return sysMenuDao.findMenuByUserId(userId);
+	}
+	
+	public List<SysMenu> findPermissionsByUserId( Integer userId){
+		return sysMenuDao.findPermissionsByUserId(userId);
 	}
 }

@@ -1,4 +1,5 @@
 package org.icec.web.core.aop;
+import org.apache.shiro.authz.AuthorizationException;
 import org.icec.common.base.tips.ErrorTip;
 import org.icec.common.exception.IcecException;
 import org.icec.common.utils.AjaxUtils;
@@ -10,6 +11,7 @@ import org.icec.web.sys.utils.ShiroKit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,29 +56,32 @@ public class GlobalExceptionHandler {
      /**
      * 无权访问该资源
      *
-     * @author fengshuonan
+     *  
      */ 
-    @ExceptionHandler(UndeclaredThrowableException.class)
+    @ExceptionHandler(AuthorizationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ResponseBody
-    public ErrorTip credentials(UndeclaredThrowableException e) {
+    public String credentials(AuthorizationException e,WebRequest request, HttpServletResponse response,Model model) {
+    	saveException(e);
         log.error("权限异常!", e);
-        return new ErrorTip(IcecException.SERVER_ERROR,"server error!");
+        if(AjaxUtils.isAjaxRequest(request)){//ajax 则返回json
+      		 AjaxUtils.writeJson(new ErrorTip(500,"无权限访问资源"),response);
+      	}
+        model.addAttribute("error", "无权限访问资源");
+        return "/error/500";
     }
-
     /**
      * 拦截未知的运行时异常
      *
      *  
      */ 
     @ExceptionHandler(RuntimeException.class)
-    public String notFount(RuntimeException e,WebRequest request, HttpServletResponse response) {
+    public String notFount(RuntimeException e,WebRequest request, HttpServletResponse response,Model model) {
     	saveException(e);
     	log.error("运行时异常:", e);
     	if(AjaxUtils.isAjaxRequest(request)){//ajax 则返回json
    		 AjaxUtils.writeJson(new ErrorTip(500,e.getMessage()),response);
    		 return null;
-   	}
+   	}model.addAttribute("error",e.getMessage());
         return "/error/500";
     }
 

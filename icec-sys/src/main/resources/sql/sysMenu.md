@@ -1,4 +1,12 @@
-findByUserId
+findPermissionsByUserId
+===
+* 根据用户id查权限标识
+	
+	select DISTINCT #use("cols")# from sys_menu a,sys_role_menu b ,sys_user_role c 
+	where a.id=b.menu_id and b.role_id=c.role_id and c.user_id=#userId# 
+	and a.del_flag=0  and a.type=2
+	
+findMenuByUserId
 ===
 * 根据用户id查菜单
 	
@@ -11,7 +19,7 @@ findByRoleId
 * 根据角色id查菜单
 
 	select #use("cols")# from sys_menu a,sys_role_menu b 
-	where a.id=b.menu_id and b.role_id=#roleId# and a.del_flag=0  and type=1
+	where a.id=b.menu_id and b.role_id=#roleId# and a.del_flag=0 
 
 findById
 ===
