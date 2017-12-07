@@ -113,7 +113,6 @@ create table  `sys_menu`
        `href`            VARCHAR(2000) comment '链接',
        `target`          VARCHAR(20) comment '目标',
        `icon`            VARCHAR(100) comment '图标',
-       `type` 			 VARCHAR(1) comment '菜单类型',
        `is_show`         VARCHAR(1) not null comment '是否在菜单中显示',
        `permission`      VARCHAR(200) comment '权限标识',
        `create_by`       INT not null comment '创建者',
@@ -121,7 +120,9 @@ create table  `sys_menu`
        `update_by`       INT not null comment '更新者',
        `update_date`     DATETIME  not null comment '更新时间',
        `remarks`         VARCHAR(255) comment '备注信息',
-       `del_flag`        VARCHAR(1) default 0 not null comment '删除标记'
+       `del_flag`        VARCHAR(1) default 0 not null comment '删除标记',
+        `type` 			 VARCHAR(1) comment '菜单类型'
+       
 ,primary key (`id`)
 );
  
