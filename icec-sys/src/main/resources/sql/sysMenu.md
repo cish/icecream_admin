@@ -12,7 +12,7 @@ findMenuByUserId
 	
 	select DISTINCT #use("cols")# from sys_menu a,sys_role_menu b ,sys_user_role c 
 	where a.id=b.menu_id and b.role_id=c.role_id and c.user_id=#userId# 
-	and a.del_flag=0  and type=1
+	and a.del_flag=0  and type=1 order by a.sort  
 
 findByRoleId
 ===

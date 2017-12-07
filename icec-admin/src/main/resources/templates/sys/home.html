@@ -2,82 +2,164 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/layout :: common_header(~{::title},~{::link})">
 <title>首页</title>
- <!-- 
+<!-- 
   additional css  -->
 </head>
 <body>
 	<div class="main-container">
 		<div class="main-content-inner">
 			<div class="page-content">
-
-
-
 				<div class="row">
-					<div class="col-md-3 col-sm-6 col-xs-12">
-						<div class="info-box">
-							<span class="info-box-icon bg-aqua"><i
-								class="ion ion-ios-gear-outline"></i></span>
+					<div class="col-sm-6 widget-container-col ui-sortable"
+						id="widget-container-col-12">
+						<!-- #section:custom/widget-box.options.transparent -->
+						<div class="widget-box transparent ui-sortable-handle"
+							id="widget-box-12">
+							<div class="widget-header">
+								<h4 class="widget-title lighter red">通知公告</h4>
 
-							<div class="info-box-content">
-								<span class="info-box-text">CPU Traffic</span> <span
-									class="info-box-number">90<small>%</small></span>
+								<div class="widget-toolbar no-border"></div>
 							</div>
-							<!-- /.info-box-content -->
-						</div>
-						<!-- /.info-box -->
-					</div>
-					<!-- /.col -->
-					<div class="col-md-3 col-sm-6 col-xs-12">
-						<div class="info-box">
-							<span class="info-box-icon bg-red"><i
-								class="fa fa-google-plus"></i></span>
 
-							<div class="info-box-content">
-								<span class="info-box-text">Likes</span> <span
-									class="info-box-number">41,410</span>
+							<div class="widget-body" style="display: block;"></div>
+						</div>
+
+
+					</div>
+					<div class="col-sm-6 widget-container-col ui-sortable"
+						id="widget-container-col-12">
+						<!-- #section:custom/widget-box.options.transparent -->
+						<div class="widget-box transparent ui-sortable-handle"
+							id="widget-box-12">
+							<div class="widget-header">
+								<h4 class="widget-title lighter green">企业新闻</h4>
+
+								<div class="widget-toolbar no-border"></div>
 							</div>
-							<!-- /.info-box-content -->
-						</div>
-						<!-- /.info-box -->
-					</div>
-					<!-- /.col -->
 
-					<!-- fix for small devices only -->
-					<div class="clearfix visible-sm-block"></div>
+							<div class="widget-body" style="display: block;">
+								<table class="table table-striped table-bordered table-hover">
+									<thead class="thin-border-bottom">
+										<tr>
+											<th><i class="ace-icon fa fa-user"></i> User</th>
 
-					<div class="col-md-3 col-sm-6 col-xs-12">
-						<div class="info-box">
-							<span class="info-box-icon bg-green"><i
-								class="ion ion-ios-cart-outline"></i></span>
+											<th><i>@</i> Email</th>
+											<th class="hidden-480">Status</th>
+										</tr>
+									</thead>
 
-							<div class="info-box-content">
-								<span class="info-box-text">Sales</span> <span
-									class="info-box-number">760</span>
+									<tbody>
+										<tr>
+											<td class="">Alex</td>
+
+											<td><a href="#">alex@email.com</a></td>
+
+											<td class="hidden-480"><span class="label label-warning">Pending</span></td>
+										</tr>
+
+										<tr>
+											<td class="">Fred</td>
+
+											<td><a href="#">fred@email.com</a></td>
+
+											<td class="hidden-480"><span
+												class="label label-success arrowed-in arrowed-in-right">Approved</span>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="">Jack</td>
+
+											<td><a href="#">jack@email.com</a></td>
+
+											<td class="hidden-480"><span class="label label-warning">Pending</span></td>
+										</tr>
+
+										<tr>
+											<td class="">John</td>
+
+											<td><a href="#">john@email.com</a></td>
+
+											<td class="hidden-480"><span
+												class="label label-inverse arrowed">Blocked</span></td>
+										</tr>
+
+										<tr>
+											<td class="">James</td>
+
+											<td><a href="#">james@email.com</a></td>
+
+											<td class="hidden-480"><span
+												class="label label-info arrowed-in arrowed-in-right">Online</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
-							<!-- /.info-box-content -->
 						</div>
-						<!-- /.info-box -->
-					</div>
-					<!-- /.col -->
-					<div class="col-md-3 col-sm-6 col-xs-12">
-						<div class="info-box">
-							<span class="info-box-icon bg-yellow"><i
-								class="ion ion-ios-people-outline"></i></span>
 
-							<div class="info-box-content">
-								<span class="info-box-text">New Members</span> <span
-									class="info-box-number">2,000</span>
-							</div>
-							<!-- /.info-box-content -->
-						</div>
-						<!-- /.info-box -->
 					</div>
-					<!-- /.col -->
+
+				</div>
+				<div class="row">
+					<div class="col-sm-6 widget-container-col ui-sortable"
+						id="widget-container-col-12">
+						<!-- #section:custom/widget-box.options.transparent -->
+						<div class="widget-box transparent ui-sortable-handle"
+							id="widget-box-12">
+							<div class="widget-header">
+								<h4 class="widget-title lighter">快速导航</h4>
+
+								<div class="widget-toolbar no-border">
+									<a href="#" data-action="reload"> <i
+										class="ace-icon fa fa-refresh"></i>
+									</a> <a href="#" data-action="collapse"> <i
+										class="ace-icon fa fa-chevron-up"></i>
+									</a> <a href="#" data-action="close"> <i
+										class="ace-icon fa fa-times"></i>
+									</a>
+								</div>
+							</div>
+
+							<div class="widget-body" style="display: block;">
+								<div
+									class="widget-main padding-6 no-padding-left no-padding-right">
+
+								</div>
+							</div>
+						</div>
+
+						<!-- /section:custom/widget-box.options.transparent -->
+					</div>
+					<div class="col-sm-6 widget-container-col ui-sortable"
+						id="widget-container-col-12">
+						<!-- #section:custom/widget-box.options.transparent -->
+						<div class="widget-box transparent ui-sortable-handle"
+							id="widget-box-12">
+							<div class="widget-header">
+								<h4 class="widget-title lighter">流程审批</h4>
+
+								<div class="widget-toolbar no-border">
+									<a href="#" data-action="reload"> <i
+										class="ace-icon fa fa-refresh"></i>
+									</a> <a href="#" data-action="collapse"> <i
+										class="ace-icon fa fa-chevron-up"></i>
+									</a> <a href="#" data-action="close"> <i
+										class="ace-icon fa fa-times"></i>
+									</a>
+								</div>
+							</div>
+
+							<div class="widget-body" style="display: block;"></div>
+						</div>
+					</div>
+
 				</div>
 
 
 
 			</div>
+			<!-- end page-content -->
 
 		</div>
 		<!-- end main container -->

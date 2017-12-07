@@ -48,7 +48,7 @@
 							<tbody id="treeTableList">
 								<tr th:each="menu:${menuList}" th:id="${menu.id}"
 									th:pid="${menu.parentId}">
-									<td th:text="${menu.name}"></td>
+									<td  ><a><i th:class="${menu.icon}"></i>[[${menu.name}]]</a></td>
 									<td th:text="${menu.href}"></td>
 									<td th:text="${menu.sort}"></td>
 									<td th:text="${menu.isShow}"></td>
