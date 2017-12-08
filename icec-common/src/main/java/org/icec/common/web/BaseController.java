@@ -18,6 +18,13 @@ public class BaseController {
 
 	public static final Tip  SUCC=new SuccessTip();
 	public static final Tip  FAIL=new ErrorTip("操作失败");
+	
+	public SuccessTip succ(String msg) {
+		return new SuccessTip(msg);
+	}
+	public SuccessTip fail(String msg) {
+		return new SuccessTip(msg);
+	}
 	public int getDefault_page_size() {
 		return default_page_size;
 	}

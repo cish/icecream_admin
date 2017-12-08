@@ -13,7 +13,27 @@
 						id="officeId" name="officeId" type="hidden" />
 					<table
 						class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
-
+						<tr>
+						<td class="width-15 active"> 
+						<label
+								class="pull-right control-label" for="companyName"><font
+									color="red">*</font>头像</label> 
+						</td>
+						<td><span class="profile-picture">
+						
+						<img id="avatar" onclick="fileSelect();" class="" alt="头像" th:src="@{/ace/avatars/profile-pic.jpg}" style="display: block;" width="60">
+						</span><input type="file" id="photoImg" accept="image/*" name="file" onchange="fileSelected();" style="display:none;">
+						<input type="button" onclick="fileSelect()" value="选择"> <input type="button" onclick="clearfileSelect()" value="清除">
+						</td>
+						<td>
+						<label
+								class="pull-right control-label" for="ds_no"><font
+									color="red">*</font>工号</label> 
+						</td>
+						<td class="width-35"><input class="form-control"
+								id="ds_no" name="no" type="text" placeholder="请输入工号"
+								required /></td>
+						</tr>
 						<tr>
 							<td class="width-15 active"><label
 								class="pull-right control-label" for="companyName"><font
@@ -55,12 +75,14 @@
 
 						<tr>
 							<td class="width-15 active"><label
-								class="pull-right  control-label" for="ds_id">用户名</label></td>
+								class="pull-right  control-label" for="ds_id"><font
+									color="red">*</font>用户名</label></td>
 							<td class="width-15 active"><input class="form-control"
 								id="ds_id" name="loginName" type="text" placeholder="请输入登录系统账号"
 								required /></td>
 							<td class="width-15 active"><label
-								class="pull-right  control-label" for="ds_name">姓名</label></td>
+								class="pull-right  control-label" for="ds_name"><font
+									color="red">*</font>姓名</label></td>
 							<td class="width-35"><input class="form-control"
 								id="ds_name" name="name" type="text" placeholder="请输入姓名"
 								required /></td>
@@ -68,12 +90,14 @@
 						</tr>
 						<tr>
 							<td class="width-15 active"><label
-								class="pull-right control-label" for="ds_password">密码</label></td>
+								class="pull-right control-label" for="ds_password"><font
+									color="red">*</font>密码</label></td>
 							<td class="width-35"><input class="form-control"
 								id="ds_password" name="password" type="password"
 								placeholder="请输入密码" required /></td>
 							<td class="width-15 active"><label
-								class="pull-right control-label" for="ds_repassword">确认密码</label>
+								class="pull-right control-label" for="ds_repassword"><font
+									color="red">*</font>确认密码</label>
 							</td>
 							<td class="width-35"><input class="form-control"
 								id="ds_repassword" name="repassword" equalTo="#ds_password"
@@ -143,6 +167,8 @@
 	<script th:src="@{/ace/plugins/chosen/chosen.jquery.min.js}"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
+		
+		
 		$(".chosen-select").chosen();
 	$("#officeButton, #officeName").click(function(){
 		// 是否限制选择，如果限制，设置为disabled
@@ -246,6 +272,22 @@
 })
 </script>
 	<script type="text/javascript">
+		var defaultImg="[[@{/ace/avatars/profile-pic.jpg}]]";
+		 function fileSelect() {
+	        $("#photoImg").click(); 
+	    }
+		 function clearfileSelect(){
+			 $("#avatar").attr("src",defaultImg);
+		 }
+	    function fileSelected(selectedFile) {
+	    	 var docObj=document.getElementById("photoImg");
+	      // 文件选择后触发次函数
+	    	if(docObj.files &&docObj.files[0]){
+	    		$("#avatar").attr("src", window.URL.createObjectURL(docObj.files[0]));
+	    	 } 
+	   	 return true;
+	    }
+	
 		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 		//关闭iframe
 		$('#closeWin').click(function() {
