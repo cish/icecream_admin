@@ -29,6 +29,7 @@
 	5、数据库设计文件：doc/db/icec1.0.dm
 	数据库脚本：doc/db/mysql/icec-all.sql
 	
+	导入sql后，默认的登录系统的账号密码  admin/123456
 	
 ## 技术栈 
 ### 后端技术：

@@ -261,6 +261,29 @@ alter  table `sys_user_role`
 alter table `sys_user_role` comment= '用户-角色';
 
 
+-- sys_file
+/*
+ 系统文件表
+*/
+
+create table  `sys_file`
+(
+       `id`              INT auto_increment primary key not null comment '编号',
+       `file_name`       VARCHAR(64) comment '文件名',
+       `file_size`       INT comment '大小',
+       `file_type`       VARCHAR(1) comment '类型',
+       `file_url`        VARCHAR(512) comment '存储位置',
+       `create_time`     DATETIME,
+       `create_by`       VARCHAR(64),
+       `update_time`     DATETIME,
+       `update_by`       VARCHAR(64),
+       `busi_type`       VARCHAR(1) comment '业务类型',
+       `busi_no`         VARCHAR(128) comment '业务单号',
+       `memo`            VARCHAR(512) comment '注释',
+       `state`           INT comment '状态',
+       `deleted`         INT comment '删除标识'
+);
+alter table `sys_file` comment= '系统文件管理 系统文件管理';
 
 
 -- data
