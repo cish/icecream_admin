@@ -39,8 +39,8 @@
 					<!-- #section:basics/navbar.user_menu -->
 					<li class="light-blue dropdown-modal"><a
 						data-toggle="dropdown" href="#" class="dropdown-toggle"> <img
-							class="nav-user-photo" th:src="@{/ace/avatars/user.jpg}"
-							alt="Jason's Photo" /> <span class="user-info"> <small>欢迎</small>
+							class="nav-user-photo" th:src="(${user.photo=='0'})?(@{/ace/avatars/profile-pic.jpg}):(@{/sys/showFile/}+${user.photo})"
+							  /> <span class="user-info"> <small>欢迎</small>
 								<span th:text="${user.name}"></span>
 						</span> <i class="ace-icon fa fa-caret-down"></i>
 					</a>

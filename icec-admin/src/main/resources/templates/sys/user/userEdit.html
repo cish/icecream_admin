@@ -15,7 +15,27 @@
 						id="officeId" name="officeId" type="hidden" th:value="${user.officeId}"  />
 					<table
 						class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
-
+<tr>
+						<td class="width-15 active"> 
+						<label
+								class="pull-right control-label" for="companyName"><font
+									color="red">*</font>头像</label> 
+						</td>
+						<td><span class="profile-picture">
+						
+						<img id="avatar" onclick="fileSelect();" class="" alt="头像" th:src="(${user.photo=='0'})?(@{/ace/avatars/profile-pic.jpg}):(@{/sys/showFile/}+${user.photo})" style="display: block;" width="60">
+						</span><input type="file" id="photoImg" accept="image/*" name="file" onchange="fileSelected();" style="display:none;">
+						<input type="button" onclick="fileSelect()" value="选择"> <input type="button" onclick="clearfileSelect()" value="清除">
+						</td>
+						<td>
+						<label
+								class="pull-right control-label" for="ds_no"><font
+									color="red">*</font>工号</label> 
+						</td>
+						<td class="width-35"><input class="form-control"
+								id="ds_no" name="no" type="text" placeholder="请输入工号" th:value="${user.no}"
+								required /></td>
+						</tr>
 						<tr>
 							<td class="width-15 active"><label
 								class="pull-right control-label" for="companyName"><font
@@ -255,6 +275,22 @@
 })
 </script>
 	<script type="text/javascript">
+	var defaultImg="[[@{/ace/avatars/profile-pic.jpg}]]";
+	 function fileSelect() {
+       $("#photoImg").click(); 
+   }
+	 function clearfileSelect(){
+		 $("#avatar").attr("src",defaultImg);
+	 }
+   function fileSelected(selectedFile) {
+   	 var docObj=document.getElementById("photoImg");
+     // 文件选择后触发次函数
+   	if(docObj.files &&docObj.files[0]){
+   		$("#avatar").attr("src", window.URL.createObjectURL(docObj.files[0]));
+   	 } 
+  	 return true;
+   }
+	
 	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 	//关闭iframe
 	$('#closeWin').click(function(){

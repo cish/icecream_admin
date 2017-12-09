@@ -75,7 +75,7 @@
 										<tr>
 											<th class="center" data-checkbox="true"  > </th>
 											<th   data-field="id"   > ID</th>
-											<th class="center" data-field="loginName">用户名</th>
+											<th class="center" data-field="loginName" data-formatter="nameFormatter"> 用户名</th>
 											<th data-field="name">姓名</th>
 											<th data-field="phone">手机</th>
 											<th class="hidden-480" data-field="email">邮箱</th>
@@ -121,6 +121,11 @@
     		return "<span class='label label-sm label-warning'>禁用</span>";
     	}
     }
+    function  nameFormatter(value,row,index){
+    	return "<a href='javascript:;' onclick='edit("+row.id+")'>"+value
+    	 "</a>"
+    	
+    }
     function optFormatter(value,row,index){
     	return "<div class='hidden-sm hidden-xs btn-group'>"+
     	"<button class='btn btn-xs btn-info' onclick='edit("+value+")'>修改</button>"
@@ -151,7 +156,7 @@
     	    	}
   			  id = getIdSelections();
   		  }
-    		jp.openWindow("修改"+'用户',ctx+"sys/user/edit/"+id,"800px", "450px");	
+    		jp.openWindow("修改"+'用户',ctx+"sys/user/edit/"+id,"800px", "550px");	
     	 
     	
     }

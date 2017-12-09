@@ -1,5 +1,6 @@
 package org.icec.web.sys.service;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.icec.common.exception.IcecException;
 import org.icec.web.sys.dao.SysFileDao;
 
 /*
@@ -43,6 +45,9 @@ public class SysFileService   {
 	 * @return
 	 */
 	public Resource readFile(String path) {
+		if(StringUtils.isEmpty(filePath)) {
+			filePath="upload";
+		}
 		return  resourceLoader.getResource("file:" + Paths.get(filePath, path));
 	}
 	/**
@@ -53,6 +58,8 @@ public class SysFileService   {
 	 * @return
 	 */
 	public Long saveUploadFile(String type,MultipartFile multiFile,SysUser user) {
+		if(multiFile==null)return 0l;
+		
 		String filename = multiFile.getOriginalFilename(); // 得到上传时的文件名
 		 logger.debug("上传的图片名称：{}", filename);
 		String fileExtName = "";
@@ -71,17 +78,22 @@ public class SysFileService   {
 		sysfile.setFileSize(multiFile.getSize());
 		sysfile.setFileType(multiFile.getContentType());
 		sysfile.setState(0);
- 
+		sysfile.setBusiType("userPhoto");
 		String newfilename= makeFileName(fileExtName);
-		
+		if(StringUtils.isEmpty(filePath)) {
+			filePath="upload";
+		}
+		Path typepath=Paths.get(filePath, type);
 		Path path=Paths.get(filePath, type,newfilename);
 		try {
 			// 文件读取并写入
 			 try {
-		            if(!Files.exists(path))
-		                Files.createFile(path);
+				 if(!Files.isDirectory(typepath)) {
+					 Files.createDirectories(typepath); 
+				 }
 		        } catch (IOException e) {
 		            e.printStackTrace();
+		            throw new IcecException("头像上传失败");
 		        }
 			Files.copy(multiFile.getInputStream(),path);
 			sysfile.setFileUrl("/" + type + "/"+newfilename);
@@ -90,7 +102,7 @@ public class SysFileService   {
 			return fileId;
 		} catch (Exception e) {
 			logger.error("上传图片异常", e);
-			return 0l;
+			throw new IcecException("头像上传失败");
 		}
 	}
 	

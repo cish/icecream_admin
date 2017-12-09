@@ -8,7 +8,7 @@
 		<div class="main-content-inner">
 			<div class="page-content">
 				<form class="form-horizontal" role="form" id="userAddForm"
-					method="post" th:action="@{/sys/user/save}">
+					method="post" th:action="@{/sys/user/save}" enctype="multipart/form-data">
 					<input id="companyId" name="companyId" type="hidden" /> <input
 						id="officeId" name="officeId" type="hidden" />
 					<table
@@ -41,7 +41,7 @@
 							<td class="width-35">
 								<div class="input-group" style="width: 100%">
 									<input class="form-control" id="companyName" name="companyName"
-										type="text" readonly="readonly" /> <span
+										type="text" readonly="readonly" required /> <span
 										class="input-group-btn">
 										<button type="button" id="companyButton"
 											class="btn   btn-primary  ">
@@ -60,7 +60,7 @@
 							<td class="width-35"><div class="input-group"
 									style="width: 100%">
 									<input class="form-control" id="officeName" name="officeName"
-										type="text" readonly="readonly" /> <span
+										type="text" readonly="readonly"  required/> <span
 										class="input-group-btn">
 										<button type="button" id="officeButton"
 											class="btn   btn-primary  ">

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +36,7 @@ public class UserCtrl extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("add")
-	//@RequiresPermissions({"user:edit"})
+	@RequiresPermissions({"user:edit"})
 	public String add(Model model) {
 		model.addAttribute("roleList", sysRoleService.findAll());
 		return "sys/user/userAdd";
@@ -45,17 +46,17 @@ public class UserCtrl extends BaseController{
 	 * @param user
 	 * @return
 	 */
-	//@RequiresPermissions({"user:edit"})
+	@RequiresPermissions({"user:edit"})
 	@RequestMapping("save")
 	@ResponseBody
-	public Integer save(SysUser user,Integer[] roleList,@CurrentUser SysUser optuser) {
-		logger.debug(roleList.toString());
+	public Integer save(SysUser user,Integer[] roleList,@CurrentUser SysUser optuser,@RequestParam(name="file",required=false) MultipartFile multiFile) {
+		 
 		SysUser temp=userService.findByUserId(user.getLoginName());
 		if(temp!=null) {
 			logger.debug("用户名已存在，不能新增");
 			return 0;
 		}
-		userService.save(user,optuser,roleList);
+		userService.save(user,optuser,roleList,  multiFile);
 		return 1;
 	}
 	/**
@@ -64,7 +65,7 @@ public class UserCtrl extends BaseController{
 	 * @param model
 	 * @return
 	 */
-	//@RequiresPermissions({"user:edit"})
+	@RequiresPermissions({"user:edit"})
 	@RequestMapping("edit/{id}")
 	public String edit(@PathVariable Integer id ,ModelMap model) {
 		SysUser user = userService.findById(id);
@@ -86,17 +87,18 @@ public class UserCtrl extends BaseController{
 	 * @param user
 	 * @return
 	 */
-	//@RequiresPermissions({"user:edit"})
+	@RequiresPermissions({"user:edit"})
 	@RequestMapping("update")
 	@ResponseBody
-	public Integer update(SysUser user,Integer[] roleList,@CurrentUser SysUser optuser) {
+	public Integer update(SysUser user,Integer[] roleList,@CurrentUser SysUser optuser,@RequestParam(name="file",required=false) MultipartFile multiFile) {
 		if(user==null||user.getId()==null) {
 			return 0;
 		}
-		userService.update(user,optuser,roleList);
+		userService.update(user,optuser,roleList,multiFile);
 		return 1;
 	}
 	
+	@RequiresPermissions({"user:edit"})
 	@RequestMapping("deleteAll")
 	@ResponseBody
 	public Integer deleteAll(String ids,@CurrentUser SysUser optuser) {
