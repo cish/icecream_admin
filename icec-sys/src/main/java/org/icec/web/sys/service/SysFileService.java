@@ -61,7 +61,7 @@ public class SysFileService   {
 		if(multiFile==null)return 0l;
 		
 		String filename = multiFile.getOriginalFilename(); // 得到上传时的文件名
-		 logger.debug("上传的图片名称：{}", filename);
+		 logger.debug("上传的文件名称：{}", filename);
 		String fileExtName = "";
 		int index=filename.lastIndexOf('.');
 		if(	index>0){
