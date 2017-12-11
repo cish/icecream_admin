@@ -142,4 +142,20 @@ public class UserCtrl extends BaseController{
 		return  query;
 	}
 	
+	/**
+	 * 个人信息设置
+	 * @param optuser
+	 * @return
+	 */
+	@RequestMapping("userSetting")
+	public String userSetting(@CurrentUser SysUser optuser,Model model) {
+		SysUser user = userService.findById(optuser.getId());
+		model.addAttribute("user", user);
+		return "sys/user/userSetting";
+	}
+	@RequestMapping("modifyPasswd")
+	public String modifyPasswd() {
+		return "sys/user/modifyPasswd";
+	}
+	
 }
