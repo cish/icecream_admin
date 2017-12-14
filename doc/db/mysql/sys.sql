@@ -290,7 +290,7 @@ alter table `sys_file` comment= '系统文件管理 系统文件管理';
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, '1', '1', 'admin', '$2a$10$iyy/9WyGecm9MqeSyGaxauYXcz79foBFA047EtQlrPJbau5OPBpMm', '1', '管理员', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1', '2017-10-21 17:12:38', '1', '2017-10-21 17:13:12', NULL, '0');
+INSERT INTO `sys_user` VALUES (1, '1', '1', 'admin', '$2a$10$iyy/9WyGecm9MqeSyGaxauYXcz79foBFA047EtQlrPJbau5OPBpMm', '1', '管理员', NULL, NULL, NULL, NULL, 0, NULL, NULL, '0', '1', '2017-10-21 17:12:38', '1', '2017-10-21 17:13:12', NULL, '0');
 
 -- ----------------------------
 -- Records of sys_role
@@ -310,7 +310,7 @@ INSERT INTO `sys_user_role` VALUES ('1', '1');
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES ('1', '0', '0,', '系统管理', '30', '', '', '', '1', '', '1', '2017-11-29 11:02:04', '1', '2017-11-29 11:02:04', '', '0', '1');
+INSERT INTO `sys_menu` VALUES ('1', '0', '0,', '系统管理', '30', '', '', 'fa fa-cog', '1', '', '1', '2017-11-29 11:02:04', '1', '2017-11-29 11:02:04', '', '0', '1');
 INSERT INTO `sys_menu` VALUES ('2', '1', '0,1,', '用户管理', '30', '/sys/user/list', '', '', '1', '', '1', '2017-11-29 11:03:21', '1', '2017-11-29 11:03:21', '', '0', '1');
 INSERT INTO `sys_menu` VALUES ('3', '1', '0,1,', '角色管理', '30', '/sys/role/list', '', '', '1', '', '1', '2017-11-29 11:03:37', '1', '2017-11-29 11:03:37', '', '0', '1');
 INSERT INTO `sys_menu` VALUES ('4', '1', '0,1,', '菜单管理', '30', '/sys/menu/list', '', '', '1', '', '1', '2017-11-29 11:03:49', '1', '2017-11-29 11:03:49', '', '0', '1');
