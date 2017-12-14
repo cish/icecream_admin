@@ -4,9 +4,11 @@ import java.util.Date;
 
 import org.beetl.sql.core.engine.PageQuery;
 import org.icec.common.utils.CryptoUtils;
+import org.icec.web.shiro.credential.BCryptPasswordService;
 import org.icec.web.sys.dao.SysRoleDao;
 import org.icec.web.sys.dao.SysUserDao;
 import org.icec.web.sys.model.SysUser;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ public class SysUserService {
 	private SysRoleDao sysRoleDao;
 	@Autowired
 	private SysFileService sysFileService;
+	private BCryptPasswordService pwService = new BCryptPasswordService();
 
 	/**
 	 * 新增用户
@@ -130,5 +133,25 @@ public class SysUserService {
 		user.setDelFlag(SysUser.DEL_FLAG_NORMAL);
 		return userDao.templateOne(user);
 	}
-
+	/**
+	 * 更新用户密码
+	 * @param userId
+	 * @param newpasswd
+	 */
+	@Transactional
+	public boolean updatePasswd(Integer userId,String oldPasswd,String newpasswd){
+		
+		SysUser user = this.findById(userId);
+		if (BCrypt.checkpw(oldPasswd, user.getPassword())) {
+			SysUser updateUser = new SysUser();
+			updateUser.setId(userId);
+			updateUser.setPassword(CryptoUtils.bcrypt(newpasswd));
+			userDao.updateTemplateById(updateUser);
+			return true;
+		}else{
+			return false;
+		}
+		
+	
+	}
 }

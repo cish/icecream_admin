@@ -22,8 +22,8 @@ public class BaseController {
 	public SuccessTip succ(String msg) {
 		return new SuccessTip(msg);
 	}
-	public SuccessTip fail(String msg) {
-		return new SuccessTip(msg);
+	public ErrorTip fail(String msg) {
+		return new ErrorTip(msg);
 	}
 	public int getDefault_page_size() {
 		return default_page_size;

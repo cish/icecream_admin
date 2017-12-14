@@ -11,7 +11,7 @@
 					 
 
 						 
-								<form class="form-horizontal">
+								<form class="form-horizontal" id="passwdForm" method="post" th:action="@{/sys/user/updateMyPasswd}">
 									<div class="space-10"></div>
 
 									<div class="form-group">
@@ -19,7 +19,7 @@
 											for="form-field-pass1">原密码</label>
 
 										<div class="col-sm-9">
-											<input type="password" id="form-field-pass1">
+											<input type="password" id="form-field-pass1" name="oldPasswd" required>
 										</div>
 									</div>
 
@@ -30,7 +30,7 @@
 											for="form-field-pass2">新密码</label>
 
 										<div class="col-sm-9">
-											<input type="password" id="form-field-pass2">
+											<input type="password" id="form-field-pass2" name="newPasswd" required>
 										</div>
 									</div>
 
@@ -41,12 +41,12 @@
 											for="form-field-pass3">确认密码</label>
 
 										<div class="col-sm-9">
-											<input type="password" id="form-field-pass3">
+											<input type="password" id="form-field-pass3" equalTo="#form-field-pass2">
 										</div>
 									</div>
 									<div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info" type="button">
+											<button class="btn btn-info" type="submit">
 												<i class="ace-icon fa fa-check bigger-110"></i> 保存
 											</button>
 
@@ -65,5 +65,33 @@
 
 	</div>
 	<div th:replace="common/commonJS"></div>
+	<script type="text/javascript">
+	
+	$().ready(function() {
+		$("#passwdForm").validate({
+			submitHandler : function(form) {
+				//验证通过后 的js代码写在这里 
+				$(form).ajaxSubmit({
+					dataType : "json",
+					success : function(result) {
+						if (result.code == 0) {
+							top.layer.alert('修改密码成功')
+							top.layer.close(index);
+							//top.getActiveTab()[0].contentWindow.search();
+						} else {
+							jp.error(result.message);
+						}
+
+					},
+					error : function(xhr, status, error) {
+						top.layer.alert('操作失败');
+					}
+				});
+
+			}
+		});
+	});
+	
+	</script>
 </body>
 </html>
