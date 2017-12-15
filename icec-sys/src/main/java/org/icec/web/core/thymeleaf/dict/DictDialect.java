@@ -31,6 +31,7 @@ public class DictDialect extends AbstractProcessorDialect {
 	 private static Set<IProcessor> createStandardProcessorsSet(String dialectPrefix) {
 		 final Set<IProcessor> processors = new HashSet<IProcessor>();
 	        processors.add(new DictShowProcessor(dialectPrefix));
+	        processors.add(new DictSelectProcessor(dialectPrefix));
 	        return processors;
 	 }
 

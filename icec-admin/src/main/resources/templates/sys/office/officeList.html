@@ -41,8 +41,9 @@
 									<th   width="10%">归属区域</th>
 									<th   width="10%">机构编码</th>
 									<th width="10%">机构类型</th>
-									<th   width="30%">备注</th>
-									<th  width="20%">操作</th>
+									<th width="10%">机构级别</th>
+									<th   width="20%">备注</th>
+									<th  width="30%">操作</th>
 								</tr>
 							</thead>
 							<tbody id="treeTableList">
@@ -51,7 +52,12 @@
 									<td   th:text="${office.name}"></td>
 									<td th:text="${office.areaName}"></td>
 									<td th:text="${office.code}"></td>
-									<td th:text="${office.type}"></td>
+									<td  >
+									<dict:show code="orgType" value="${office.type}"></dict:show>
+									</td>
+									<td  >
+									<dict:show code="orgLevel" value="${office.grade}"></dict:show>
+									</td>
 									<td th:text="${office.remarks}"></td>
 									<td>
 										 
