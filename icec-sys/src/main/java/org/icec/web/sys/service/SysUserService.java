@@ -73,11 +73,12 @@ public class SysUserService {
 			user.setPhoto(result+"");
 		}
 		userDao.updateTemplateById(user);
-		sysRoleDao.deleteUserRoleByUserId(user.getId());// 先删除角色
+		
 		if (roleList != null) {
-		for (Integer roleId : roleList) {// 添加用户角色关系表
-			sysRoleDao.insertUserRole(user.getId(), roleId);
-		}
+			sysRoleDao.deleteUserRoleByUserId(user.getId());// 先删除角色
+			for (Integer roleId : roleList) {// 添加用户角色关系表
+				sysRoleDao.insertUserRole(user.getId(), roleId);
+			}
 		}
 	}
 

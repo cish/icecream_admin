@@ -2,6 +2,7 @@ package org.icec.web.sys.controller;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.beetl.sql.core.engine.PageQuery;
+import org.icec.common.base.tips.SuccessTip;
 import org.icec.common.base.tips.Tip;
 import org.icec.common.web.BaseController;
 import org.icec.web.shiro.annotation.CurrentUser;
@@ -182,5 +183,16 @@ public class UserCtrl extends BaseController {
 			return fail("原密码不正确");
 		}
 		return SUCC;
+	}
+	
+	@RequestMapping("modifyAvatar")
+	@ResponseBody
+	public Tip modifyAvatar(@RequestParam(name = "file", required = false) MultipartFile multiFile,@CurrentUser SysUser optuser){
+		SysUser user=new SysUser();
+		user.setId(optuser.getId());
+		userService.update(user, optuser, null, multiFile);
+		SuccessTip tip=new SuccessTip();
+		tip.setData(user.getPhoto());
+		return tip;
 	}
 }
