@@ -44,8 +44,8 @@
 								required /></td>
 							<td class="width-15 active"><label class="  control-label"
 								for="ds_type">区域类型</label></td>
-							<td class="width-35"><input class="form-control"
-								id="ds_type" name="type" type="text" th:value="${sysArea.type}" />
+							<td class="width-35">
+							<dict:select code="areaType"  name="type" value="${sysArea.type}"  class="form-control" id="ds_type"></dict:select> 
 							</td>
 						</tr>
 						<tr>

@@ -49,7 +49,10 @@
 									th:pid="${area.parentId}">
 									<td   th:text="${area.name}"></td>
 									<td th:text="${area.code}"></td>
-									<td th:text="${area.type}"></td>
+									<td >
+									<dict:show code="areaType" value="${area.type}"></dict:show>
+									
+									</td>
 									<td th:text="${area.remarks}"></td>
 									<td>
 										 
