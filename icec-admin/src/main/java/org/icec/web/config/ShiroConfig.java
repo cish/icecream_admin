@@ -98,6 +98,7 @@ public class ShiroConfig {
         //filterChainDefinitionMap.put("/*.html", "anon");  
         //filterChainDefinitionMap.put("/html/*.html", "anon"); 
         filterChainDefinitionMap.put("/ace/**", "anon");  
+        filterChainDefinitionMap.put("/mystatic/**", "anon");  
         filterChainDefinitionMap.put("/favicon.ico", "anon"); 
         filterChainDefinitionMap.put("/kaptcha.jpg", "anon");
        // filterChainDefinitionMap.put("/third/**", "anon"); 
