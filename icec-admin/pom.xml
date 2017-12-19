@@ -116,6 +116,12 @@
 			<resource>
 				<filtering>true</filtering>
 				<directory>src/main/resources</directory>
+				 <excludes>  
+                    <exclude>**/*.woff</exclude>  
+                    <exclude>**/*.ttf</exclude>  
+                    <exclude>**/*.eot</exclude>  
+                    <exclude>**/*.svg</exclude>  
+                </excludes> 
 			</resource>
 		</resources>
 		<plugins>
@@ -128,6 +134,11 @@
 				<configuration>
 					<encoding>utf-8</encoding>
 					<useDefaultDelimiters>true</useDefaultDelimiters>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+						<nonFilteredFileExtension>woff</nonFilteredFileExtension>
+						<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
 				</configuration>
 			</plugin>
 		</plugins>
