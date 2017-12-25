@@ -116,18 +116,25 @@
 			<resource>
 				<filtering>true</filtering>
 				<directory>src/main/resources</directory>
-				 <excludes>  
-                    <exclude>**/*.woff</exclude>  
-                    <exclude>**/*.ttf</exclude>  
-                    <exclude>**/*.eot</exclude>  
-                    <exclude>**/*.svg</exclude>  
-                </excludes> 
+				<excludes>
+					<exclude>**/*.woff</exclude>
+					<exclude>**/*.ttf</exclude>
+					<exclude>**/*.eot</exclude>
+					<exclude>**/*.svg</exclude>
+				</excludes>
 			</resource>
 		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
