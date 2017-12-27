@@ -19,7 +19,7 @@
 							<span class="profile-picture"> <img id="avatar"
 								onclick="fileSelect();" class="" alt="头像"
 								th:src="(${user.photo=='0'})?(@{/ace/avatars/profile-pic.jpg}):(@{/sys/showFile/}+${user.photo})"
-								style="display: block;">
+								style="display: block;" width="200px">
 							</span>
 							<div class="space space-4"></div>
 							<a href="#" class="btn btn-sm btn-block btn-success"  id="modifyAvatar"> <i
