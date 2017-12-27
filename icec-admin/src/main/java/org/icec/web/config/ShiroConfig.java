@@ -101,7 +101,7 @@ public class ShiroConfig {
        // filterChainDefinitionMap.put("/third/**", "anon"); 
        // filterChainDefinitionMap.put("/upload/**", "anon"); 
        // filterChainDefinitionMap.put("/public/**", "anon"); 
-        filterChainDefinitionMap.put("/**", "user");  
+        filterChainDefinitionMap.put("/**", "authc");  
         
         shiroFilterFactoryBean  
                 .setFilterChainDefinitionMap(filterChainDefinitionMap); 
