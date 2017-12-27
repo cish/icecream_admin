@@ -68,10 +68,8 @@ public class ShiroConfig {
     @Autowired
     public DefaultWebSecurityManager getDefaultWebSecurityManager(List<Realm> realms) {  
         DefaultWebSecurityManager dwsm = new DefaultWebSecurityManager();  
-       //dwsm.setRealm(tokenAuthRealm);  
-       dwsm.setRealms(realms);
+        dwsm.setRealms(realms);
         dwsm.setCacheManager(getEhCacheManager());  
-       
         return dwsm;  
     }  
   
@@ -80,7 +78,6 @@ public class ShiroConfig {
     public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor(DefaultWebSecurityManager defaultWebSecurityManager) {  
         AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();  
         aasa.setSecurityManager(defaultWebSecurityManager);  
-        
         return new AuthorizationAttributeSourceAdvisor();  
     }  
   
@@ -104,7 +101,7 @@ public class ShiroConfig {
        // filterChainDefinitionMap.put("/third/**", "anon"); 
        // filterChainDefinitionMap.put("/upload/**", "anon"); 
        // filterChainDefinitionMap.put("/public/**", "anon"); 
-        filterChainDefinitionMap.put("/**", "authc");  
+        filterChainDefinitionMap.put("/**", "user");  
         
         shiroFilterFactoryBean  
                 .setFilterChainDefinitionMap(filterChainDefinitionMap); 

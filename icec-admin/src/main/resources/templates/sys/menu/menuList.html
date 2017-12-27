@@ -51,7 +51,10 @@
 									<td  ><a><i th:class="${menu.icon}"></i>[[${menu.name}]]</a></td>
 									<td th:text="${menu.href}"></td>
 									<td th:text="${menu.sort}"></td>
-									<td th:text="${menu.isShow}"></td>
+									<td>
+										<div th:if="${menu.isShow == '1'}"><i class="fa fa-circle text-success ml5"></i></div>
+										<div th:if="${menu.isShow == '0'}"><i class="fa fa-circle text-muted ml5"></i></div>
+									</td>
 									<td th:text="${menu.permission}"></td>
 									<td th:text="${menu.remarks}"></td>
 									<td><a href="#" th:onclick="'edit('+${menu.id}+')'"><i

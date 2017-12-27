@@ -23,8 +23,6 @@ import org.icec.web.shiro.token.JWTAuthenticationToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.code.kaptcha.Constants;
-
 public final class JWTOrFormAuthenticationFilter extends AuthenticatingFilter {
 	private static final Logger log = LoggerFactory.getLogger(JWTOrFormAuthenticationFilter.class);
 	public static final String USER_ID = "userId";
