@@ -25,8 +25,24 @@ public class SysOfficeService   {
 	public SysOffice findById(Integer id) {
 		return sysOfficeDao.findById(id);
 	}
-	public List<SysOffice> findAll() {
-		return sysOfficeDao.query();
+	/**
+	 * 查询所有子节点
+	 * @param pId
+	 * @return
+	 */
+	public List<SysOffice> findSubOffice(Integer pId){
+		SysOffice entity = sysOfficeDao.single(pId);
+		String oldParentIds = entity.getParentIds();
+		List<SysOffice> list = sysOfficeDao.findByParentIdsLike(oldParentIds + entity.getId() + ",");
+		return list;
+	}
+	/**
+	 * 根据机构类型查询
+	 * @param type
+	 * @return
+	 */
+	public List<SysOffice> findByType(String type) {
+		return sysOfficeDao.findByType(type);
 	}
 
 	/**
@@ -116,7 +132,7 @@ public class SysOfficeService   {
 	 * @return
 	 */
 	public List<SysOffice> query(){
-		return (List<SysOffice>) TreeBuild.buildByRecursive(sysOfficeDao.query());
+		return (List<SysOffice>) TreeBuild.buildByRecursive(sysOfficeDao.findByType(null));
 		 
 	}
 }

@@ -14,12 +14,16 @@ FROM sys_office a
         LEFT JOIN sys_area c 
         ON a.area_id=c.id where a.id=#id#
         
-query
+findByType
 ===
 * 查询所有的区域
 	
 	select a.*,b.name as areaName from sys_office a LEFT JOIN sys_area b 
-        ON a.area_id=b.id    where a.del_flag=0 order by  a.parent_ids
+        ON a.area_id=b.id    where a.del_flag=0
+        @if(!isEmpty(type)){
+	 and a.`type`=#type#
+	@}
+         order by  a.parent_ids
 sample
 ===
 * 注释

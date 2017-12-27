@@ -216,7 +216,7 @@
 			});
 		 $('#jstree').on("changed.jstree", function (e, data) {
 			  console.log(data.selected);
-			  $("#companyId").val(data.selected[0]);
+			  $("#officeId").val(data.selected[0]);
 			  $('#usertable').bootstrapTable('refresh');
 			});
 		 /* $.getJSON(ctx+"sys/office/treeData",function(data){

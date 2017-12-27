@@ -44,11 +44,13 @@ public class TreeBuild {
         }  
        
     }  
-    
     public static List<JsTreeData> buildJsTree(List<? extends TreeModel> treeModels) {
+    	 return buildJsTree( treeModels,0);
+    }
+    public static List<JsTreeData> buildJsTree(List<? extends TreeModel> treeModels,Integer root) {
     	 List<JsTreeData> trees = new ArrayList<JsTreeData>();  
          for (TreeModel treeModel : treeModels) {  
-             if ((treeModel.getParentId()==0)) { 
+             if ((treeModel.getParentId()==root)) { 
             	 JsTreeData data=new JsTreeData(treeModel.getId()+"","#", treeModel.getName(), true,treeModel);
             	 trees.add(data);
                  findChildren2jstree(treeModel,treeModels,data,trees);  

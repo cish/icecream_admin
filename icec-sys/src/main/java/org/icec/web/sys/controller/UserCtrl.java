@@ -6,6 +6,8 @@ import org.icec.common.base.tips.SuccessTip;
 import org.icec.common.base.tips.Tip;
 import org.icec.common.web.BaseController;
 import org.icec.web.shiro.annotation.CurrentUser;
+import org.icec.web.sys.dao.SysOfficeDao;
+import org.icec.web.sys.model.SysOffice;
 import org.icec.web.sys.model.SysUser;
 import org.icec.web.sys.service.SysRoleService;
 import org.icec.web.sys.service.SysUserService;
@@ -33,7 +35,8 @@ public class UserCtrl extends BaseController {
 	private SysUserService userService;
 	@Autowired
 	private SysRoleService sysRoleService;
-
+	@Autowired
+	private SysOfficeDao  sysOfficeDao ;
 
 	/**
 	 * 进入添加界面
@@ -145,8 +148,12 @@ public class UserCtrl extends BaseController {
 	public PageQuery<SysUser> query(@RequestParam(defaultValue = "1") Integer pageNumber, Integer pageSize,
 			SysUser user) {
 		PageQuery<SysUser> query = new PageQuery<SysUser>();
-		if (StringUtils.isEmpty(user.getCompanyId())) {
-			user.setCompanyId(null);
+		if (StringUtils.isEmpty(user.getOfficeId())) {
+			user.setOfficeId(null);
+		}else {
+			SysOffice entity = sysOfficeDao.single(user.getOfficeId());
+			String oldParentIds = entity.getParentIds();
+			user.setOfficeId(oldParentIds + entity.getId() + ",");
 		}
 		query.setPageNumber(pageNumber);
 		if (pageSize != null) {

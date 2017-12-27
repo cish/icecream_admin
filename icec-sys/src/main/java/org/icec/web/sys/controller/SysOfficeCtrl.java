@@ -13,6 +13,7 @@ import org.icec.web.sys.service.SysOfficeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -98,9 +99,16 @@ public class SysOfficeCtrl {
 	 
 	@ResponseBody
 	@RequestMapping(value = "treeData")
-	public List<JsTreeData> treeData(@RequestParam(required=false) String extId) {
-		List<SysOffice> list = sysOfficeService.findAll();
-		 
-		return TreeBuild.buildJsTree(list);
+	public List<JsTreeData> treeData(@RequestParam(required=false) String type,@RequestParam(required=false) Integer pId) {
+		List<SysOffice> list=null;
+		Integer root=0;
+		if(!StringUtils.isEmpty(pId)) {
+			list = sysOfficeService.findSubOffice(pId);
+			root=pId;
+		}else {
+		  list = sysOfficeService.findByType(type);
+		  
+		}
+		return TreeBuild.buildJsTree(list,root);
 	}
 }

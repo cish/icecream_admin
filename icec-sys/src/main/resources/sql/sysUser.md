@@ -13,20 +13,20 @@ queryUser
  
  	select
  	@pageTag(){
- 	* 
+ 	a.* 
  	@}
- 	from sys_user 
- 	where del_flag=0
+ 	from sys_user a LEFT JOIN sys_office  b on a.office_id=b.id
+ 	where a.del_flag=0
  	@if(!isEmpty(loginName)){
-	 and `login_name` like #'%'+loginName+'%'#
+	 and a.`login_name` like #'%'+loginName+'%'#
 	@}
  	@if(!isEmpty(name)){
-	 and `name` like #'%'+name+'%'#
+	 and a.`name` like #'%'+name+'%'#
 	@}
- 	@if(!isEmpty(companyId)){
-	 and `company_id` =#companyId#
+ 	@if(!isEmpty(officeId)){
+	 and  CONCAT(CONCAT(b.parent_ids,b.id),',') like #officeId+'%'#
 	@}
- 	order by id 
+ 	order by a.id 
  
 
 sample
