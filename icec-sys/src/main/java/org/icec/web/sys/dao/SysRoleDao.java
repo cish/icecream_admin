@@ -48,5 +48,11 @@ public interface SysRoleDao extends BaseMapper<SysRole>{
 	 * @param userId
 	 */
 	public void deleteRoleMenuByRoleId(@Param("roleId")Integer roleId);
+
+	public List<SysRole> getRoleItems(@Param("roleTypeId")Integer roleTypeId);
+	public List<SysRole> queryUnselect(@Param("roleTypeId")Integer roleTypeId);
+	
+	public void saveAll(@Param("userId")Integer userId,@Param("roleTypeId")Integer roleTypeId);
+	
 	
 }

@@ -11,11 +11,16 @@
 	<div class="main-container">
 		<div class="main-content-inner">
 			<div class="page-content">
-				<div class="row">
+			<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">角色列表</h3>
+					</div>
+			<div class="panel-body">
+				<div id="left" class="row">
 					<div class="col-xs-12">
 						<form action="" class="form-inline" id="userForm">
 							 <label>角色名称：</label><input
-								type="text" name="name">
+								type="text" id="name">
 							<button class="btn btn-primary btn-rounded btn-outline btn-sm "
 							 type="button"	onclick="search()">
 								<i class="fa fa-search"></i> 查询
@@ -26,8 +31,7 @@
 							</button>
 						</form>
 					</div>
-				</div>
-				<div class="row">
+					
 					<div class="col-sm-12">
 						<div class="pull-left">
 							<button class="btn btn-primary btn-sm" data-toggle="tooltip"
@@ -47,9 +51,7 @@
 						</div>
 						<div class="pull-right"></div>
 					</div>
-				</div>
-				 
-				<div class="row">
+					
 					<div class="col-xs-12">
 						<table id="roletable"  data-toggle="table" data-side-pagination="server" 
 						data-striped="true"  data-query-params="queryParams" data-pagination-loop="false"
@@ -69,6 +71,33 @@
 									</thead>
 						</table>
 					</div>
+					
+				</div>
+				
+				<div id="right" class="panel panel-default col-sm-6 " style="display:none">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										<label>角色名称: </label><font id="roleNameLabel" color="red"></font><input
+											type="hidden" id="roleTypeId" />
+									</h3>
+								</div>
+								<div class="panel-body">
+									<div id="roleValueToolbar">
+										<button id="roleValueButton"
+											class="btn btn-outline btn-sm btn-primary" title="添加用户">
+											<i class="fa fa-plus-circle"></i> 添加用户
+										</button>
+									</div>
+									<!-- 表格 -->
+									<table id="roleValueTable" data-toolbar="#roleValueToolbar"
+										data-id-field="id">
+									</table>
+
+								</div>
+							</div>
+				
+				
+				</div>
 				</div>
 				<!-- /.col -->
 			</div>
@@ -99,12 +128,24 @@
     	return "<div class='hidden-sm hidden-xs btn-group'>"+
     	"<button class='btn btn-xs btn-info' onclick='edit("+value+")'>修改</button>"
     	+"<button class='btn btn-xs btn-danger' onclick='auth("+value+")'>权限设置</button>"
-    	+"<button class='btn btn-xs btn-danger'>分配用户</button>"
+    	+"<button class='btn btn-xs btn-danger'onclick='setRoleValue("+row.id+",\""+row.name+"\")'>分配用户</button>"
     	+"</div>"
     	
     }
+    function setRoleValue(id,name){
+    	$("#left").attr("class", "col-sm-6");
+		setTimeout(function(){
+		$("#right").fadeIn(500);
+		},500)
+		$("#roleNameLabel").html(name);
+		$("#roleTypeId").val(id);
+	 	$('#roleValueTable').bootstrapTable("refresh",{query:{roleTypeId:id}})
+    }
     function search(){
     	$('#roletable').bootstrapTable('refresh');
+    }
+    function searchValue(){
+    	$('#roleValueTable').bootstrapTable('refresh');
     }
     function add(){
     	jp.openWindow("新增"+'角色',"sys/role/add","800px", "360px");
@@ -127,7 +168,7 @@
   			  id = getIdSelections();
   		  }
     		jp.openWindow("修改"+'角色',ctx+"sys/role/edit/"+id,"800px", "360px");	
-    	 
+    		  
     	
     }
     function auth(id){
@@ -160,6 +201,10 @@
  		);
     	}
     }
+
+     	 function roleValueRefresh(){
+    	    	$('#roleValueTable').bootstrapTable('refresh');
+    	    } 
     
 	 $(function () {
     	$('#roletable').on('check.bs.table uncheck.bs.table load-success.bs.table ' +
@@ -167,6 +212,61 @@
             $('#delete').prop('disabled', ! $('#roletable').bootstrapTable('getSelections').length);
             $('#edit').prop('disabled', $('#roletable').bootstrapTable('getSelections').length!=1);
         });
+    	   		
+    	    	
+    	     	$('#roleValueTable').bootstrapTable({
+    				  //请求方法
+    	          method: 'get',
+    	          dataType: "json",
+    	           //是否显示行间隔色
+    	          striped: true,
+    	          //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）     
+    	          cache: false,    
+    	          //是否显示分页（*）  
+    	          pagination: false,   
+    	          //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据  
+    	          url: ctx+"sys/role/getRoleValue",
+    	          //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+    	          //queryParamsType:'',   
+    	          ////查询参数,每次调用是会带上这个参数，可自定义                         
+    	          queryParams : function(params) {
+    	              return {roleTypeId:$("#roleTypeId").val()};
+    	          },
+    	          //分页方式：client客户端分页，server服务端分页（*）
+    	          sidePagination: "server",
+    	          columns: [{
+    				        field: 'name',
+    				        title: '用户名'
+    				    }, {
+    	              field: 'operate',
+    	              title: '操作',
+    	              align: 'center',
+    	              events: {
+    	              	 'click .edit': function (e, value, row, index) {
+    	              		jp.openWindow("修改"+'用户',ctx+"sys/user/edit/"+row.id,"800px", "420px");
+    	              		
+    	      		        },
+    	  		      
+    	  		    },
+    	              formatter:  function operateFormatter(value, row, index) {
+    	  		        return [
+    	  		        	
+    							'<a href="#" class="edit" title="编辑" >[编辑] </a>'
+    							
+    	  		        ].join('');
+    	  		    }
+    	          }]
+    				
+    				});
+    	     	  if(navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)){//如果是移动端
+    				  $('#roleValueTable').bootstrapTable("toggleView");
+    				}
+    			  
+    			  $("#roleValueButton").click(function(){
+    					jp.openWindow('添加用户', ctx+'sys/role/roleValueAdd?roleTypeId=' + $("#roleTypeId").val(),'800px', '420px');
+    				});
+    	
+   	
     });
 </script>
 </body>

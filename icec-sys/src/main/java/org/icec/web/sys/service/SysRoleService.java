@@ -88,4 +88,31 @@ public class SysRoleService {
 			}
 		}
 	}
+	
+	/**
+	 * 查询用户名
+	 * @param typeId
+	 * @return
+	 */
+	public List<SysRole> getRoleValue(Integer roleTypeId){
+		if(roleTypeId==null)return null;
+		return sysRoleDao.getRoleItems(roleTypeId);
+	}
+
+	public List<SysRole> queryUnselect(Integer roleTypeId) {
+		if(roleTypeId==null)return null;
+		return sysRoleDao.queryUnselect(roleTypeId);
+	}
+
+	@Transactional
+	public void saveAll(String ids,Integer roleTypeId) {
+		String [] idarr=ids.split(",");
+		for(String id:idarr) {		
+			SysUser user = new SysUser();
+			user.setId(Integer.parseInt(id));
+			Integer userId=user.getId();						
+			sysRoleDao.saveAll(userId, roleTypeId);
+		}
+		 
+	}
 }

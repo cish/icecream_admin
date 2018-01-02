@@ -9,4 +9,6 @@ import org.icec.web.sys.model.SysUser;
 public interface  SysUserDao extends BaseMapper<SysUser>{
 	public SysUser findById(@Param("id")Integer id);
 	public PageQuery<SysUser> queryUser(PageQuery<SysUser> query);
+	public PageQuery<SysUser> queryUnSelectedUser(PageQuery<SysUser> query);
+	
 }

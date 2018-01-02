@@ -43,7 +43,7 @@
 							class="nav-user-photo"
 							th:src="(${user.photo=='0'})?(@{/ace/avatars/profile-pic.jpg}):(@{/sys/showFile/}+${user.photo})" />
 							<span class="user-info"> <small>欢迎</small> <span
-								th:text="${user.name}"></span>
+								th:text="${user.Name}"></span>
 						</span> <i class="ace-icon fa fa-caret-down"></i>
 					</a>
 

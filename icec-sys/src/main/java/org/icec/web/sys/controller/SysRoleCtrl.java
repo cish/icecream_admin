@@ -1,5 +1,9 @@
 package org.icec.web.sys.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.beetl.sql.core.engine.PageQuery;
 import org.icec.web.shiro.annotation.CurrentUser;
@@ -126,5 +130,38 @@ public class SysRoleCtrl {
 	public String authSave(Integer roleId,String menuIds) {
 		sysRoleService.saveRoleMenu(roleId, menuIds);
 		return "1";
+	}
+	
+	@RequestMapping("getRoleValue")
+	@ResponseBody
+	public Map<String,List<SysRole>> getRoleValue(Integer roleTypeId){
+		Map<String,List<SysRole>> result=new HashMap<String,List<SysRole>>();
+		result.put("rows", sysRoleService.getRoleValue(roleTypeId));
+		return result;
+	}
+	@RequestMapping("queryUnselect")
+	@ResponseBody
+	public Map<String,List<SysRole>> queryUnselect(Integer roleTypeId){
+		Map<String,List<SysRole>> result=new HashMap<String,List<SysRole>>();
+		
+		result.put("rows", sysRoleService.queryUnselect(roleTypeId));
+		return result;
+	}
+	
+	
+	@RequestMapping("roleValueAdd")
+	public String roleValueAdd(@RequestParam(required=true) Integer roleTypeId,ModelMap model) {
+		model.addAttribute("roleTypeId", roleTypeId);
+		return "sys/role/roleValueAdd";
+	}
+	
+	@RequestMapping("saveAll")
+	@ResponseBody
+	public Integer saveAll(String ids,Integer roleTypeId) {
+		if(ids==null) {
+			return 0;
+		}
+		sysRoleService.saveAll(ids,roleTypeId);
+		return 1;
 	}
 }

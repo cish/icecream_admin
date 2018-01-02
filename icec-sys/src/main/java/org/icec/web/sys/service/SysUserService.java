@@ -155,4 +155,9 @@ public class SysUserService {
 		
 	
 	}
+	
+	public PageQuery<SysUser> queryUnSelectedUser(PageQuery<SysUser> query) {
+		return userDao.queryUnSelectedUser(query);
+	}
+
 }

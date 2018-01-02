@@ -1,3 +1,23 @@
+queryUnSelectedUser
+===
+ 
+ 	select
+ 	@pageTag(){
+ 	* 
+ 	@}
+ 	from sys_user 
+ 	where del_flag=0
+ 	@if(!isEmpty(loginName)){
+	 and `login_name` like #'%'+loginName+'%'#
+	@}
+ 	@if(!isEmpty(name)){
+	 and `name` like #'%'+name+'%'#
+	@}
+ 	@if(!isEmpty(companyId)){
+	 and `company_id` =#companyId#
+	@}
+ 	order by id 
+
 findById
 ===
  

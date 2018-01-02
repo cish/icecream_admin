@@ -1,3 +1,24 @@
+getRoleItems
+===
+     select 
+     u.id,u.name 
+     from 
+     sys_user u left join sys_user_role ur on ur.user_id=u.id 
+     where ur.role_id=#roleTypeId# group by u.id
+queryUnselect
+===
+      select 
+      u.id,u.name
+      from 
+      sys_user u
+      where 
+      id not in ( select user_id from sys_user_role where role_id  = #roleTypeId#)
+      
+saveAll
+===   
+   
+      insert into sys_user_role(user_id,role_id) VALUES(#userId#,#roleTypeId#);
+      
 deleteRoleMenuByRoleId
 ===
 

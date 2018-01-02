@@ -1,5 +1,9 @@
 package org.icec.web.sys.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.beetl.sql.core.engine.PageQuery;
 import org.icec.common.base.tips.SuccessTip;
@@ -8,6 +12,7 @@ import org.icec.common.web.BaseController;
 import org.icec.web.shiro.annotation.CurrentUser;
 import org.icec.web.sys.dao.SysOfficeDao;
 import org.icec.web.sys.model.SysOffice;
+import org.icec.web.sys.model.SysRole;
 import org.icec.web.sys.model.SysUser;
 import org.icec.web.sys.service.SysRoleService;
 import org.icec.web.sys.service.SysUserService;
@@ -201,5 +206,13 @@ public class UserCtrl extends BaseController {
 		SuccessTip tip=new SuccessTip();
 		tip.setData(user.getPhoto());
 		return tip;
+	}
+	
+	@RequestMapping("queryUnSelect")
+	@ResponseBody
+	public Map<String,List<SysRole>> queryUnselect(Integer roleTypeId){
+		Map<String,List<SysRole>> result=new HashMap<String,List<SysRole>>();
+		result.put("rows", sysRoleService.queryUnselect(roleTypeId));
+		return result;
 	}
 }
